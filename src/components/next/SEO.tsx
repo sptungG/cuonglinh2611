@@ -9,8 +9,8 @@ type TSEOProps = {
   statusbarColor?: string;
 };
 const SEO = ({
-  title = "Cuong & Linh",
-  description = "Cuong & Linh",
+  title = "Cuong&Linh",
+  description = "Cuong&Linh",
   keywords = "",
   statusbarColor = "#fff",
 }: TSEOProps) => {
