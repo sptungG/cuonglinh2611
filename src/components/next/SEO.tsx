@@ -64,7 +64,7 @@ const SEO = ({
         <link rel="icon" href={`${router.basePath}/favicon.ico`} key="favicon" />
 
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#fff" />
         {/* Title */}
         <title>{title}</title>
 

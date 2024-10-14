@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --text-font: "Manrope", sans-serif;
+  --title-font: "Dancing Script", serif;
+  --script-font: "Great Vibes", cursive;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

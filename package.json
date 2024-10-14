@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 11111",
+    "dev": "next dev -p 26111",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -24,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cssnano": "^7.0.6",
     "eslint": "^8",
     "eslint-config-next": "14.2.14",
     "eslint-plugin-tailwindcss": "^3.17.4",
