@@ -9,13 +9,13 @@ type TSEOProps = {
   statusbarColor?: string;
 };
 const SEO = ({
-  title = "Cuong & Linh",
-  description = "Cuong & Linh",
+  title = "Cuong&Linh",
+  description = "Cuong&Linh",
   keywords = "",
   statusbarColor = "#fff",
 }: TSEOProps) => {
   const router = useRouter();
-  // Cuztomize Meta Properties
+  // Customize Meta Properties
   // Can create extra props and pass as arguments like title in case you want to change for each page.
   const metaDescription = description ? description : process.env.NEXT_PUBLIC_siteDescription;
   const metaKeywords = keywords ? keywords : process.env.NEXT_PUBLIC_siteKeywords;
@@ -64,7 +64,7 @@ const SEO = ({
         <link rel="icon" href={`${router.basePath}/favicon.ico`} key="favicon" />
 
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#fff" />
         {/* Title */}
         <title>{title}</title>
 
