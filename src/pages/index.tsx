@@ -1,5 +1,10 @@
+import SEO from "@/components/next/SEO";
 import Fonts from "@/styles/fonts";
 
 export default function Home() {
-  return <div className={`${Fonts.fontGeistSans.variable} ${Fonts.fontGeistMono.variable}`}></div>;
+  return (
+    <div className="">
+      <SEO />
+    </div>
+  );
 }
