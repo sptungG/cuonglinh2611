@@ -57,8 +57,8 @@ export const CardsHeader01 = () => {
         </div>
 
         <div className="absolute inset-0" style={{ borderRadius: `calc(16px * 0.96)` }}>
-          <MovingBorder duration={5000} rx="30%" ry="30%">
-            <div className="size-40 bg-[radial-gradient(var(--amber-100)_40%,transparent_60%)] opacity-80" />
+          <MovingBorder duration={5000} rx="50%" ry="30%">
+            <div className="size-40 bg-[radial-gradient(var(--amber-100)_40%,transparent_60%)]" />
           </MovingBorder>
         </div>
       </motion.div>
