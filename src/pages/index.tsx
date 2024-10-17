@@ -1,10 +1,21 @@
 import { cn } from "@/common/utils";
 import { RainbowButtonLink } from "@/components/button/RainbowButton";
 import { CardsHeader01 } from "@/components/card/CardsHeader";
+import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
 import Fonts from "@/styles/fonts";
-import { HeartIcon, MapPinCheckIcon } from "lucide-react";
+import {
+  CalendarCheck2Icon,
+  CalendarHeartIcon,
+  GiftIcon,
+  HeartIcon,
+  HomeIcon,
+  ImagesIcon,
+  MapPinCheckIcon,
+  MapPinnedIcon,
+  Share2Icon,
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -107,6 +118,35 @@ export default function Home() {
         <div className="">Lê Quang Đạo, An Đông, Thành phố Huế, Thừa Thiên Huế, Vietnam</div>
         <div className="">Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!</div>
       </section>
+
+      <FloatingDock
+        desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
+        items={[
+          {
+            title: "Xem vị trí",
+            icon: <MapPinCheckIcon className="size-full" />,
+            href: "#",
+          },
+
+          {
+            title: "Save the Date",
+            icon: <CalendarHeartIcon className="size-full" />,
+            href: "#",
+          },
+
+          {
+            title: "Wedding Album",
+            icon: <ImagesIcon className="size-full" />,
+            href: "#",
+          },
+
+          {
+            title: "Share",
+            icon: <GiftIcon className="size-full" />,
+            href: "#",
+          },
+        ]}
+      />
     </>
   );
 }
