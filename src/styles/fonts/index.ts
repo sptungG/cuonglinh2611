@@ -1,4 +1,9 @@
-import { Manrope as FontManrope, Great_Vibes as FontGreatVibes, Dancing_Script as FontDancingScript } from "next/font/google";
+import {
+  Manrope as FontManrope,
+  Great_Vibes as FontGreatVibes,
+  Dancing_Script as FontDancingScript,
+  Questrial as FontQuestrial,
+} from "next/font/google";
 import localFont from "next/font/local";
 
 const GeistSans = localFont({
@@ -15,11 +20,13 @@ const GeistMono = localFont({
 const Manrope = FontManrope({ subsets: ["vietnamese", "latin"], weight: ["400", "600"] });
 const DancingScript = FontDancingScript({ subsets: ["vietnamese", "latin"], weight: ["400", "600", "700"] });
 const GreatVibes = FontGreatVibes({ subsets: ["vietnamese", "latin"], weight: ["400"] });
+const Questrial = FontQuestrial({ subsets: ["vietnamese", "latin"], weight: ["400"] });
 
 const Fonts = {
   Manrope,
   DancingScript,
   GreatVibes,
+  Questrial,
   //
   GeistMono,
   GeistSans,
