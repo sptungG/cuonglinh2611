@@ -6,7 +6,13 @@ import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
 import Fonts from "@/styles/fonts";
-import { CalendarHeartIcon, GiftIcon, HeartIcon, ImagesIcon, MapPinIcon } from "lucide-react";
+import {
+  CalendarHeartIcon,
+  GiftIcon,
+  HeartIcon,
+  ImagesIcon,
+  MapPinIcon,
+} from "lucide-react";
 
 export default function Home() {
   return (
@@ -16,17 +22,50 @@ export default function Home() {
       <section className="relative flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden">
         <div className="z-10 flex items-center justify-between">
           <div className="relative flex h-full max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-            <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
-            <NImage src="/images/icon-flower-3.png" alt="2611" height={0} width={120} className="absolute bottom-0 left-[-55px]" />
-            <NImage src="/images/icon-flower-4.png" alt="2611" height={0} width={100} className="absolute right-[-30px] top-0 rotate-[184deg]" />
+            <NImage
+              src="/assets/image-01.jpg"
+              alt="2611"
+              height={0}
+              width={240}
+              className="size-full rounded-full object-cover"
+            />
+            <NImage
+              src="/images/icon-flower-3.png"
+              alt="2611"
+              height={0}
+              width={120}
+              className="absolute bottom-0 left-[-55px]"
+            />
+            <NImage
+              src="/images/icon-flower-4.png"
+              alt="2611"
+              height={0}
+              width={100}
+              className="absolute right-[-30px] top-0 rotate-[184deg]"
+            />
           </div>
 
           <div className="relative flex flex-col items-center justify-center px-20 text-center">
-            <div className={cn(Fonts.Manrope.className, "text-xl font-[600] tracking-[4px] mb-8")}>CHÚNG MÌNH CƯỚI</div>
+            <div
+              className={cn(
+                Fonts.Manrope.className,
+                "text-xl font-[600] tracking-[4px] mb-8"
+              )}
+            >
+              CHÚNG MÌNH CƯỚI
+            </div>
             <h2
-              className={cn(Fonts.GreatVibes.className, "text-6xl font-[600] text-balance whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]")}
+              className={cn(
+                Fonts.GreatVibes.className,
+                "text-6xl font-[600] text-balance whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]"
+              )}
             >{`Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}</h2>
-            <div className={cn(Fonts.DancingScript.className, "text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}>
+            <div
+              className={cn(
+                Fonts.DancingScript.className,
+                "text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6"
+              )}
+            >
               26 Tháng 11, 2024
             </div>
 
@@ -46,9 +85,27 @@ export default function Home() {
           </div>
 
           <div className="relative flex h-full max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-            <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={240} className="size-full min-h-full rounded-full object-cover" />
-            <NImage src="/images/icon-flower-3.png" alt="2611" height={0} width={100} className="absolute left-[-40px] top-0 rotate-[60deg]" />
-            <NImage src="/images/icon-flower-4.png" alt="2611" height={0} width={120} className="absolute bottom-0 right-[-30px] rotate-[250deg]" />
+            <NImage
+              src="/assets/image-02.jpg"
+              alt="2611"
+              height={0}
+              width={240}
+              className="size-full min-h-full rounded-full object-cover"
+            />
+            <NImage
+              src="/images/icon-flower-3.png"
+              alt="2611"
+              height={0}
+              width={100}
+              className="absolute left-[-40px] top-0 rotate-[60deg]"
+            />
+            <NImage
+              src="/images/icon-flower-4.png"
+              alt="2611"
+              height={0}
+              width={120}
+              className="absolute bottom-0 right-[-30px] rotate-[250deg]"
+            />
           </div>
         </div>
 
@@ -74,21 +131,32 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={cn(Fonts.Questrial.className, "text-lg h-dvh relative flex flex-col items-center justify-center overflow-hidden")}>
+      <section
+        className={cn(
+          Fonts.Questrial.className,
+          "text-lg h-dvh relative flex flex-col items-center justify-center overflow-hidden"
+        )}
+      >
         <div className="relative flex flex-col items-center justify-center rounded-2xl border-2 border-amber-500/20 p-10 pb-12">
           <div className="mb-5 flex items-center">
             <div className="flex flex-col">
               <div className="mb-4 text-center text-xl uppercase">Nhà Trai</div>
-              <div className="">Ông: Nguyễn Minh Triết</div>
-              <div className="">Bà: Ngô Thu Ngân</div>
+              <div className="">Ông: Nguyễn Văn Linh</div>
+              <div className="">Bà: Nguyễn Thị Hoàn</div>
             </div>
 
-            <NImage src="/images/flower.png" alt="2611" height={0} width={366} className="mx-10" />
+            <NImage
+              src="/images/flower.png"
+              alt="2611"
+              height={0}
+              width={366}
+              className="mx-10"
+            />
 
             <div className="flex flex-col ">
               <div className="mb-4 text-center text-xl uppercase">Nhà Gái</div>
-              <div className="">Ông: Nguyễn Tuấn Việt</div>
-              <div className="">Bà: Nguyễn Ngọc Thanh Ngân</div>
+              <div className="">Ông: Nguyễn Phương Dũng</div>
+              <div className="">Bà: Nguyễn Thị Minh</div>
             </div>
           </div>
 
@@ -98,19 +166,38 @@ export default function Home() {
           <div className="text-base italic">{`(Tới dự Lễ Thành Hôn của hai con chúng tôi)`}</div>
 
           <div className="my-10 flex items-center">
-            <div className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>Nguyễn Tuấn Hải</div>
-            <HeartIcon className="mx-10 size-10 text-red-500" fill="currentColor" />
-            <div className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>Nguyễn Phương Hà</div>
+            <div
+              className={cn(
+                Fonts.DancingScript.className,
+                "font-[600] text-4xl"
+              )}
+            >
+              Nguyễn Văn Cường
+            </div>
+            <HeartIcon
+              className="mx-10 size-10 text-red-500"
+              fill="currentColor"
+            />
+            <div
+              className={cn(
+                Fonts.DancingScript.className,
+                "font-[600] text-4xl"
+              )}
+            >
+              Nguyễn Yến Linh
+            </div>
           </div>
 
-          <div className="text-neutral-500">Tổ chức vào lúc 09 giờ 00</div>
-          <div className="">Thứ Tư, ngày 09 tháng 06 năm 2023</div>
-          <div className="mb-6 text-base italic">{`(Tức ngày 12 tháng 05 năm 2023 Quý Mão)`}</div>
+          <div className="text-neutral-500">Tổ chức vào lúc 10 giờ 00</div>
+          <div className="">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
+          <div className="mb-6 text-base italic">{`(Tức ngày 26 tháng 10 năm 2024 Giáp Thìn)`}</div>
 
           <div className="text-xl">Tại gia đình Nhà Trai:</div>
-          <div className="mb-10">Lê Quang Đạo, An Đông, Thành phố Huế, Thừa Thiên Huế, Vietnam</div>
+          <div className="mb-10">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
 
-          <div className={cn(Fonts.DancingScript.className, "text-2xl")}>Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!</div>
+          <div className={cn(Fonts.DancingScript.className, "text-2xl")}>
+            Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!
+          </div>
 
           <NImage
             src="/images/overlay2.jpg"
@@ -130,7 +217,16 @@ export default function Home() {
         </div>
 
         <div className="absolute left-0 top-1/2 -z-20 w-dvw -translate-y-1/2 ">
-          <FlickeringGrid className="" squareSize={4} gridGap={6} color="#d97706" maxOpacity={0.5} flickerChance={0.1} height={300} width={3000} />
+          <FlickeringGrid
+            className=""
+            squareSize={4}
+            gridGap={6}
+            color="#d97706"
+            maxOpacity={0.5}
+            flickerChance={0.1}
+            height={300}
+            width={3000}
+          />
         </div>
       </section>
 
