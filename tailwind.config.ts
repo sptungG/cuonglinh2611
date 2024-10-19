@@ -19,11 +19,16 @@ const config: Config = {
           "0%": { "background-position": "0%" },
           "100%": { "background-position": "200%" },
         },
-        'bounceY': {
-          "0%": { "transform": "translateY(0)" },
-          "50%": { "transform": "translateY(-30px)" },
-          "100%": { "transform": "translateY(0)" },
-        }
+        bounceY: {
+          "0%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-30px)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        zoomTwo: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(0.95)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
     },
   },

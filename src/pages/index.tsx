@@ -230,6 +230,60 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="flex h-dvh items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          <div className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>Cô dâu</div>
+          <div className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>Nguyễn Yến Linh</div>
+          <div className="relative flex h-[260px] items-center justify-center">
+            <NImage src="/assets/pexels-agung-pandit-wiguna-9827356.jpg" height={0} width={172} className="max-h-[172px] rounded-full object-cover" />
+            <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
+              <NImage
+                src="/images/couple-frame-2.png"
+                alt="2611"
+                height={260}
+                width={260}
+                className="max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative mx-16 flex h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
+          <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full min-h-full rounded-full object-cover" />
+          <NImage
+            src="/images/icon-flowers-3.png"
+            alt="2611"
+            height={0}
+            width={100}
+            className="absolute left-[-10px] top-0 animate-[bounceY_10s_linear_infinite]"
+          />
+          <NImage
+            src="/images/icon-flowers-4.png"
+            alt="2611"
+            height={0}
+            width={120}
+            className="absolute bottom-0 right-[-40px] animate-[bounceY_10s_linear_infinite]"
+          />
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <div className="relative mb-3 flex h-[260px] items-center justify-center">
+            <NImage src="/assets/image-01.jpg" height={0} width={172} className="max-h-[172px] rounded-full object-cover" />
+            <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
+              <NImage
+                src="/images/couple-frame-2.png"
+                alt="2611"
+                height={260}
+                width={260}
+                className="max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
+              />
+            </div>
+          </div>
+          <div className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>Chú rể</div>
+          <div className={cn(Fonts.DancingScript.className, "text-5xl ")}>Nguyễn Văn Cường</div>
+        </div>
+      </section>
+
       <FloatingDock
         desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
         items={[
