@@ -6,6 +6,8 @@ import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
 import Fonts from "@/styles/fonts";
+import { useRouter } from "next/router";
+import useSWR from "swr";
 import {
   CalendarHeartIcon,
   GiftIcon,
@@ -14,7 +16,19 @@ import {
   MapPinIcon,
 } from "lucide-react";
 
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export default function Home() {
+  // const router = useRouter();
+  // const { id } = router.query;
+
+  // const { data, error, isLoading } = useSWR(
+  //   id ? `https://cuonglinh2611.app/participants/${id}` : null,
+  //   fetcher
+  // );
+
+  // console.log("🚀 ~ Home ~ data:", data);
+
   return (
     <>
       <SEO />
@@ -161,8 +175,22 @@ export default function Home() {
           </div>
 
           <div className="mb-2 text-2xl font-[600]">TRÂN TRỌNG KÍNH MỜI</div>
+          <div
+            className={cn(
+              Fonts.DancingScript.className,
+              "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+            )}
+          >
+            Bạn Tùng và Nys
+          </div>
+          <NImage
+            src="/images/divider.png"
+            alt="2611"
+            height={0}
+            width={180}
+            className="mx-10 my-2"
+          />
 
-          <div className="text-lg">Bạn cùng gia đình</div>
           <div className="text-base italic">{`(Tới dự Lễ Thành Hôn của hai con chúng tôi)`}</div>
 
           <div className="my-10 flex items-center">
@@ -232,10 +260,24 @@ export default function Home() {
 
       <section className="flex h-dvh items-center justify-center">
         <div className="flex flex-col items-center justify-center">
-          <div className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>Cô dâu</div>
-          <div className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>Nguyễn Yến Linh</div>
+          <div
+            className={cn(
+              Fonts.DancingScript.className,
+              "text-xl text-amber-400 font-[700] uppercase mb-1"
+            )}
+          >
+            Cô dâu
+          </div>
+          <div className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>
+            Nguyễn Yến Linh
+          </div>
           <div className="relative flex h-[260px] items-center justify-center">
-            <NImage src="/assets/pexels-agung-pandit-wiguna-9827356.jpg" height={0} width={172} className="max-h-[172px] rounded-full object-cover" />
+            <NImage
+              src="/assets/pexels-agung-pandit-wiguna-9827356.jpg"
+              height={0}
+              width={172}
+              className="max-h-[172px] rounded-full object-cover"
+            />
             <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
               <NImage
                 src="/images/couple-frame-2.png"
@@ -249,7 +291,13 @@ export default function Home() {
         </div>
 
         <div className="relative mx-16 flex h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-          <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full min-h-full rounded-full object-cover" />
+          <NImage
+            src="/assets/image-02.jpg"
+            alt="2611"
+            height={0}
+            width={300}
+            className="size-full min-h-full rounded-full object-cover"
+          />
           <NImage
             src="/images/icon-flowers-3.png"
             alt="2611"
@@ -268,7 +316,12 @@ export default function Home() {
 
         <div className="flex flex-col items-center justify-center">
           <div className="relative mb-3 flex h-[260px] items-center justify-center">
-            <NImage src="/assets/image-01.jpg" height={0} width={172} className="max-h-[172px] rounded-full object-cover" />
+            <NImage
+              src="/assets/image-01.jpg"
+              height={0}
+              width={172}
+              className="max-h-[172px] rounded-full object-cover"
+            />
             <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
               <NImage
                 src="/images/couple-frame-2.png"
@@ -279,8 +332,17 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>Chú rể</div>
-          <div className={cn(Fonts.DancingScript.className, "text-5xl ")}>Nguyễn Văn Cường</div>
+          <div
+            className={cn(
+              Fonts.DancingScript.className,
+              "text-xl text-amber-400 font-[700] uppercase mb-1"
+            )}
+          >
+            Chú rể
+          </div>
+          <div className={cn(Fonts.DancingScript.className, "text-5xl ")}>
+            Nguyễn Văn Cường
+          </div>
         </div>
       </section>
 
