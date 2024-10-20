@@ -1,20 +1,23 @@
+import { fetchReq, nextAPIUrl } from "@/common/request";
+import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
 import FlickeringGrid from "@/components/background/FlickeringGrid";
-import { RainbowButtonLink } from "@/components/button/RainbowButton";
+import { GradientButtonLink } from "@/components/button/GradientButton";
+import { RainbowButton, RainbowButtonLink } from "@/components/button/RainbowButton";
 import { CardsHeader01 } from "@/components/card/CardsHeader";
+import ImageRotate from "@/components/card/ImageRotate";
+import ModalAccept from "@/components/modal/ModalAccept";
+import ModalQR from "@/components/modal/ModalQR";
 import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
+import TimelineDating from "@/components/timeline/TimelineDating";
 import Fonts from "@/styles/fonts";
-import { CalendarHeartIcon, GemIcon, GiftIcon, HeartIcon, ImagesIcon, MapPinIcon } from "lucide-react";
-import { nextAPIUrl, fetchReq } from "@/common/request";
-import { Sheet } from "@/common/sheets";
-import type { InferGetStaticPropsType, GetStaticProps, GetStaticPaths } from "next";
+import { CalendarHeartIcon, GiftIcon, HeartIcon, ImagesIcon, MapPinIcon, PartyPopperIcon } from "lucide-react";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 import useSWRMutation from "swr/mutation";
-import { AnimatedGradientText } from "@/components/button/AnimatedGradientText";
-import { Modal } from "@/components/modal/AnimatedModal";
-import { useState } from "react";
 
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -28,7 +31,7 @@ const Page = (props: { data: Sheet }) => {
   const mapParty =
     userData?.partyName === "NhaGai"
       ? "https://www.google.com/maps/search/?api=1&query=21.009745980494834,105.86708485767026"
-      : "https://www.google.com/maps/search/?api=1&query=21.024022438527897,105.81117814459483";
+      : "https://www.google.com/maps/search/?api=1&query=20.748664750735944,105.97718142951669";
 
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
@@ -41,9 +44,9 @@ const Page = (props: { data: Sheet }) => {
     <>
       <SEO />
 
-      <section className="relative flex h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden">
         <div className="z-10 flex items-center justify-between">
-          <div className="relative flex h-full max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
+          <div className="relative flex h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
             <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
             <NImage src="/images/icon-flower-3.png" alt="2611" height={0} width={120} className="absolute bottom-0 left-[-55px]" />
             <NImage src="/images/icon-flower-4.png" alt="2611" height={0} width={100} className="absolute right-[-30px] top-0 rotate-[184deg]" />
@@ -77,8 +80,15 @@ const Page = (props: { data: Sheet }) => {
             </RainbowButtonLink>
           </div>
 
-          <div className="relative flex h-full max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-            <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={240} className="size-full min-h-full rounded-full object-cover" />
+          <div className="relative flex h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
+            <NImage
+              src="/assets/image-02.jpg"
+              alt="2611"
+              height={0}
+              width={240}
+              style={{ height: "100%" }}
+              className="size-full min-h-full rounded-full object-cover"
+            />
             <NImage src="/images/icon-flower-3.png" alt="2611" height={0} width={100} className="absolute left-[-40px] top-0 rotate-[60deg]" />
             <NImage src="/images/icon-flower-4.png" alt="2611" height={0} width={120} className="absolute bottom-0 right-[-30px] rotate-[250deg]" />
           </div>
@@ -106,7 +116,7 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className={cn(Fonts.Questrial.className, "text-lg h-dvh relative flex flex-col items-center justify-center overflow-hidden")}>
+      <section className={cn(Fonts.Questrial.className, "text-lg min-h-dvh relative flex flex-col items-center justify-center overflow-hidden")}>
         <div className="relative flex flex-col items-center justify-center rounded-2xl border-2 border-amber-500/20 p-10 pb-12">
           <div className="mb-5 flex items-center">
             <div className="flex flex-col">
@@ -186,7 +196,7 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="flex h-dvh items-center justify-center">
+      <section className="relative flex min-h-dvh items-center justify-center">
         <div className="flex flex-col items-center justify-center">
           <div className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>Cô dâu</div>
           <div className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>Nguyễn Yến Linh</div>
@@ -198,14 +208,14 @@ const Page = (props: { data: Sheet }) => {
                 alt="2611"
                 height={260}
                 width={260}
-                className="max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
+                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
               />
             </div>
           </div>
         </div>
 
         <div className="relative mx-16 flex h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-          <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full min-h-full rounded-full object-cover" />
+          <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full min-h-[600px] rounded-full object-cover" />
           <NImage
             src="/images/icon-flowers-3.png"
             alt="2611"
@@ -231,12 +241,201 @@ const Page = (props: { data: Sheet }) => {
                 alt="2611"
                 height={260}
                 width={260}
-                className="max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
+                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
               />
             </div>
           </div>
           <div className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>Chú rể</div>
           <div className={cn(Fonts.DancingScript.className, "text-5xl ")}>Nguyễn Văn Cường</div>
+        </div>
+
+        <NImage
+          src="/images/icon-flowers-1.png"
+          alt="2611"
+          height={400}
+          width={200}
+          className="absolute -bottom-16 left-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+        />
+        <NImage
+          src="/images/icon-flowers-2.png"
+          alt="2611"
+          height={320}
+          width={160}
+          className="absolute right-0 top-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+        />
+      </section>
+
+      <section className="relative flex min-h-[80dvh] flex-col items-center justify-center px-6 pb-10">
+        <div className="text-center text-xl uppercase text-amber-500">Cho đến ngày</div>
+        <div className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-4")}>Về chung một nhà</div>
+        <div className="text-center text-lg text-neutral-500">Cùng chúng mình đếm ngược nhé!</div>
+
+        <div className="mt-8 flex w-full max-w-screen-lg items-center justify-between divide-x divide-neutral-200 rounded-full border px-8 py-14">
+          <div className="flex flex-1 flex-col items-center justify-center">
+            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
+            <div className={cn(Fonts.DancingScript.className, "")}>Ngày</div>
+          </div>
+          <div className="flex flex-1 flex-col items-center justify-center">
+            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
+            <div className={cn(Fonts.DancingScript.className, "")}>Giờ</div>
+          </div>
+          <div className="flex flex-1 flex-col items-center justify-center">
+            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
+            <div className={cn(Fonts.DancingScript.className, "")}>Phút</div>
+          </div>
+          <div className="flex flex-1 flex-col items-center justify-center">
+            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
+            <div className={cn(Fonts.DancingScript.className, "")}>Giây</div>
+          </div>
+        </div>
+
+        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2">
+          <NImage
+            src="/images/pattern-4.png"
+            alt="2611"
+            height={0}
+            width={366}
+            className="-z-10 size-full animate-[bounceY_10s_linear_infinite] object-cover"
+          />
+        </div>
+      </section>
+
+      <section className="relative flex min-h-dvh flex-col items-center justify-center">
+        <div className="text-center text-xl uppercase text-amber-500">Chuyện chúng mình</div>
+        <div className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-4")}>Đã bắt đầu như thế nào</div>
+
+        <TimelineDating />
+
+        <NImage
+          src="/images/icon-flowers-1.png"
+          alt="2611"
+          height={400}
+          width={200}
+          className="absolute -bottom-16 left-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+        />
+        <NImage
+          src="/images/icon-flowers-2.png"
+          alt="2611"
+          height={320}
+          width={160}
+          className="absolute right-0 top-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+        />
+      </section>
+
+      <section className="relative flex min-h-fit flex-col items-center justify-center py-40">
+        <div className="mb-1 text-center text-base uppercase text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+        <div className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
+          Chúng mình rất mong bạn/anh/chị đến chung vui với chúng mình
+        </div>
+
+        <div className="z-50 flex items-center justify-center px-8">
+          <RainbowButton
+            onClick={() => setIsOpenSaveDate(true)}
+            className="items-center text-base uppercase tracking-[2px] text-amber-900 ring-1 ring-amber-300"
+          >
+            <PartyPopperIcon className="mr-2 size-6" />
+            <span>Bạn sẽ đến chứ?</span>
+          </RainbowButton>
+        </div>
+
+        <div className="relative min-h-fit w-full overflow-hidden">
+          <div className="flex items-center justify-center py-8">
+            {[
+              "assets/pexels-tran-long-13114541.jpg",
+              "assets/pexels-tuan-anh-nguyen-1806361.jpg",
+              "assets/pexels-nguyen-xuan-trung-17586999.jpg",
+              "assets/pexels-san-wedding-5544662.jpg",
+              "assets/pexels-san-wedding-5544650.jpg",
+            ].map((image, index) => (
+              <ImageRotate key={"ImageRotate" + index} src={image} style={index === 2 ? { width: 320, height: 320 } : {}} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative flex min-h-dvh flex-col items-center justify-center pb-28">
+        <div className="text-center text-xl uppercase text-amber-500">Kỉ niệm cưới</div>
+        <div className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-8 ")}>Những khoảnh khắc đáng nhớ</div>
+
+        <div className="flex max-w-screen-lg gap-4 items-stretch">
+          <div className="grid grid-cols-2 gap-4 flex-1 items-stretch">
+            <div className="col-span-2 flex items-center">
+              <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-amber-600")}>Album chúng mình</div>
+
+              <GradientButtonLink
+                href="/albums"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full ml-auto pl-3 pr-4 py-1.5 font-[600]"
+                icon={<ImagesIcon className="text-[#ffaa40] mr-2" />}
+              >
+                Xem tất cả
+              </GradientButtonLink>
+            </div>
+            <NImage
+              className="rounded-xl object-cover"
+              src="/assets/pexels-san-wedding-5544662.jpg"
+              width={300}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              alt=""
+            />
+            <NImage
+              className="rounded-xl object-cover"
+              src="/assets/pexels-trung-nguyen-9517421.jpg"
+              width={300}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              alt=""
+            />
+            <NImage
+              className="rounded-xl object-cover col-span-2"
+              src="/assets/pexels-san-wedding-5544650.jpg"
+              width={300}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              alt=""
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4 flex-1 items-stretch">
+            <NImage
+              className="rounded-xl object-cover col-span-2"
+              src="/assets/pexels-san-wedding-5544650.jpg"
+              width={300}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              alt=""
+            />
+            <NImage
+              className="rounded-xl object-cover"
+              src="/assets/pexels-san-wedding-5544662.jpg"
+              width={300}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              alt=""
+            />
+            <NImage
+              className="rounded-xl object-cover"
+              src="/assets/pexels-trung-nguyen-9517421.jpg"
+              width={300}
+              height={0}
+              style={{ width: "100%", height: "auto" }}
+              alt=""
+            />
+            <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-neutral-500")}>
+              “ Hãy để tình yêu diễn biến thật tự nhiên, đã là duyên thì cũng chẳng sợ lạc đường. ”
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2">
+          <NImage
+            src="/images/pattern-5.png"
+            alt="2611"
+            height={0}
+            width={366}
+            className="-z-10 size-full animate-[bounceY_10s_linear_infinite] object-cover"
+          />
         </div>
       </section>
 
@@ -262,7 +461,9 @@ const Page = (props: { data: Sheet }) => {
           {
             title: "Album chúng mình",
             icon: <ImagesIcon className="size-full" />,
-            href: "#",
+            href: "/albums",
+            target: "_blank",
+            rel: "noreferrer noopenner",
           },
 
           {
@@ -275,13 +476,9 @@ const Page = (props: { data: Sheet }) => {
         ]}
       />
 
-      <Modal open={isOpenQR} setOpen={setIsOpenQR}>
-        <div className="flex items-center justify-center gap-4 bg-amber-50 p-4 text-amber-500">
-          <GemIcon />
-          <h4 className="text-lg font-bold md:text-2xl">Hộp mừng cưới</h4>
-        </div>
-        <div className="flex min-h-0 flex-[1_1_auto]"></div>
-      </Modal>
+      <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
+
+      <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} />
     </>
   );
 };
