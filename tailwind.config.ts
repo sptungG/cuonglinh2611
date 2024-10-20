@@ -13,6 +13,7 @@ const config: Config = {
       },
       animation: {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
+        gradient: "gradient 8s linear infinite",
       },
       keyframes: {
         rainbow: {
@@ -28,6 +29,9 @@ const config: Config = {
           "0%": { transform: "scale(1)" },
           "50%": { transform: "scale(0.95)" },
           "100%": { transform: "scale(1)" },
+        },
+        gradient: {
+          to: { backgroundPosition: "var(--bg-size) 0" },
         },
       },
     },

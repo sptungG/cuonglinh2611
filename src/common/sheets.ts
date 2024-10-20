@@ -14,12 +14,12 @@ const SheetTarget = {
 };
 
 export interface Sheet {
-  id: any;
-  fullName: any;
-  partyName: any;
-  accepted: any;
-  createdAt: any;
-  updatedAt: any;
+  id?: any;
+  fullName?: any;
+  partyName?: any;
+  accepted?: any;
+  createdAt?: any;
+  updatedAt?: any;
 }
 
 export class SheetsMethods {
