@@ -6,13 +6,7 @@ import imageLoader from "./next-image-loader";
 /**
  * for internal images only (/assets,...)
  */
-const NImage = ({
-  src,
-  alt,
-  style,
-  fill,
-  ...props
-}: Omit<NextImageProps, "alt"> & { alt?: string }) => {
+const NImage = ({ src, alt, style, fill, ...props }: Omit<NextImageProps, "alt"> & { alt?: string }) => {
   const uid = useId();
   return (
     <NextImage
@@ -22,6 +16,7 @@ const NImage = ({
       loader={imageLoader}
       style={fill ? style : { height: "auto", ...style }}
       fill={fill}
+      quality={30}
       {...props}
     />
   );

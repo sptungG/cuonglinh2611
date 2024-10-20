@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import NImage from "../next/NextImage";
 type TImageRotateProps = { src: string; style?: React.CSSProperties };
@@ -34,4 +34,4 @@ const ImageRotate = ({ src, style }: TImageRotateProps) => {
   );
 };
 
-export default ImageRotate;
+export default memo(ImageRotate);
