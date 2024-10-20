@@ -289,7 +289,7 @@ const Page = (props: { data: Sheet }) => {
           </div>
         </div>
 
-        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 -z-10">
+        <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2">
           <NImage
             src="/images/pattern-4.png"
             alt="2611"
@@ -357,8 +357,8 @@ const Page = (props: { data: Sheet }) => {
         <div className="text-center text-xl uppercase text-amber-500">Kỉ niệm cưới</div>
         <div className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-8 ")}>Những khoảnh khắc đáng nhớ</div>
 
-        <div className="flex max-w-screen-lg gap-4 items-stretch">
-          <div className="grid grid-cols-2 gap-4 flex-1 items-stretch">
+        <div className="flex max-w-screen-lg items-stretch gap-4">
+          <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
             <div className="col-span-2 flex items-center">
               <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-amber-600")}>Album chúng mình</div>
 
@@ -366,8 +366,8 @@ const Page = (props: { data: Sheet }) => {
                 href="/albums"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full ml-auto pl-3 pr-4 py-1.5 font-[600]"
-                icon={<ImagesIcon className="text-[#ffaa40] mr-2" />}
+                className="ml-auto rounded-full py-1.5 pl-3 pr-4 font-[600]"
+                icon={<ImagesIcon className="mr-2 text-[#ffaa40]" />}
               >
                 Xem tất cả
               </GradientButtonLink>
@@ -389,7 +389,7 @@ const Page = (props: { data: Sheet }) => {
               alt=""
             />
             <NImage
-              className="rounded-xl object-cover col-span-2"
+              className="col-span-2 rounded-xl object-cover"
               src="/assets/pexels-san-wedding-5544650.jpg"
               width={300}
               height={0}
@@ -397,9 +397,9 @@ const Page = (props: { data: Sheet }) => {
               alt=""
             />
           </div>
-          <div className="grid grid-cols-2 gap-4 flex-1 items-stretch">
+          <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
             <NImage
-              className="rounded-xl object-cover col-span-2"
+              className="col-span-2 rounded-xl object-cover"
               src="/assets/pexels-san-wedding-5544650.jpg"
               width={300}
               height={0}
@@ -428,7 +428,7 @@ const Page = (props: { data: Sheet }) => {
           </div>
         </div>
 
-        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 -z-10">
+        <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2">
           <NImage
             src="/images/pattern-5.png"
             alt="2611"

@@ -1,12 +1,12 @@
 import React, { memo } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import NImage from "../next/NextImage";
 type TImageRotateProps = { src: string; style?: React.CSSProperties };
 
 const ImageRotate = ({ src, style }: TImageRotateProps) => {
   const zIndex = style?.zIndex || 10;
   return (
-    <motion.div
+    <m.div
       style={{
         rotate: Math.random() * 20 - 10,
       }}
@@ -30,7 +30,7 @@ const ImageRotate = ({ src, style }: TImageRotateProps) => {
         style={{ width: 300, height: 300, ...style }}
         className="shrink-0 rounded-lg object-cover"
       />
-    </motion.div>
+    </m.div>
   );
 };
 

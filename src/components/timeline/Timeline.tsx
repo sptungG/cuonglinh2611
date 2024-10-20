@@ -1,5 +1,5 @@
 import { cn } from "@/common/utils";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useId, useRef, useState } from "react";
 
 interface TimelineEntry {
@@ -34,7 +34,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     <div className="w-full bg-white font-sans dark:bg-neutral-950 md:px-10" ref={containerRef}>
       <div ref={ref} className="relative mx-auto max-w-7xl pb-20">
         {data.map((item, index) => (
-          <motion.div
+          <m.div
             key={uid + index}
             whileInView={{ style: { background: "red" } }}
             viewport={{ root: containerRef }}
@@ -45,7 +45,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             {item.center}
 
             {item.right}
-          </motion.div>
+          </m.div>
         ))}
         <div
           style={{
@@ -53,7 +53,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           }}
           className="absolute left-1/2 top-0 w-[2px] -translate-x-1/2 overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] dark:via-neutral-700 "
         >
-          <motion.div
+          <m.div
             style={{
               height: heightTransform,
               opacity: opacityTransform,

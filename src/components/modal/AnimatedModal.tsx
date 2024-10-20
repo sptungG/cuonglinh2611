@@ -1,5 +1,5 @@
 import { cn } from "@/common/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { XIcon } from "lucide-react";
 import React, { ReactNode, useEffect, useRef } from "react";
 
@@ -25,7 +25,7 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           initial={{
             opacity: 0,
           }}
@@ -41,7 +41,7 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
         >
           <Overlay />
 
-          <motion.div
+          <m.div
             ref={modalRef}
             className={cn(
               "min-h-[50%] max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
@@ -72,8 +72,8 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
           >
             <CloseIcon onClick={() => setOpen(false)} />
             {children}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );
@@ -81,7 +81,7 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
 
 const Overlay = ({ className }: { className?: string }) => {
   return (
-    <motion.div
+    <m.div
       initial={{
         opacity: 0,
       }}
@@ -94,7 +94,7 @@ const Overlay = ({ className }: { className?: string }) => {
         backdropFilter: "blur(0px)",
       }}
       className={cn("fixed inset-0 z-50 size-full bg-black bg-opacity-50", className)}
-    ></motion.div>
+    ></m.div>
   );
 };
 
