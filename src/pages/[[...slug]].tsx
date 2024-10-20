@@ -41,7 +41,7 @@ const Page = (props: { data: Sheet }) => {
     <>
       <SEO />
 
-      <section className="relative flex h-dvh w-dvw flex-col items-center justify-center overflow-hidden">
+      <section className="relative flex h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden">
         <div className="z-10 flex items-center justify-between">
           <div className="relative flex h-full max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
             <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
