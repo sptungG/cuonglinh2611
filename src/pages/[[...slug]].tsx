@@ -499,7 +499,7 @@ const Page = (props: { data: Sheet }) => {
 
           {
             title: "Mừng Cưới",
-            icon: <GiftIcon className="size-full" />,
+            icon: <GiftIcon className="size-full text-amber-500" />,
             onClick: () => {
               setIsOpenQR(true);
             },
