@@ -289,7 +289,7 @@ const Page = (props: { data: Sheet }) => {
           </div>
         </div>
 
-        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2">
+        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 -z-10">
           <NImage
             src="/images/pattern-4.png"
             alt="2611"
@@ -428,7 +428,7 @@ const Page = (props: { data: Sheet }) => {
           </div>
         </div>
 
-        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2">
+        <div className="absolute left-0 top-1/2 w-full -translate-y-1/2 -z-10">
           <NImage
             src="/images/pattern-5.png"
             alt="2611"
