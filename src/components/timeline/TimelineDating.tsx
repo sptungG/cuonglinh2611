@@ -2,6 +2,7 @@ import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import NImage from "../next/NextImage";
 import { Timeline } from "./Timeline";
+import { FadeWrapper } from "../animation/Fade";
 
 const TimelineDating = () => {
   const dataText = [
@@ -38,7 +39,10 @@ const TimelineDating = () => {
           </div>
         ),
         left: (
-          <div className={cn("flex flex-1 flex-col max-w-md", index % 2 === 0 ? "pr-5" : "pl-5")}>
+          <FadeWrapper
+            direction={index % 2 === 0 ? "left" : "right"}
+            className={cn("flex flex-1 flex-col max-w-md", index % 2 === 0 ? "pr-5" : "pl-5")}
+          >
             <h3
               className={cn(
                 Fonts.DancingScript.className,
@@ -48,10 +52,10 @@ const TimelineDating = () => {
               {item.title}
             </h3>
             <p className="text-base">{item.desc}</p>
-          </div>
+          </FadeWrapper>
         ),
         right: (
-          <div className="flex max-w-md flex-1">
+          <FadeWrapper direction={index % 2 === 0 ? "right" : "left"} className="flex max-w-md flex-1">
             <div className="relative mx-16 flex h-[360px] w-[250px] shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
               <NImage src={item.image} alt="2611" height={0} width={300} className="size-full min-h-full rounded-full object-cover" />
               <NImage
@@ -69,7 +73,7 @@ const TimelineDating = () => {
                 className="absolute bottom-[-30px] right-[-40px] animate-[bounceY_10s_linear_infinite]"
               />
             </div>
-          </div>
+          </FadeWrapper>
         ),
       }))}
     />
