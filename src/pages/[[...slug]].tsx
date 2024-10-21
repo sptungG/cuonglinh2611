@@ -48,7 +48,7 @@ const Page = (props: { data: Sheet }) => {
     <>
       <SEO />
 
-      <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden">
+      <section className="relative flex max-h-[1000px] min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden">
         <div className="z-10 flex items-center justify-between">
           <FadeWrapper className="relative flex h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
             <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
@@ -120,7 +120,12 @@ const Page = (props: { data: Sheet }) => {
         </FadeWrapper>
       </section>
 
-      <section className={cn(Fonts.Questrial.className, "text-lg min-h-dvh relative flex flex-col items-center justify-center overflow-hidden")}>
+      <section
+        className={cn(
+          Fonts.Questrial.className,
+          "text-lg min-h-dvh max-h-[1000px] relative flex flex-col items-center justify-center overflow-hidden"
+        )}
+      >
         <div className="relative flex flex-col items-center justify-center rounded-2xl border-2 border-amber-500/20 p-10 pb-12">
           <div className="mb-5 flex items-center">
             <FadeWrapper direction="left" className="flex flex-col">
@@ -206,7 +211,7 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="relative flex min-h-dvh items-center justify-center">
+      <section className="relative flex max-h-[1000px] min-h-dvh items-center justify-center">
         <div className="flex flex-col items-center justify-center">
           <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
             Cô dâu
@@ -283,7 +288,7 @@ const Page = (props: { data: Sheet }) => {
         />
       </section>
 
-      <section className="relative flex min-h-[80dvh] flex-col items-center justify-center px-6 pb-10">
+      <section className="relative flex max-h-[800px] min-h-[80dvh] flex-col items-center justify-center px-6 pb-10">
         <FadeWrapper direction="left" className="text-center text-xl uppercase text-amber-500">
           Cho đến ngày
         </FadeWrapper>
@@ -333,7 +338,7 @@ const Page = (props: { data: Sheet }) => {
         />
       </section>
 
-      <section className="relative flex min-h-fit flex-col items-center justify-center py-40">
+      <section className="relative flex max-h-[1000px] min-h-fit flex-col items-center justify-center py-40">
         <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500">
           Hãy dành chút thời gian để nói cho chúng mình biết nhé!
         </FadeWrapper>
@@ -354,11 +359,11 @@ const Page = (props: { data: Sheet }) => {
         <div className="relative min-h-fit w-full overflow-hidden">
           <div className="flex items-center justify-center py-8">
             {[
-              "assets/pexels-tran-long-13114541.jpg",
-              "assets/pexels-tuan-anh-nguyen-1806361.jpg",
-              "assets/pexels-nguyen-xuan-trung-17586999.jpg",
-              "assets/pexels-san-wedding-5544662.jpg",
-              "assets/pexels-san-wedding-5544650.jpg",
+              "/assets/pexels-tran-long-13114541.jpg",
+              "/assets/pexels-tuan-anh-nguyen-1806361.jpg",
+              "/assets/pexels-nguyen-xuan-trung-17586999.jpg",
+              "/assets/pexels-san-wedding-5544662.jpg",
+              "/assets/pexels-san-wedding-5544650.jpg",
             ].map((image, index) => (
               <ImageRotate key={"ImageRotate" + index} src={image} style={index === 2 ? { width: 320, height: 320 } : {}} />
             ))}
@@ -366,7 +371,7 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="relative flex min-h-dvh flex-col items-center justify-center pb-28">
+      <section className="relative flex max-h-[1000px] min-h-dvh flex-col items-center justify-center pb-28">
         <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500">
           Kỉ niệm cưới
         </FadeWrapper>
