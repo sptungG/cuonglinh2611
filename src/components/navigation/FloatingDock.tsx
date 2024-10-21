@@ -5,18 +5,21 @@
  **/
 
 import { cn } from "@/common/utils";
-import { AnimatePresence, MotionValue, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, MotionValue, m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
-export const FloatingDock = ({
-  items,
-  desktopClassName,
-}: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
-  desktopClassName?: string;
-  mobileClassName?: string;
-}) => {
+interface IItem {
+  title: string;
+  icon: React.ReactNode;
+  href?: string;
+  onClick?: () => void;
+  target?: string;
+  rel?: string;
+  className?: string;
+}
+
+export const FloatingDock = ({ items, desktopClassName }: { items: IItem[]; desktopClassName?: string; mobileClassName?: string }) => {
   return (
     <>
       <FloatingDockDesktop items={items} className={desktopClassName} />
@@ -24,10 +27,10 @@ export const FloatingDock = ({
   );
 };
 
-const FloatingDockDesktop = ({ items, className }: { items: { title: string; icon: React.ReactNode; href: string }[]; className?: string }) => {
+const FloatingDockDesktop = ({ items, className }: { items: IItem[]; className?: string }) => {
   const mouseX = useMotionValue(Infinity);
   return (
-    <motion.div
+    <m.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn("mx-auto hidden md:flex h-12 gap-4 items-end  rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 pb-3 shadow", className)}
@@ -35,11 +38,11 @@ const FloatingDockDesktop = ({ items, className }: { items: { title: string; ico
       {items.map((item) => (
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
       ))}
-    </motion.div>
+    </m.div>
   );
 };
 
-function IconContainer({ mouseX, title, icon, href }: { mouseX: MotionValue; title: string; icon: React.ReactNode; href: string }) {
+function IconContainer({ mouseX, ...itemProps }: IItem & { mouseX: MotionValue }) {
   const ref = useRef<HTMLDivElement>(null);
 
   const distance = useTransform(mouseX, (val) => {
@@ -79,8 +82,8 @@ function IconContainer({ mouseX, title, icon, href }: { mouseX: MotionValue; tit
   const [hovered, setHovered] = useState(false);
 
   return (
-    <Link href={href}>
-      <motion.div
+    <ItemWrapper {...itemProps}>
+      <m.div
         ref={ref}
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
@@ -89,20 +92,38 @@ function IconContainer({ mouseX, title, icon, href }: { mouseX: MotionValue; tit
       >
         <AnimatePresence>
           {hovered && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 left-1/2 w-fit -translate-x-1/2 whitespace-pre rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-base text-amber-700"
+              className="absolute -top-10 left-1/2 w-fit -translate-x-1/2 whitespace-pre rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-base text-amber-700"
             >
-              {title}
-            </motion.div>
+              {itemProps.title}
+            </m.div>
           )}
         </AnimatePresence>
-        <motion.div style={{ width: widthIcon, height: heightIcon }} className="flex items-center justify-center">
-          {icon}
-        </motion.div>
-      </motion.div>
-    </Link>
+        <m.div style={{ width: widthIcon, height: heightIcon }} className="flex items-center justify-center">
+          {itemProps.icon}
+        </m.div>
+      </m.div>
+    </ItemWrapper>
   );
+}
+
+function ItemWrapper({ children, ...itemProps }: IItem & { children: React.ReactNode }) {
+  if (itemProps?.href) {
+    return (
+      <Link href={itemProps.href} target={itemProps?.target} rel={itemProps?.rel} className={itemProps?.className}>
+        {children}
+      </Link>
+    );
+  }
+  if (itemProps?.onClick) {
+    return (
+      <button onClick={itemProps?.onClick} className={itemProps?.className}>
+        {children}
+      </button>
+    );
+  }
+  return <div className={itemProps?.className}>{children}</div>;
 }

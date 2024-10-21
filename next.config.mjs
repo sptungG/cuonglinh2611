@@ -3,24 +3,19 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   compress: process.env.NODE_ENV === "production",
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: [
-        {
-          loader: "@svgr/webpack",
-          options: {
-            // https://react-svgr.com/docs/options/
-            icon: true,
-            dimensions: false,
-            svgo: true,
-          },
-        },
-      ],
-    });
-    return config;
-  }
+  optimizeFonts: process.env.NODE_ENV === "production",
+  experimental: {
+    optimizeCss: process.env.NODE_ENV === "production",
+  },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/a",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

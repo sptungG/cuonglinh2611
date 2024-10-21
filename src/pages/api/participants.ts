@@ -19,7 +19,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!newData?.id) throw new Error("No ID found in request");
         const result = await Sheets.updateRow(newData);
         if (!result) throw new Error(`Failed Updated for ID: ${newData.id}`);
-        res.revalidate(`/participants/${newData.id}`);
         res.status(201).json({ message: `Successfully Updated for ID: ${newData.id}` });
       } catch (error) {
         console.log("handler ~ error:", error);
