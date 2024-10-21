@@ -371,7 +371,7 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="relative flex max-h-[1000px] min-h-dvh flex-col items-center justify-center pb-28">
+      <section className="relative flex min-h-dvh flex-col items-center justify-center pb-28">
         <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500">
           Kỉ niệm cưới
         </FadeWrapper>
