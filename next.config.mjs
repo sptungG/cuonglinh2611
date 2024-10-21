@@ -4,7 +4,9 @@ const nextConfig = {
   swcMinify: true,
   compress: process.env.NODE_ENV === "production",
   optimizeFonts: process.env.NODE_ENV === "production",
-  optimizeCss: process.env.NODE_ENV === "production",
+  experimental: {
+    optimizeCss: process.env.NODE_ENV === "production",
+  },
   async redirects() {
     return [
       {

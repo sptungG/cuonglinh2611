@@ -1,6 +1,7 @@
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
+import { FadeWrapper } from "@/components/animation/Fade";
 import FlickeringGrid from "@/components/background/FlickeringGrid";
 import { GradientButtonLink } from "@/components/button/GradientButton";
 import { RainbowButton, RainbowButtonLink } from "@/components/button/RainbowButton";
@@ -11,14 +12,16 @@ import ModalQR from "@/components/modal/ModalQR";
 import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
-import { FadeWrapper } from "@/components/animation/Fade";
 import TimelineDating from "@/components/timeline/TimelineDating";
 import Fonts from "@/styles/fonts";
 import { CalendarHeartIcon, GiftIcon, HeartIcon, ImagesIcon, MapPinIcon, PartyPopperIcon } from "lucide-react";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 import useSWRMutation from "swr/mutation";
+
+const TimerCountDown = dynamic(() => import("@/components/card/TimerCountDown"), { ssr: false });
 
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -291,24 +294,7 @@ const Page = (props: { data: Sheet }) => {
           Cùng chúng mình đếm ngược nhé!
         </FadeWrapper>
 
-        <FadeWrapper className="mt-8 flex w-full max-w-screen-lg items-center justify-between divide-x divide-neutral-200 rounded-full border px-8 py-14">
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
-            <div className={cn(Fonts.DancingScript.className, "")}>Ngày</div>
-          </div>
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
-            <div className={cn(Fonts.DancingScript.className, "")}>Giờ</div>
-          </div>
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
-            <div className={cn(Fonts.DancingScript.className, "")}>Phút</div>
-          </div>
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <div className={cn(Fonts.DancingScript.className, "text-5xl mb-2 font-[600]")}>0</div>
-            <div className={cn(Fonts.DancingScript.className, "")}>Giây</div>
-          </div>
-        </FadeWrapper>
+        <TimerCountDown targetDate={new Date("2024-11-26T00:00:01")} />
 
         <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2">
           <NImage
