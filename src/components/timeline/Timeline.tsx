@@ -34,12 +34,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     <div className="w-full bg-white font-sans dark:bg-neutral-950 md:px-10" ref={containerRef}>
       <div ref={ref} className="relative mx-auto max-w-7xl pb-20">
         {data.map((item, index) => (
-          <m.div
-            key={uid + index}
-            whileInView={{ style: { background: "red" } }}
-            viewport={{ root: containerRef }}
-            className={cn("flex flex-row justify-center", index % 2 !== 0 && "flex-row-reverse", item?.className)}
-          >
+          <m.div key={uid + index} className={cn("flex flex-row justify-center", index % 2 !== 0 && "flex-row-reverse", item?.className)}>
             {item.left}
 
             {item.center}

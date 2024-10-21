@@ -52,8 +52,20 @@ const Page = (props: { data: Sheet }) => {
         <div className="z-10 flex items-center justify-between">
           <FadeWrapper className="relative flex h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
             <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
-            <NImage src="/images/icon-flower-3.png" alt="2611" height={0} width={120} className="absolute bottom-0 left-[-55px]" />
-            <NImage src="/images/icon-flower-4.png" alt="2611" height={0} width={100} className="absolute right-[-30px] top-0 rotate-[184deg]" />
+            <NImage
+              src="/images/icon-flower-3.png"
+              alt="2611"
+              height={0}
+              width={120}
+              className="absolute bottom-[-10px] left-[-55px] animate-[bounceY_12s_linear_infinite]"
+            />
+            <NImage
+              src="/images/icon-flower-4.png"
+              alt="2611"
+              height={0}
+              width={100}
+              className="absolute right-[-20px] top-0 animate-[bounceY_12s_linear_infinite]"
+            />
           </FadeWrapper>
 
           <div className="relative flex flex-col items-center justify-center px-20 text-center">
@@ -93,8 +105,20 @@ const Page = (props: { data: Sheet }) => {
               style={{ height: "100%" }}
               className="size-full min-h-full rounded-full object-cover"
             />
-            <NImage src="/images/icon-flower-3.png" alt="2611" height={0} width={100} className="absolute left-[-40px] top-0 rotate-[60deg]" />
-            <NImage src="/images/icon-flower-4.png" alt="2611" height={0} width={120} className="absolute bottom-0 right-[-30px] rotate-[250deg]" />
+            <NImage
+              src="/images/icon-flowers-3.png"
+              alt="2611"
+              height={0}
+              width={100}
+              className="absolute left-[-20px] top-0 animate-[bounceY_12s_linear_infinite]"
+            />
+            <NImage
+              src="/images/icon-flowers-4.png"
+              alt="2611"
+              height={0}
+              width={120}
+              className="absolute bottom-[-10px] right-[-50px] animate-[bounceY_12s_linear_infinite]"
+            />
           </FadeWrapper>
         </div>
 
@@ -338,7 +362,7 @@ const Page = (props: { data: Sheet }) => {
         />
       </section>
 
-      <section className="relative flex max-h-[1000px] min-h-fit flex-col items-center justify-center py-40">
+      <section className="relative flex min-h-fit flex-col items-center justify-center py-40">
         <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500">
           Hãy dành chút thời gian để nói cho chúng mình biết nhé!
         </FadeWrapper>
