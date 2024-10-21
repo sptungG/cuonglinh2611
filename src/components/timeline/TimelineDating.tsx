@@ -1,7 +1,7 @@
 import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import NImage from "../next/NextImage";
-import { m, useScroll, useTransform } from "framer-motion";
+import { m, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useId, useRef, useState } from "react";
 import { FadeWrapper } from "../animation/Fade";
 
@@ -42,6 +42,7 @@ const TimelineDating = () => {
     }
   }, [ref]);
 
+  const [scrollYProgressValue, setScrollYProgressValue] = useState(0);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 10%", "end 100%"],
@@ -49,6 +50,20 @@ const TimelineDating = () => {
 
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
+  const activeTitleStyle: React.CSSProperties = { textDecoration: "underline", color: "#fbbf24 " };
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setScrollYProgressValue(latest);
+  });
+
+  const formatActiveTitleStyle = (progress: number, index: number) => {
+    const progresses = [0.1, 0.5, 0.7];
+    if (progress > progresses[index]) {
+      return activeTitleStyle;
+    }
+    return {};
+  };
 
   return (
     <div className="w-full bg-white font-sans dark:bg-neutral-950 md:px-10" ref={containerRef}>
@@ -60,10 +75,8 @@ const TimelineDating = () => {
               className={cn("flex flex-1 flex-col max-w-md", index % 2 === 0 ? "pr-5" : "pl-5")}
             >
               <h3
-                className={cn(
-                  Fonts.DancingScript.className,
-                  "text-5xl font-[600] mb-4 group-hover:text-amber-400 group-hover:underline transition-all "
-                )}
+                className={cn(Fonts.DancingScript.className, "text-5xl font-[600] mb-4 transition-all ")}
+                style={formatActiveTitleStyle(scrollYProgressValue, index)}
               >
                 {item.title}
               </h3>
