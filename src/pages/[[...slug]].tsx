@@ -1,7 +1,6 @@
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
-import { FadeWrapper } from "@/components/animation/Fade";
 import FlickeringGrid from "@/components/background/FlickeringGrid";
 import { GradientButtonLink } from "@/components/button/GradientButton";
 import { RainbowButton, RainbowButtonLink } from "@/components/button/RainbowButton";
@@ -12,7 +11,6 @@ import ModalQR from "@/components/modal/ModalQR";
 import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
-import TimelineDating from "@/components/timeline/TimelineDating";
 import Fonts from "@/styles/fonts";
 import { CalendarHeartIcon, GiftIcon, HeartIcon, ImagesIcon, MapPinIcon, PartyPopperIcon } from "lucide-react";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -21,6 +19,8 @@ import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 import useSWRMutation from "swr/mutation";
 
+const FadeWrapper = dynamic(() => import("@/components/animation/Fade"), { ssr: false });
+const TimelineDating = dynamic(() => import("@/components/timeline/TimelineDating"), { ssr: false });
 const TimerCountDown = dynamic(() => import("@/components/card/TimerCountDown"), { ssr: false });
 
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
@@ -363,10 +363,12 @@ const Page = (props: { data: Sheet }) => {
       </section>
 
       <section className="relative flex min-h-fit flex-col items-center justify-center py-40">
-        <div className="mb-1 text-center text-base uppercase text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
-        <div className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
+        <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500">
+          Hãy dành chút thời gian để nói cho chúng mình biết nhé!
+        </FadeWrapper>
+        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
           Chúng mình rất mong bạn/anh/chị đến chung vui với chúng mình
-        </div>
+        </FadeWrapper>
 
         <div className="z-50 flex items-center justify-center px-8">
           <RainbowButton

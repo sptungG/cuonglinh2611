@@ -8,7 +8,7 @@ type FadeWrapperProps = {
   className?: string;
 };
 
-export function FadeWrapper({
+function FadeWrapper({
   direction = "down",
   framerProps = {
     hidden: { opacity: 0 },
@@ -51,3 +51,5 @@ export function FadeWrapper({
     </m.div>
   );
 }
+
+export default FadeWrapper;

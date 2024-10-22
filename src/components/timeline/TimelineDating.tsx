@@ -3,7 +3,9 @@ import Fonts from "@/styles/fonts";
 import NImage from "../next/NextImage";
 import { m, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useId, useRef, useState } from "react";
-import { FadeWrapper } from "../animation/Fade";
+import dynamic from "next/dynamic";
+
+const FadeWrapper = dynamic(() => import("../animation/Fade"), { ssr: false });
 
 const dataText = [
   {

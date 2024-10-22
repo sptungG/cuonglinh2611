@@ -1,8 +1,10 @@
 import React, { useMemo } from "react";
-import { FadeWrapper } from "../animation/Fade";
 import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
+import dynamic from "next/dynamic";
+
+const FadeWrapper = dynamic(() => import("../animation/Fade"), { ssr: false });
 
 type TTimerCountDownProps = { targetDate: Date };
 
