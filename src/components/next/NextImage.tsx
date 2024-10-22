@@ -16,7 +16,7 @@ const NImage = ({ src, alt, style, fill, ...props }: Omit<NextImageProps, "alt">
       loader={imageLoader}
       style={fill ? style : { height: "auto", ...style }}
       fill={fill}
-      quality={30}
+      quality={25}
       {...props}
     />
   );

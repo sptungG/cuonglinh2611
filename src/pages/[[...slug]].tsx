@@ -251,7 +251,7 @@ const Page = (props: { data: Sheet }) => {
                 alt="2611"
                 height={260}
                 width={260}
-                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
+                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover"
               />
             </div>
           </FadeWrapper>
@@ -284,7 +284,7 @@ const Page = (props: { data: Sheet }) => {
                 alt="2611"
                 height={260}
                 width={260}
-                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_10s_linear_infinite] object-cover"
+                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover"
               />
             </div>
           </FadeWrapper>
@@ -363,12 +363,10 @@ const Page = (props: { data: Sheet }) => {
       </section>
 
       <section className="relative flex min-h-fit flex-col items-center justify-center py-40">
-        <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500">
-          Hãy dành chút thời gian để nói cho chúng mình biết nhé!
-        </FadeWrapper>
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
+        <div className="mb-1 text-center text-base uppercase text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+        <div className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
           Chúng mình rất mong bạn/anh/chị đến chung vui với chúng mình
-        </FadeWrapper>
+        </div>
 
         <div className="z-50 flex items-center justify-center px-8">
           <RainbowButton
