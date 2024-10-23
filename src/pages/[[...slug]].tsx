@@ -50,10 +50,7 @@ const Page = (props: { data: Sheet }) => {
 
   return (
     <>
-      <SEO
-        title={[userData?.fullName, "Cuong&Linh"].filter(Boolean).join(" | ")}
-        description={["Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
-      />
+      <SEO title={[userData?.fullName, "Cuong&Linh"].filter(Boolean).join(" | ")} description={"Welcome to Our Wedding • ✨ 🎉 🎊"} />
 
       <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:max-h-[1000px]">
         <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
