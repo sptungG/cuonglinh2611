@@ -1,11 +1,13 @@
 import "@/styles/globals.css";
-import { LazyMotion, domAnimation } from "framer-motion";
 import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
+
+const Provider = dynamic(() => import("@/components/animation/Provider"), { ssr: false, loading: () => <div>Loading...</div> });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <LazyMotion features={domAnimation}>
+    <Provider>
       <Component {...pageProps} />
-    </LazyMotion>
+    </Provider>
   );
 }
