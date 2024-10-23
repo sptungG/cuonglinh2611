@@ -49,9 +49,9 @@ const Page = (props: { data: Sheet }) => {
 
   return (
     <>
-      <SEO />
+      <SEO title="Cuong&Linh" description={["Welcome to Our Wedding", userData?.fullName].filter(Boolean).join(" ")} />
 
-      <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden sm:max-h-[1000px]">
+      <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:max-h-[1000px]">
         <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
           <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
             <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
@@ -359,11 +359,14 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="relative flex min-h-dvh flex-col items-center justify-center ">
-        <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500">
+      <section className="relative flex min-h-dvh flex-col items-center justify-center">
+        <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500 max-sm:w-[90dvw] max-sm:overflow-hidden">
           Chuyện chúng mình
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-5xl sm:text-6xl text-center font-[600] mb-4")}>
+        <FadeWrapper
+          direction="right"
+          className={cn(Fonts.DancingScript.className, "text-5xl sm:text-6xl text-center font-[600] mb-4 max-sm:w-[90dvw] max-sm:overflow-hidden")}
+        >
           Đã bắt đầu như thế nào
         </FadeWrapper>
 

@@ -4,6 +4,7 @@ import NImage from "../next/NextImage";
 import { m, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import React, { useEffect, useId, useRef, useState } from "react";
 import FadeWrapper from "../animation/Fade";
+import { useMediaQuery } from "react-responsive";
 
 const dataText = [
   {
@@ -29,11 +30,13 @@ const dataText = [
   },
 ];
 
-const TimelineDating = () => {
+const TimelineDating = (props: { className?: string }) => {
   const uid = useId();
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
+
+  const mediaAbove640 = useMediaQuery({ minWidth: 640 });
 
   useEffect(() => {
     if (ref.current) {
@@ -66,16 +69,19 @@ const TimelineDating = () => {
   };
 
   return (
-    <div className="md:px-10" ref={containerRef}>
-      <div ref={ref} className="relative mx-auto w-full max-w-7xl pb-20">
+    <div className={cn("md:px-10 w-full", props?.className)} ref={containerRef}>
+      <div ref={ref} className="relative mx-auto max-w-7xl pb-20 max-sm:w-dvw">
         {dataText.map((item, index) => (
           <div
             key={uid + index}
-            className={cn("flex max-sm:flex-col justify-center pt-20 sm:pt-40 sm:items-center group", index % 2 !== 0 && "flex-row-reverse")}
+            className={cn("flex max-sm:flex-col justify-center pt-20 sm:pt-40 sm:items-center group", index % 2 !== 0 && "sm:flex-row-reverse")}
           >
             <FadeWrapper
               direction={index % 2 === 0 ? "left" : "right"}
-              className={cn("flex flex-1 flex-col max-w-md max-sm:px-5 max-sm:mb-10", index % 2 === 0 ? "sm:pr-5" : "sm:pl-5")}
+              className={cn(
+                "flex flex-col sm:max-w-md max-sm:px-5 max-sm:mb-10 sm:flex-1 max-sm:w-[90dvw] max-sm:overflow-hidden",
+                index % 2 === 0 ? "sm:pr-5" : "sm:pl-5"
+              )}
             >
               <h3
                 className={cn(Fonts.DancingScript.className, "text-4xl sm:text-5xl font-[600] mb-4 transition-all ")}
@@ -88,10 +94,13 @@ const TimelineDating = () => {
 
             <div className="z-10 flex shrink-0 items-baseline border-amber-600 text-amber-700 max-sm:-order-1 max-sm:mb-6 max-sm:px-5 sm:mx-10 sm:size-40 sm:flex-col sm:items-center sm:justify-center sm:rounded-full sm:border sm:bg-white">
               <div className={cn(Fonts.DancingScript.className, "text-7xl")}>{item.time1}</div>
-              <div className="">{item.time2}</div>
+              <div className="text-lg sm:text-base">{item.time2}</div>
             </div>
 
-            <FadeWrapper direction={index % 2 === 0 ? "right" : "left"} className="flex max-w-md flex-1">
+            <FadeWrapper
+              direction={index % 2 === 0 ? "right" : "left"}
+              className="flex max-sm:ml-5 max-sm:w-[90dvw] max-sm:overflow-hidden sm:max-w-md sm:flex-1"
+            >
               <div className="relative mx-auto flex h-[360px] w-[300px] shrink-0 flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 sm:mx-16 sm:w-[250px] sm:rounded-full">
                 <NImage src={item.image} alt="2611" height={0} width={300} className="size-full min-h-full rounded-lg object-cover sm:rounded-full" />
                 <NImage

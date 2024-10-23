@@ -6,6 +6,7 @@ type FadeWrapperProps = {
   framerProps?: Variants;
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 };
 
 function FadeWrapper({
@@ -15,6 +16,7 @@ function FadeWrapper({
     show: { opacity: 1, transition: { type: "spring" } },
   },
   className,
+  style,
   children,
 }: FadeWrapperProps) {
   const directionOffset = useMemo(() => {
@@ -46,7 +48,7 @@ function FadeWrapper({
   }, [directionOffset, axis, framerProps]);
 
   return (
-    <m.div initial="hidden" whileInView="show" viewport={{ once: false }} variants={FADE_ANIMATION_VARIANTS} className={className}>
+    <m.div initial="hidden" whileInView="show" viewport={{ once: false }} variants={FADE_ANIMATION_VARIANTS} className={className} style={style}>
       {children}
     </m.div>
   );
