@@ -4,11 +4,9 @@ import { cn } from "@/common/utils";
 import FlickeringGrid from "@/components/background/FlickeringGrid";
 import { GradientButtonLink } from "@/components/button/GradientButton";
 import { RainbowButton, RainbowButtonLink } from "@/components/button/RainbowButton";
-import { CardsHeader01 } from "@/components/card/CardsHeader";
 import ImageRotate from "@/components/card/ImageRotate";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
-import { FloatingDock } from "@/components/navigation/FloatingDock";
 import NImage from "@/components/next/NextImage";
 import SEO from "@/components/next/SEO";
 import Fonts from "@/styles/fonts";
@@ -16,12 +14,15 @@ import { CalendarHeartIcon, GiftIcon, HeartIcon, ImagesIcon, MapPinIcon, PartyPo
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import useSWR, { SWRConfig } from "swr";
 import useSWRMutation from "swr/mutation";
 
 const FadeWrapper = dynamic(() => import("@/components/animation/Fade"), { ssr: false });
 const TimelineDating = dynamic(() => import("@/components/timeline/TimelineDating"), { ssr: false });
 const TimerCountDown = dynamic(() => import("@/components/card/TimerCountDown"), { ssr: false });
+const CardsHeader01 = dynamic(() => import("@/components/card/CardsHeader"), { ssr: false });
+const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false });
 
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -40,6 +41,8 @@ const Page = (props: { data: Sheet }) => {
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
 
+  const mediaAbove640 = useMediaQuery({ minWidth: 640 });
+
   const handleAccept = () => {
     UpdateUserReq.trigger({ ...props.data, accepted: "YES" });
   };
@@ -48,9 +51,9 @@ const Page = (props: { data: Sheet }) => {
     <>
       <SEO />
 
-      <section className="relative flex max-h-[1000px] min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden">
-        <div className="z-10 flex items-center justify-between">
-          <FadeWrapper className="relative flex h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
+      <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden sm:max-h-[1000px]">
+        <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
+          <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
             <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
             <NImage
               src="/images/icon-flower-3.png"
@@ -68,17 +71,22 @@ const Page = (props: { data: Sheet }) => {
             />
           </FadeWrapper>
 
-          <div className="relative flex flex-col items-center justify-center px-20 text-center">
-            <div className={cn(Fonts.Manrope.className, "text-xl font-[600] tracking-[4px] mb-8")}>CHÚNG MÌNH CƯỚI</div>
+          <div className="relative flex flex-col items-center justify-center px-0 text-center max-sm:-order-1 sm:px-20">
+            <div className={cn(Fonts.Manrope.className, "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8")}>CHÚNG MÌNH CƯỚI</div>
             <h2
-              className={cn(Fonts.GreatVibes.className, "text-6xl font-[600] text-balance whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]")}
+              className={cn(
+                Fonts.GreatVibes.className,
+                "text-4xl sm:text-6xl font-[600] text-center whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]"
+              )}
             >{`Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}</h2>
-            <div className={cn(Fonts.DancingScript.className, "text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}>
+            <div
+              className={cn(Fonts.DancingScript.className, "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}
+            >
               26 Tháng 11, 2024
             </div>
 
-            <div className="mb-2 flex items-center gap-1 text-lg">
-              <MapPinIcon />
+            <div className="mb-2 flex items-center gap-1 text-base leading-[1.2] sm:text-lg">
+              <MapPinIcon className="shrink-0" />
               <span>
                 {userData?.partyName === "NhaGai"
                   ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội"
@@ -96,14 +104,14 @@ const Page = (props: { data: Sheet }) => {
             </RainbowButtonLink>
           </div>
 
-          <FadeWrapper className="relative flex h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
+          <FadeWrapper className="relative h-[367px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
             <NImage
               src="/assets/image-02.jpg"
               alt="2611"
               height={0}
               width={240}
               style={{ height: "100%" }}
-              className="size-full min-h-full rounded-full object-cover"
+              className="size-full min-h-full rounded-md object-cover sm:rounded-full"
             />
             <NImage
               src="/images/icon-flowers-3.png"
@@ -117,7 +125,7 @@ const Page = (props: { data: Sheet }) => {
               alt="2611"
               height={0}
               width={120}
-              className="absolute bottom-[-10px] right-[-50px] animate-[bounceY_12s_linear_infinite]"
+              className="absolute bottom-[-40px] right-[-40px] animate-[bounceY_12s_linear_infinite] sm:bottom-[-10px] sm:right-[-50px]"
             />
           </FadeWrapper>
         </div>
@@ -139,7 +147,7 @@ const Page = (props: { data: Sheet }) => {
       </section>
 
       <section className="relative mb-20 flex max-w-[100dvw] items-center justify-center overflow-hidden">
-        <FadeWrapper className="px-10 py-5">
+        <FadeWrapper className="sm:px-10 sm:py-5">
           <CardsHeader01 />
         </FadeWrapper>
       </section>
@@ -147,21 +155,21 @@ const Page = (props: { data: Sheet }) => {
       <section
         className={cn(
           Fonts.Questrial.className,
-          "text-lg min-h-dvh max-h-[1000px] relative flex flex-col items-center justify-center overflow-hidden"
+          "text-lg min-h-dvh sm:max-h-[1000px] relative flex flex-col items-center justify-center overflow-hidden"
         )}
       >
-        <div className="relative flex flex-col items-center justify-center rounded-2xl border-2 border-amber-500/20 p-10 pb-12">
-          <div className="mb-5 flex items-center">
-            <FadeWrapper direction="left" className="flex flex-col">
-              <div className="mb-4 text-center text-xl uppercase">Nhà Trai</div>
+        <div className="relative flex flex-col items-center justify-center border-2 border-amber-500/20 p-4 pb-0 sm:rounded-2xl sm:p-10 sm:pb-12">
+          <div className="mb-10 flex items-center max-sm:flex-col sm:mb-5">
+            <FadeWrapper direction="left" className="flex flex-col max-sm:mb-4 max-sm:text-center">
+              <div className="text-center text-xl uppercase sm:mb-4">Nhà Trai</div>
               <div className="">Ông: Nguyễn Văn Linh</div>
               <div className="">Bà: Nguyễn Thị Hoàn</div>
             </FadeWrapper>
 
-            <NImage src="/images/flower.png" alt="2611" height={0} width={366} className="mx-10" />
+            <NImage src="/images/flower.png" alt="2611" height={0} width={366} className="max-sm:-order-1 sm:mx-10" />
 
-            <FadeWrapper direction="right" className="flex flex-col ">
-              <div className="mb-4 text-center text-xl uppercase">Nhà Gái</div>
+            <FadeWrapper direction="right" className="flex flex-col max-sm:text-center">
+              <div className="text-center text-xl uppercase sm:mb-4">Nhà Gái</div>
               <div className="">Ông: Nguyễn Phương Dũng</div>
               <div className="">Bà: Nguyễn Thị Minh</div>
             </FadeWrapper>
@@ -179,11 +187,11 @@ const Page = (props: { data: Sheet }) => {
           </FadeWrapper>
           <div className="text-base italic">{`(Tới dự Lễ Thành Hôn của hai con chúng tôi)`}</div>
 
-          <div className="my-10 flex items-center">
+          <div className="my-10 flex items-center max-sm:flex-col">
             <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>
               Nguyễn Văn Cường
             </FadeWrapper>
-            <HeartIcon className="mx-10 size-10 text-red-500" fill="currentColor" />
+            <HeartIcon className="size-10 text-red-500 max-sm:my-4 sm:mx-10" fill="currentColor" />
             <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>
               Nguyễn Yến Linh
             </FadeWrapper>
@@ -209,7 +217,7 @@ const Page = (props: { data: Sheet }) => {
             </>
           )}
 
-          <FadeWrapper className={cn(Fonts.DancingScript.className, "text-2xl")}>
+          <FadeWrapper className={cn(Fonts.DancingScript.className, "text-center text-2xl")}>
             Sự hiện diện của Quý khách là niềm vinh hạnh của gia đình chúng tôi!
           </FadeWrapper>
 
@@ -218,7 +226,7 @@ const Page = (props: { data: Sheet }) => {
             alt="2611"
             height={0}
             width={366}
-            className="absolute left-0 top-1/2 -z-10 min-h-full min-w-full -translate-y-1/2 rounded-2xl object-cover"
+            className="absolute left-0 top-1/2 -z-10 min-h-full min-w-full -translate-y-1/2 object-cover sm:rounded-2xl"
           />
 
           <NImage
@@ -226,39 +234,46 @@ const Page = (props: { data: Sheet }) => {
             alt="2611"
             height={0}
             width={330}
-            className="absolute bottom-0 left-0 z-10 -translate-x-1/2 object-cover"
+            className="bottom-0 left-0 z-10 object-cover sm:absolute sm:-translate-x-1/2"
           />
         </div>
 
-        <div className="absolute left-0 top-1/2 -z-20 w-dvw -translate-y-1/2 ">
-          <FlickeringGrid className="" squareSize={4} gridGap={6} color="#d97706" maxOpacity={0.5} flickerChance={0.1} height={300} width={3000} />
-        </div>
+        {mediaAbove640 && (
+          <div className="absolute left-0 top-1/2 -z-20 w-dvw -translate-y-1/2 ">
+            <FlickeringGrid className="" squareSize={4} gridGap={6} color="#d97706" maxOpacity={0.5} flickerChance={0.1} height={300} width={3000} />
+          </div>
+        )}
       </section>
 
-      <section className="relative flex max-h-[1000px] min-h-dvh items-center justify-center">
-        <div className="flex flex-col items-center justify-center">
+      <section className="relative flex min-h-dvh items-center justify-center max-sm:flex-col max-sm:py-40 sm:max-h-[1000px]">
+        <div className="flex flex-col items-center justify-center max-sm:mt-20">
           <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
             Cô dâu
           </FadeWrapper>
           <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>
             Nguyễn Yến Linh
           </FadeWrapper>
-          <FadeWrapper direction="left" className="relative flex h-[260px] items-center justify-center">
-            <NImage src="/assets/pexels-agung-pandit-wiguna-9827356.jpg" height={0} width={172} className="max-h-[172px] rounded-full object-cover" />
-            <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
+          <FadeWrapper direction="left" className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]">
+            <NImage
+              src="/assets/pexels-agung-pandit-wiguna-9827356.jpg"
+              height={0}
+              width={172}
+              className="max-h-full rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
+            />
+            <div className="absolute bottom-[-60px] right-[-40px] -z-10 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
               <NImage
                 src="/images/couple-frame-2.png"
                 alt="2611"
                 height={260}
                 width={260}
-                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover"
+                className="-ml-1 -mt-1 size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
               />
             </div>
           </FadeWrapper>
         </div>
 
-        <FadeWrapper className="relative mx-16 flex h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-          <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full min-h-[600px] rounded-full object-cover" />
+        <FadeWrapper className="relative mx-16 hidden h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 max-sm:-order-1 sm:flex">
+          <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full rounded-full object-cover sm:min-h-[600px]" />
           <NImage
             src="/images/icon-flowers-3.png"
             alt="2611"
@@ -275,16 +290,24 @@ const Page = (props: { data: Sheet }) => {
           />
         </FadeWrapper>
 
-        <div className="flex flex-col items-center justify-center">
-          <FadeWrapper direction="right" className="relative mb-3 flex h-[260px] items-center justify-center">
-            <NImage src="/assets/image-01.jpg" height={0} width={172} className="max-h-[172px] rounded-full object-cover" />
-            <div className="absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2">
+        <div className="flex flex-col items-center justify-center max-sm:-order-1">
+          <FadeWrapper
+            direction="right"
+            className="relative mb-3 flex size-[300px] items-center justify-center max-sm:order-3 max-sm:mt-6 sm:size-[260px]"
+          >
+            <NImage
+              src="/assets/image-01.jpg"
+              height={0}
+              width={172}
+              className="max-h-full rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
+            />
+            <div className="absolute bottom-[-60px] left-[-40px] -z-10 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
               <NImage
                 src="/images/couple-frame-2.png"
                 alt="2611"
                 height={260}
                 width={260}
-                className="-ml-1 -mt-1 max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover"
+                className="-ml-1 -mt-1 size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
               />
             </div>
           </FadeWrapper>
@@ -301,22 +324,22 @@ const Page = (props: { data: Sheet }) => {
           alt="2611"
           height={400}
           width={200}
-          className="absolute -bottom-16 left-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+          className="absolute -bottom-16 left-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50"
         />
         <NImage
           src="/images/icon-flowers-2.png"
           alt="2611"
           height={320}
           width={160}
-          className="absolute right-0 top-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+          className="absolute right-0 top-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50"
         />
       </section>
 
-      <section className="relative flex max-h-[800px] min-h-[80dvh] flex-col items-center justify-center px-6 pb-10">
+      <section className="relative flex min-h-[80dvh] max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden px-4 pb-10 sm:max-h-[800px] sm:px-6">
         <FadeWrapper direction="left" className="text-center text-xl uppercase text-amber-500">
           Cho đến ngày
         </FadeWrapper>
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-4")}>
+        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-5xl sm:text-6xl text-center font-[600] mb-4")}>
           Về chung một nhà
         </FadeWrapper>
         <FadeWrapper direction="left" className="text-center text-lg text-neutral-500">
@@ -336,11 +359,11 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="relative flex min-h-dvh flex-col items-center justify-center">
+      <section className="relative flex min-h-dvh flex-col items-center justify-center ">
         <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500">
           Chuyện chúng mình
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-4")}>
+        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-5xl sm:text-6xl text-center font-[600] mb-4")}>
           Đã bắt đầu như thế nào
         </FadeWrapper>
 
@@ -362,15 +385,15 @@ const Page = (props: { data: Sheet }) => {
         />
       </section>
 
-      <section className="relative flex min-h-fit flex-col items-center justify-center py-40">
-        <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500">
+      <section className="relative flex min-h-fit max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden py-40">
+        <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500 max-sm:px-8">
           Hãy dành chút thời gian để nói cho chúng mình biết nhé!
         </FadeWrapper>
         <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
           Chúng mình rất mong bạn/anh/chị đến chung vui với chúng mình
         </FadeWrapper>
 
-        <div className="z-50 flex items-center justify-center px-8">
+        <div className="z-50 flex items-center justify-center sm:px-8">
           <RainbowButton
             onClick={() => setIsOpenSaveDate(true)}
             className="items-center text-base uppercase tracking-[2px] text-amber-900 ring-1 ring-amber-300"
@@ -395,15 +418,15 @@ const Page = (props: { data: Sheet }) => {
         </div>
       </section>
 
-      <section className="relative flex min-h-dvh flex-col items-center justify-center pb-28">
+      <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden pb-28">
         <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500">
           Kỉ niệm cưới
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-6xl text-center font-[600] mb-8 ")}>
+        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-4xl sm:text-6xl text-center font-[600] mb-8 ")}>
           Những khoảnh khắc đáng nhớ
         </FadeWrapper>
 
-        <div className="flex max-w-screen-lg items-stretch gap-4">
+        <div className="flex max-w-screen-lg items-stretch gap-4 px-4 max-sm:flex-col">
           <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
             <div className="col-span-2 flex items-center">
               <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-amber-600")}>Album chúng mình</div>
@@ -445,7 +468,7 @@ const Page = (props: { data: Sheet }) => {
           </div>
           <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
             <NImage
-              className="col-span-2 rounded-xl object-cover"
+              className="col-span-2 rounded-xl object-cover max-sm:order-3"
               src="/assets/pexels-san-wedding-5544650.jpg"
               width={300}
               height={0}

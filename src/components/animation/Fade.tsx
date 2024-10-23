@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { m, Variants } from "framer-motion";
 
 type FadeWrapperProps = {
@@ -52,4 +52,4 @@ function FadeWrapper({
   );
 }
 
-export default FadeWrapper;
+export default memo(FadeWrapper);

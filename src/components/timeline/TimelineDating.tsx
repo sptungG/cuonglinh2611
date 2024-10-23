@@ -66,16 +66,19 @@ const TimelineDating = () => {
   };
 
   return (
-    <div className="w-full bg-white font-sans dark:bg-neutral-950 md:px-10" ref={containerRef}>
-      <div ref={ref} className="relative mx-auto max-w-7xl pb-20">
+    <div className="md:px-10" ref={containerRef}>
+      <div ref={ref} className="relative mx-auto w-full max-w-7xl pb-20">
         {dataText.map((item, index) => (
-          <div key={uid + index} className={cn("flex flex-row justify-center pt-40 items-center group", index % 2 !== 0 && "flex-row-reverse")}>
+          <div
+            key={uid + index}
+            className={cn("flex max-sm:flex-col justify-center pt-20 sm:pt-40 sm:items-center group", index % 2 !== 0 && "flex-row-reverse")}
+          >
             <FadeWrapper
               direction={index % 2 === 0 ? "left" : "right"}
-              className={cn("flex flex-1 flex-col max-w-md", index % 2 === 0 ? "pr-5" : "pl-5")}
+              className={cn("flex flex-1 flex-col max-w-md max-sm:px-5 max-sm:mb-10", index % 2 === 0 ? "sm:pr-5" : "sm:pl-5")}
             >
               <h3
-                className={cn(Fonts.DancingScript.className, "text-5xl font-[600] mb-4 transition-all ")}
+                className={cn(Fonts.DancingScript.className, "text-4xl sm:text-5xl font-[600] mb-4 transition-all ")}
                 style={formatActiveTitleStyle(scrollYProgressValue, index)}
               >
                 {item.title}
@@ -83,14 +86,14 @@ const TimelineDating = () => {
               <p className="text-base">{item.desc}</p>
             </FadeWrapper>
 
-            <div className="z-10 mx-auto flex size-40 shrink-0 flex-col items-center justify-center rounded-full border border-amber-600 bg-white text-amber-700">
+            <div className="z-10 flex shrink-0 items-baseline border-amber-600 text-amber-700 max-sm:-order-1 max-sm:mb-6 max-sm:px-5 sm:mx-10 sm:size-40 sm:flex-col sm:items-center sm:justify-center sm:rounded-full sm:border sm:bg-white">
               <div className={cn(Fonts.DancingScript.className, "text-7xl")}>{item.time1}</div>
               <div className="">{item.time2}</div>
             </div>
 
             <FadeWrapper direction={index % 2 === 0 ? "right" : "left"} className="flex max-w-md flex-1">
-              <div className="relative mx-16 flex h-[360px] w-[250px] shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2">
-                <NImage src={item.image} alt="2611" height={0} width={300} className="size-full min-h-full rounded-full object-cover" />
+              <div className="relative mx-auto flex h-[360px] w-[300px] shrink-0 flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 sm:mx-16 sm:w-[250px] sm:rounded-full">
+                <NImage src={item.image} alt="2611" height={0} width={300} className="size-full min-h-full rounded-lg object-cover sm:rounded-full" />
                 <NImage
                   src="/images/icon-flowers-3.png"
                   alt="2611"
@@ -113,7 +116,7 @@ const TimelineDating = () => {
           style={{
             height: height + "px",
           }}
-          className="absolute left-1/2 top-0 w-[2px] -translate-x-1/2 overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] dark:via-neutral-700 "
+          className="absolute left-2 top-0 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] dark:via-neutral-700 sm:left-1/2 sm:-translate-x-1/2 "
         >
           <m.div
             style={{
