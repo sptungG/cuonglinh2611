@@ -1,6 +1,7 @@
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
+import FadeWrapper from "@/components/animation/Fade";
 import FlickeringGrid from "@/components/background/FlickeringGrid";
 import { GradientButtonLink } from "@/components/button/GradientButton";
 import { RainbowButton, RainbowButtonLink } from "@/components/button/RainbowButton";
@@ -18,7 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import useSWR, { SWRConfig } from "swr";
 import useSWRMutation from "swr/mutation";
 
-const FadeWrapper = dynamic(() => import("@/components/animation/Fade"), { ssr: false });
+// const FadeWrapper = dynamic(() => import("@/components/animation/Fade"), { ssr: false });
 const TimelineDating = dynamic(() => import("@/components/timeline/TimelineDating"), { ssr: false });
 const TimerCountDown = dynamic(() => import("@/components/card/TimerCountDown"), { ssr: false });
 const CardsHeader01 = dynamic(() => import("@/components/card/CardsHeader"), { ssr: false });
@@ -260,7 +261,7 @@ const Page = (props: { data: Sheet }) => {
               width={172}
               className="max-h-full rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
             />
-            <div className="absolute bottom-[-60px] right-[-40px] -z-10 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
+            <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:right-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
               <NImage
                 src="/images/couple-frame-2.png"
                 alt="2611"
@@ -301,7 +302,7 @@ const Page = (props: { data: Sheet }) => {
               width={172}
               className="max-h-full rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
             />
-            <div className="absolute bottom-[-60px] left-[-40px] -z-10 sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
+            <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:left-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
               <NImage
                 src="/images/couple-frame-2.png"
                 alt="2611"
@@ -389,12 +390,10 @@ const Page = (props: { data: Sheet }) => {
       </section>
 
       <section className="relative flex min-h-fit max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden py-40">
-        <FadeWrapper direction="left" className="mb-1 text-center text-base uppercase text-amber-500 max-sm:px-8">
-          Hãy dành chút thời gian để nói cho chúng mình biết nhé!
-        </FadeWrapper>
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
+        <div className="mb-1 text-center text-base uppercase text-amber-500 max-sm:px-8">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+        <div className={cn(Fonts.DancingScript.className, "text-4xl text-center font-[600] mb-4")}>
           Chúng mình rất mong bạn/anh/chị đến chung vui với chúng mình
-        </FadeWrapper>
+        </div>
 
         <div className="z-50 flex items-center justify-center sm:px-8">
           <RainbowButton
@@ -422,12 +421,8 @@ const Page = (props: { data: Sheet }) => {
       </section>
 
       <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden pb-28">
-        <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500">
-          Kỉ niệm cưới
-        </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-4xl sm:text-6xl text-center font-[600] mb-8 ")}>
-          Những khoảnh khắc đáng nhớ
-        </FadeWrapper>
+        <div className="text-center text-xl uppercase text-amber-500">Kỉ niệm cưới</div>
+        <div className={cn(Fonts.DancingScript.className, "text-4xl sm:text-6xl text-center font-[600] mb-8 ")}>Những khoảnh khắc đáng nhớ</div>
 
         <div className="flex max-w-screen-lg items-stretch gap-4 px-4 max-sm:flex-col">
           <div className="grid flex-1 grid-cols-2 items-stretch gap-4">

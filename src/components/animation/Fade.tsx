@@ -54,4 +54,4 @@ function FadeWrapper({
   );
 }
 
-export default memo(FadeWrapper);
+export default FadeWrapper;
