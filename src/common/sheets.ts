@@ -61,8 +61,8 @@ export class SheetsMethods {
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
         valueInputOption: "USER_ENTERED",
-        range: `${SheetTarget.range}!A${foundIndex + 2}:D${foundIndex + 2}`,
-        requestBody: { values: [[id, fullName, partyName, accepted]] },
+        range: `${SheetTarget.range}!C${foundIndex + 2}:D${foundIndex + 2}`,
+        requestBody: { values: [[partyName, accepted]] },
       });
       return result;
     } catch (err) {
