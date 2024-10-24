@@ -8,9 +8,13 @@ import { BorderBeam } from "../background/BorderBeam";
 import { FormInputFloating } from "../form/FormInput";
 import FormRadioBtn from "../form/FormRadioBtn";
 import { Modal } from "./AnimatedModal";
+import { toast } from "sonner";
+import { fetchReq, nextAPIUrl } from "@/common/request";
+import useSWRMutation from "swr/mutation";
+
+const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 
 type TModalAcceptProps = { open: boolean; setOpen: (open: boolean) => void; userData: Sheet };
-
 const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
   const uid = useId();
 
@@ -23,6 +27,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       partyName: userData?.partyName || "NhaTrai",
     },
   });
+  const UpdateUserReq = useSWRMutation(userData?.id ? `/participants?id=${userData.id}` : null, updateUser);
 
   const acceptItems = [
     { value: "NO", label: "Ko đi đc", icon: "😐" },
@@ -76,14 +81,37 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       });
     };
 
-    setTimeout(shoot, 0);
     setTimeout(shoot, 100);
     setTimeout(shoot, 200);
+    setTimeout(shoot, 300);
   };
 
-  const handleSubmitForm = methodForm.handleSubmit(async (data) => {
-    handleFire();
-    setOpen(false);
+  const handleSubmitForm = methodForm.handleSubmit(async (formData) => {
+    try {
+      const { accepted, fullName, partyName, email, phoneNumber } = formData;
+      if (userData?.id) await UpdateUserReq.trigger({ id: userData.id, partyName, accepted });
+      if (formData.accepted === "YES") {
+        handleFire();
+        toast.success(`Your answer is "YES" 🎉`, { description: `Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!` });
+      } else if (formData.accepted === "MAYBE") {
+        toast(`Your answer is "MAYBE" 🤔`, { description: "Hope to see you soon!" });
+      } else {
+        toast(`Your answer is "NO" 😐`, {
+          description: ":<<<",
+          action: {
+            label: "Try again",
+            onClick: () => {
+              setOpen?.(true);
+            },
+          },
+        });
+      }
+      methodForm.reset();
+      setOpen(false);
+    } catch (error) {
+      console.log("error:", error);
+      toast.error("Something went wrong!");
+    }
   });
 
   return (
@@ -92,11 +120,14 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
         <div className="flex items-center gap-4 bg-amber-50 p-4 pr-10 text-amber-500">
           <CalendarHeartIcon className="shrink-0" />
           <div className="-mb-1 flex items-baseline">
-            <h4 className="mr-1 text-2xl font-bold leading-[1.1] md:text-xl">26</h4>
-            <div className="leading-[1.1]">11/2024</div>
+            <h4 className="mr-0.5 text-2xl font-bold leading-[1.1]">26</h4>
+            <div className="leading-[1.1]">/11/2024</div>
           </div>
         </div>
-        <form onSubmit={handleSubmitForm} className="flex min-h-0 flex-[1_1_auto] flex-col p-4">
+
+        <div className="px-4 pb-1 pt-3 text-base uppercase text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+
+        <form onSubmit={handleSubmitForm} className="flex min-h-0 flex-[1_1_auto] flex-col p-4 pt-0">
           <div className="mb-1 font-[600] opacity-60"></div>
           <Controller
             name="fullName"
@@ -197,6 +228,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     value={item.value}
                     onChange={field.onChange}
                     className={cn("flex-col items-stretch px-2 pb-2 pt-4", item?.className, field.value === item.value && "border-amber-600")}
+                    disabled={userData?.id && item.value !== userData.partyName}
                   >
                     <div className={cn("leading-none h-9 flex items-center mb-1 text-4xl relative")}>
                       <span>{item.icon1}</span>

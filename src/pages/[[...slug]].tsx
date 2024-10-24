@@ -20,18 +20,15 @@ import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "ne
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import useSWR, { SWRConfig } from "swr";
-import useSWRMutation from "swr/mutation";
 import dynamic from "next/dynamic";
 
 const Provider = dynamic(() => import("@/components/animation/Provider"), { ssr: false, loading: () => <div>Loading...</div> });
 
-const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
-  const UpdateUserReq = useSWRMutation(id ? `/participants?id=${id}` : null, updateUser);
 
   const userData = getUserRes?.data || props.data;
   const mapParty =
@@ -43,10 +40,6 @@ const Page = (props: { data: Sheet }) => {
   const [isOpenQR, setIsOpenQR] = useState(false);
 
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
-
-  const handleAccept = () => {
-    UpdateUserReq.trigger({ ...props.data, accepted: "YES" });
-  };
 
   return (
     <>
