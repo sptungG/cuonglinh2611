@@ -53,14 +53,7 @@ const Page = (props: { data: Sheet }) => {
           <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
             {mediaAbove640 && (
               <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
-                <NImage
-                  src="/assets/image-01.jpg"
-                  alt="2611"
-                  loading="eager"
-                  height={0}
-                  width={240}
-                  className="size-full rounded-full object-cover"
-                />
+                <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
                 <NImage
                   src="/images/icon-flower-3.png"
                   alt="2611"
@@ -115,7 +108,6 @@ const Page = (props: { data: Sheet }) => {
               <NImage
                 src="/assets/image-02.jpg"
                 alt="2611"
-                loading="eager"
                 height={0}
                 width={240}
                 style={{ height: "100%" }}
