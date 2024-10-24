@@ -2,7 +2,6 @@ import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
-import FloatingDock from "@/components/navigation/FloatingDock";
 import SEO from "@/components/next/SEO";
 import { CalendarHeartIcon, GiftIcon, ImagesIcon, MapPinIcon } from "lucide-react";
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -19,6 +18,7 @@ const Section05 = dynamic(() => import("@/components/sections/Section05"), { ssr
 const Section06 = dynamic(() => import("@/components/sections/Section06"), { ssr: false, loading: () => <div>Loading...</div> });
 const Section07 = dynamic(() => import("@/components/sections/Section07"), { ssr: false, loading: () => <div>Loading...</div> });
 const Section08 = dynamic(() => import("@/components/sections/Section08"), { ssr: false, loading: () => <div>Loading...</div> });
+const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false, loading: () => <div>Loading...</div> });
 
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 
@@ -88,7 +88,7 @@ const Page = (props: { data: Sheet }) => {
 
             {
               title: "Mừng Cưới",
-              icon: <GiftIcon className="size-full text-amber-500" />,
+              icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
               onClick: () => {
                 setIsOpenQR(true);
               },
