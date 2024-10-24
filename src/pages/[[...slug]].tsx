@@ -560,7 +560,7 @@ const Page = (props: { data: Sheet }) => {
 
         <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
-        <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} />
+        <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
       </Provider>
     </>
   );

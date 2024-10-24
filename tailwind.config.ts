@@ -14,6 +14,7 @@ const config: Config = {
       animation: {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
         gradient: "gradient 8s linear infinite",
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
       },
       keyframes: {
         rainbow: {
@@ -32,6 +33,11 @@ const config: Config = {
         },
         gradient: {
           to: { backgroundPosition: "var(--bg-size) 0" },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
         },
       },
     },
