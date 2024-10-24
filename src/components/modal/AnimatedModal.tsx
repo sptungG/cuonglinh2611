@@ -38,7 +38,7 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
           opacity: 0,
           backdropFilter: "blur(0px)",
         }}
-        className="fixed inset-0 z-50 flex size-full [perspective:800px] [transform-style:preserve-3d] sm:items-center sm:justify-center"
+        className="fixed inset-0 z-[100] flex size-full [perspective:800px] [transform-style:preserve-3d] sm:items-center sm:justify-center"
         style={{ display: open ? "flex" : "none" }}
       >
         <Overlay />
@@ -94,7 +94,7 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={cn("fixed inset-0 z-50 size-full bg-black bg-opacity-50", className)}
+      className={cn("fixed inset-0 z-[100] size-full bg-black bg-opacity-50", className)}
     ></m.div>
   );
 };

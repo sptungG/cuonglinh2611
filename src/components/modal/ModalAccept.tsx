@@ -127,7 +127,11 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
         <div className="px-4 pb-1 pt-3 text-base uppercase text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
 
-        <form onSubmit={handleSubmitForm} className="flex min-h-0 flex-[1_1_auto] flex-col p-4 pt-0">
+        <form
+          onSubmit={handleSubmitForm}
+          className="flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-4 pt-0 "
+          style={{ scrollbarWidth: "thin" }}
+        >
           <div className="mb-1 font-[600] opacity-60"></div>
           <Controller
             name="fullName"
@@ -142,22 +146,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                 onChange={(e) => field.onChange(e.target.value)}
                 classNameWrapper="mb-4"
                 required
-              />
-            )}
-          />
-
-          <Controller
-            name="email"
-            control={methodForm.control}
-            render={({ field }) => (
-              <FormInputFloating
-                label="Email"
-                autoComplete="off"
-                value={field.value}
-                name={field.name}
-                onChange={(e) => field.onChange(e.target.value)}
-                classNameWrapper="mb-4"
-                type="email"
+                disabled={userData?.id && userData.fullName}
               />
             )}
           />
@@ -241,14 +230,16 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             )}
           />
 
-          <button
-            type="submit"
-            className="relative flex h-[60px] w-full items-center justify-center overflow-hidden rounded-lg border border-amber-500/50 bg-amber-600/10 "
-          >
-            <span className="pointer-events-none text-xl font-[600] text-amber-600">Tham gia</span>
-            <span className="ml-2 text-xl">{selectedAcceptItem.icon}</span>
-            <BorderBeam size={100} duration={6} delay={2} />
-          </button>
+          <div className="sticky bottom-0 mt-auto bg-white pb-4">
+            <button
+              type="submit"
+              className="relative flex h-[60px] w-full shrink-0 items-center justify-center overflow-hidden rounded-lg border border-amber-500/50 bg-amber-600/10 "
+            >
+              <span className="pointer-events-none text-xl font-[600] text-amber-600">Tham gia</span>
+              <span className="ml-2 text-xl">{selectedAcceptItem.icon}</span>
+              <BorderBeam size={100} duration={6} delay={2} />
+            </button>
+          </div>
         </form>
       </Modal>
     </>
