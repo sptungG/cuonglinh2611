@@ -28,7 +28,7 @@ const ImageRotate = ({ src, style }: TImageRotateProps) => {
         height={300}
         style={{ width: 300, height: 300, ...style }}
         className="shrink-0 rounded-lg object-cover"
-        loading="eager"
+        // loading="eager"
       />
     </m.div>
   );
