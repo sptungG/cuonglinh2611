@@ -94,7 +94,7 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={cn("fixed inset-0 z-[100] size-full bg-black bg-opacity-50", className)}
+      className={cn("fixed inset-0 z-[99] size-full bg-black bg-opacity-50", className)}
     ></m.div>
   );
 };
