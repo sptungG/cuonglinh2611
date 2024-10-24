@@ -4,27 +4,67 @@ import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
 import FloatingDock from "@/components/navigation/FloatingDock";
 import SEO from "@/components/next/SEO";
-import { CalendarHeartIcon, GiftIcon, ImagesIcon, MapPinIcon } from "lucide-react";
-import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import {
+  CalendarHeartIcon,
+  GiftIcon,
+  ImagesIcon,
+  MapPinIcon,
+} from "lucide-react";
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from "next";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 
-const Provider = dynamic(() => import("@/components/animation/Provider"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section01 = dynamic(() => import("@/components/sections/Section01"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section02 = dynamic(() => import("@/components/sections/Section02"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section03 = dynamic(() => import("@/components/sections/Section03"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section04 = dynamic(() => import("@/components/sections/Section04"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section05 = dynamic(() => import("@/components/sections/Section05"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section06 = dynamic(() => import("@/components/sections/Section06"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section07 = dynamic(() => import("@/components/sections/Section07"), { ssr: false, loading: () => <div>Loading...</div> });
-const Section08 = dynamic(() => import("@/components/sections/Section08"), { ssr: false, loading: () => <div>Loading...</div> });
+const Provider = dynamic(() => import("@/components/animation/Provider"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section01 = dynamic(() => import("@/components/sections/Section01"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section02 = dynamic(() => import("@/components/sections/Section02"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section03 = dynamic(() => import("@/components/sections/Section03"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section04 = dynamic(() => import("@/components/sections/Section04"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section05 = dynamic(() => import("@/components/sections/Section05"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section06 = dynamic(() => import("@/components/sections/Section06"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section07 = dynamic(() => import("@/components/sections/Section07"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
+const Section08 = dynamic(() => import("@/components/sections/Section08"), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+});
 
-const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
+const getUser = (url: string) =>
+  fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
-  const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
+  const { data: getUserRes } = useSWR(
+    id ? `/participants?id=${id}` : null,
+    getUser
+  );
 
   const userData = getUserRes?.data || props.data;
   const mapParty =
@@ -38,16 +78,22 @@ const Page = (props: { data: Sheet }) => {
   return (
     <>
       <SEO
-        title={[userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "", "Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
+        title={[
+          userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "",
+          "Welcome to Our Wedding",
+          "✨ 🎉 🎊",
+        ]
+          .filter(Boolean)
+          .join(" | ")}
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
 
       <Provider>
         <Section01 userData={userData} />
 
-        <Section02 />
-
         <Section03 userData={userData} />
+
+        <Section02 userData={userData} />
 
         <Section04 />
 
@@ -98,7 +144,11 @@ const Page = (props: { data: Sheet }) => {
 
         <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
-        <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+        <ModalAccept
+          open={isOpenSaveDate}
+          setOpen={setIsOpenSaveDate}
+          userData={userData}
+        />
       </Provider>
     </>
   );
@@ -111,17 +161,35 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async ({ params }) => {
   const [partyType, id] = (params?.slug || []) as string[];
 
-  if (!partyType || !id) return { props: { data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet } };
+  if (!partyType || !id)
+    return {
+      props: {
+        data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet,
+      },
+    };
 
-  const sheetRow = await fetchReq<{ data: Sheet }>(`${nextAPIUrl}/participants?id=${id}`);
-  if (!sheetRow?.data) return { props: { data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet } };
+  const sheetRow = await fetchReq<{ data: Sheet }>(
+    `${nextAPIUrl}/participants?id=${id}`
+  );
+  if (!sheetRow?.data)
+    return {
+      props: {
+        data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet,
+      },
+    };
 
   return { props: { data: sheetRow.data }, revalidate: 1 };
 }) satisfies GetStaticProps<{ data: Sheet }>;
 
-const PageWrapper = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PageWrapper = ({
+  data,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <SWRConfig value={{ fallback: data?.id ? { [`/participants?id=${data.id}`]: data } : {} }}>
+    <SWRConfig
+      value={{
+        fallback: data?.id ? { [`/participants?id=${data.id}`]: data } : {},
+      }}
+    >
       <Page data={data} />
     </SWRConfig>
   );

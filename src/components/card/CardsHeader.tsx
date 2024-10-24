@@ -5,8 +5,9 @@ import Fonts from "@/styles/fonts";
 import { cn } from "@/common/utils";
 import { MovingBorder } from "../button/MovingBorder";
 import { useMediaQuery } from "react-responsive";
+import { TSection02Props } from "../sections/Section02";
 
-const CardsHeader01 = () => {
+const CardsHeader01 = ({ userData }: TSection02Props) => {
   const uid = useId();
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
 
@@ -49,8 +50,22 @@ const CardsHeader01 = () => {
           width={200}
           className="rounded-full transition-all group-hover:-scale-x-100"
         />
-        <p className="mt-2 text-amber-600 underline">17:00</p>
-        <p className={cn(Fonts.DancingScript.className, "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900")}>Đón khách</p>
+        <p className="mt-2 text-amber-600 underline">
+          {userData?.partyName === "NhaGai"
+            ? "17:00"
+            : userData?.partyDay === "25/11/2024"
+              ? "16:00"
+              : "09:00"}
+        </p>
+        {/* TODO: Sửa để thể hiện được lịch lễ thành hôn & lịch tiệc cưới */}
+        <p
+          className={cn(
+            Fonts.DancingScript.className,
+            "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+          )}
+        >
+          Đón khách
+        </p>
         <p className="mt-2 text-amber-800">Bắt đầu đón khách</p>
       </m.div>
 
@@ -64,11 +79,23 @@ const CardsHeader01 = () => {
             className="rounded-full transition-all group-hover:-scale-x-100"
           />
           <p className="mt-2 text-amber-600 underline">18:00</p>
-          <p className={cn(Fonts.DancingScript.className, "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900")}>Làm lễ</p>
-          <p className="mt-2 text-center text-amber-800 max-sm:mb-4">Tiến hành rước cô dâu vào sân khấu và làm lễ</p>
+          <p
+            className={cn(
+              Fonts.DancingScript.className,
+              "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+            )}
+          >
+            Làm lễ
+          </p>
+          <p className="mt-2 text-center text-amber-800 max-sm:mb-4">
+            Tiến hành rước cô dâu vào sân khấu và làm lễ
+          </p>
         </div>
 
-        <div className="absolute inset-0" style={{ borderRadius: `calc(16px * 0.96)` }}>
+        <div
+          className="absolute inset-0"
+          style={{ borderRadius: `calc(16px * 0.96)` }}
+        >
           <MovingBorder duration={5000} rx="50%" ry="30%">
             <div className="size-40 bg-[radial-gradient(var(--amber-100)_40%,transparent_60%)]" />
           </MovingBorder>
@@ -87,7 +114,14 @@ const CardsHeader01 = () => {
           className="rounded-full transition-all group-hover:-scale-x-100"
         />
         <p className="mt-2 text-amber-600 underline">19:00</p>
-        <p className={cn(Fonts.DancingScript.className, "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900")}>Khai tiệc</p>
+        <p
+          className={cn(
+            Fonts.DancingScript.className,
+            "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+          )}
+        >
+          Khai tiệc
+        </p>
         <p className="mt-2 text-amber-800">Bắt đầu khai tiệc</p>
       </m.div>
     </m.div>
