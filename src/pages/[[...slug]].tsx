@@ -133,14 +133,14 @@ const Page = (props: { data: Sheet }) => {
             alt="2611"
             height={420}
             width={240}
-            className="absolute bottom-10 left-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+            className="absolute bottom-10 left-0 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[200px]"
           />
           <NImage
             src="/images/icon-flowers-2.png"
             alt="2611"
             height={420}
             width={260}
-            className="absolute right-0 top-4 animate-[bounceY_10s_linear_infinite] opacity-50"
+            className="absolute right-0 top-4 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[180px]"
           />
         </section>
 
@@ -331,14 +331,14 @@ const Page = (props: { data: Sheet }) => {
             alt="2611"
             height={400}
             width={200}
-            className="absolute -bottom-16 left-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50"
+            className="absolute -bottom-16 left-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[160px]"
           />
           <NImage
             src="/images/icon-flowers-2.png"
             alt="2611"
             height={320}
             width={160}
-            className="absolute right-0 top-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50"
+            className="absolute right-0 top-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[140px]"
           />
         </section>
 
@@ -384,14 +384,14 @@ const Page = (props: { data: Sheet }) => {
             alt="2611"
             height={400}
             width={200}
-            className="absolute -bottom-16 left-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+            className="absolute -bottom-16 left-0 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[160px]"
           />
           <NImage
             src="/images/icon-flowers-2.png"
             alt="2611"
             height={320}
             width={160}
-            className="absolute right-0 top-0 animate-[bounceY_10s_linear_infinite] opacity-50"
+            className="absolute right-0 top-0 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[140px]"
           />
         </section>
 
