@@ -26,8 +26,6 @@ const NImage = ({ src, alt, style, fill, ...props }: Omit<NextImageProps, "alt">
       style={fill ? style : { height: "auto", ...style }}
       fill={fill}
       quality={25}
-      placeholder="blur"
-      blurDataURL={rgbDataURL(255, 251, 235)}
       {...props}
     />
   );
