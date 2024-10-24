@@ -38,7 +38,7 @@ const Page = (props: { data: Sheet }) => {
   return (
     <>
       <SEO
-        title={[userData?.fullName, "Welcome to Our Wedding", "Cuong&Linh", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
+        title={[userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "", "Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
 

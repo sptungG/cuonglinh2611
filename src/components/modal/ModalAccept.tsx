@@ -11,12 +11,15 @@ import { Modal } from "./AnimatedModal";
 import { toast } from "sonner";
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import useSWRMutation from "swr/mutation";
+import { useRouter } from "next/router";
 
+const appendUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "POST", body: JSON.stringify(arg) });
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 
 type TModalAcceptProps = { open: boolean; setOpen: (open: boolean) => void; userData: Sheet };
 const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
   const uid = useId();
+  const router = useRouter();
 
   const methodForm = useForm({
     defaultValues: {
@@ -27,7 +30,9 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       partyName: userData?.partyName || "NhaTrai",
     },
   });
+  const AppendUserReq = useSWRMutation(`/participants`, appendUser);
   const UpdateUserReq = useSWRMutation(userData?.id ? `/participants?id=${userData.id}` : null, updateUser);
+  const isLoading = methodForm.formState.isSubmitting || AppendUserReq?.isMutating || UpdateUserReq?.isMutating;
 
   const acceptItems = [
     { value: "NO", label: "Ko đi đc", icon: "😐" },
@@ -89,7 +94,16 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
   const handleSubmitForm = methodForm.handleSubmit(async (formData) => {
     try {
       const { accepted, fullName, partyName, email, phoneNumber } = formData;
-      if (userData?.id) await UpdateUserReq.trigger({ id: userData.id, partyName, accepted });
+
+      let res;
+      if (userData?.id) {
+        res = await UpdateUserReq.trigger({ id: userData.id, partyName, accepted });
+      } else {
+        res = await AppendUserReq.trigger({ fullName, phoneNumber, partyName, accepted });
+      }
+      setOpen(false);
+      methodForm.reset();
+
       if (formData.accepted === "YES") {
         handleFire();
         toast.success(`Your answer is "YES" 🎉`, { description: `Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!` });
@@ -106,8 +120,12 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           },
         });
       }
-      methodForm.reset();
-      setOpen(false);
+
+      if (userData?.id) {
+        router.replace(`/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}#invitation`);
+      } else if (res?.data?.id) {
+        router.replace(`/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}#invitation`);
+      }
     } catch (error) {
       console.log("error:", error);
       toast.error("Something went wrong!");
@@ -232,6 +250,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
           <div className="sticky bottom-0 mt-auto bg-white pb-4">
             <button
+              disabled={isLoading}
               type="submit"
               className="relative flex h-[60px] w-full shrink-0 items-center justify-center overflow-hidden rounded-lg border border-amber-500/50 bg-amber-600/10 "
             >
