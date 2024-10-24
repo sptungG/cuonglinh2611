@@ -12,6 +12,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       else res.status(200).json({ data: await Sheets.findById(id as string) });
       break;
     }
+    case "POST": {
+      try {
+        let newData = req.body;
+        if (typeof newData === "string") newData = JSON.parse(newData);
+        const result = await Sheets.appendRow(newData);
+        if (!result) throw new Error(`Failed Add Row`);
+        res.status(201).json({ message: `Successfully Add Row`, data: { ...result, ...newData } });
+      } catch (error) {
+        console.log("handler ~ error:", error);
+        res.status(500).json({ message: "Internal server error" });
+      }
+      break;
+    }
     case "PUT": {
       try {
         let newData = req.body;

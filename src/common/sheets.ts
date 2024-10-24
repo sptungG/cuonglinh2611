@@ -16,6 +16,9 @@ const SheetTarget = {
 export interface Sheet {
   id?: any;
   fullName?: any;
+  phoneNumber?: any;
+  invitedTime?: any;
+  partyTypeName?: any;
   partyName?: any;
   accepted?: any;
   createdAt?: any;
@@ -30,14 +33,20 @@ export class SheetsMethods {
       const response = await SheetsService.spreadsheets.values.get(SheetTarget);
       const resRows = response.data.values;
       if (resRows?.length) {
-        return resRows.slice(1).map((row) => ({
-          id: row[0],
-          fullName: row?.[1],
-          partyName: row?.[2],
-          accepted: row?.[3],
-          createdAt: row?.[4],
-          updatedAt: row?.[5],
-        }));
+        return resRows.slice(1).map((row) => {
+          const [id, fullName, phoneNumber, invitedTime, partyTypeName, partyName, accepted, createdAt, updatedAt] = row;
+          return {
+            id,
+            fullName,
+            phoneNumber,
+            invitedTime,
+            partyTypeName,
+            partyName,
+            accepted,
+            createdAt,
+            updatedAt,
+          };
+        });
       }
     } catch (err) {
       console.log(err);
@@ -61,12 +70,31 @@ export class SheetsMethods {
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
         valueInputOption: "USER_ENTERED",
-        range: `${SheetTarget.range}!A${foundIndex + 2}:D${foundIndex + 2}`,
-        requestBody: { values: [[id, fullName, partyName, accepted]] },
+        range: `${SheetTarget.range}!F${foundIndex + 2}:G${foundIndex + 2}`,
+        requestBody: { values: [[partyName, accepted]] },
       });
       return result;
     } catch (err) {
       console.log("updateRow ~ err:", err);
+      throw err;
+    }
+  }
+
+  async appendRow(values: Sheet) {
+    try {
+      const rows = await this.findAll();
+      const foundIndex = rows.findIndex((item) => !item?.fullName);
+      const { id, fullName, phoneNumber, partyName, accepted } = values;
+
+      const result = await SheetsService.spreadsheets.values.update({
+        ...SheetTarget,
+        valueInputOption: "USER_ENTERED",
+        range: `${SheetTarget.range}!B${foundIndex + 2}:G${foundIndex + 2}`,
+        requestBody: { values: [[fullName, phoneNumber, "", "", partyName, accepted]] },
+      });
+      return rows[foundIndex];
+    } catch (err) {
+      console.log("appendRow ~ err:", err);
       throw err;
     }
   }

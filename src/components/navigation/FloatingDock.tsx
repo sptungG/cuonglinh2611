@@ -19,7 +19,7 @@ interface IItem {
   className?: string;
 }
 
-export const FloatingDock = ({ items, desktopClassName }: { items: IItem[]; desktopClassName?: string; mobileClassName?: string }) => {
+const FloatingDock = ({ items, desktopClassName }: { items: IItem[]; desktopClassName?: string; mobileClassName?: string }) => {
   return (
     <>
       <FloatingDockDesktop items={items} className={desktopClassName} />
@@ -33,7 +33,7 @@ const FloatingDockDesktop = ({ items, className }: { items: IItem[]; className?:
     <m.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
-      className={cn("mx-auto hidden md:flex h-12 gap-4 items-end  rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 pb-3 shadow", className)}
+      className={cn("mx-auto flex h-12 gap-4 items-end  rounded-2xl bg-gray-50 px-4 pb-3 shadow", className)}
     >
       {items.map((item) => (
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
@@ -127,3 +127,5 @@ function ItemWrapper({ children, ...itemProps }: IItem & { children: React.React
   }
   return <div className={itemProps?.className}>{children}</div>;
 }
+
+export default FloatingDock;

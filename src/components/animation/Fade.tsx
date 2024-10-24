@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { m, Variants } from "framer-motion";
 
 type FadeWrapperProps = {
@@ -6,15 +6,17 @@ type FadeWrapperProps = {
   framerProps?: Variants;
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 };
 
-export function FadeWrapper({
+function FadeWrapper({
   direction = "down",
   framerProps = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { type: "spring" } },
   },
   className,
+  style,
   children,
 }: FadeWrapperProps) {
   const directionOffset = useMemo(() => {
@@ -46,8 +48,10 @@ export function FadeWrapper({
   }, [directionOffset, axis, framerProps]);
 
   return (
-    <m.div initial="hidden" whileInView="show" viewport={{ once: false }} variants={FADE_ANIMATION_VARIANTS} className={className}>
+    <m.div initial="hidden" whileInView="show" viewport={{ once: false }} variants={FADE_ANIMATION_VARIANTS} className={className} style={style}>
       {children}
     </m.div>
   );
 }
+
+export default FadeWrapper;

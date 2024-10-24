@@ -1,15 +1,14 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import { m } from "framer-motion";
 import NImage from "../next/NextImage";
 type TImageRotateProps = { src: string; style?: React.CSSProperties };
 
 const ImageRotate = ({ src, style }: TImageRotateProps) => {
   const zIndex = style?.zIndex || 10;
+  const rotate = useMemo(() => Math.random() * 20 - 10, []);
   return (
     <m.div
-      style={{
-        rotate: Math.random() * 20 - 10,
-      }}
+      style={{ rotate }}
       whileHover={{
         scale: 1.1,
         rotate: 0,
@@ -29,6 +28,7 @@ const ImageRotate = ({ src, style }: TImageRotateProps) => {
         height={300}
         style={{ width: 300, height: 300, ...style }}
         className="shrink-0 rounded-lg object-cover"
+        // loading="eager"
       />
     </m.div>
   );
