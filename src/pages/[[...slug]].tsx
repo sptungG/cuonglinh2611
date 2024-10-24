@@ -51,23 +51,32 @@ const Page = (props: { data: Sheet }) => {
       <Provider>
         <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:max-h-[1000px]">
           <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
-            <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
-              <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" />
-              <NImage
-                src="/images/icon-flower-3.png"
-                alt="2611"
-                height={0}
-                width={120}
-                className="absolute bottom-[-10px] left-[-55px] animate-[bounceY_12s_linear_infinite]"
-              />
-              <NImage
-                src="/images/icon-flower-4.png"
-                alt="2611"
-                height={0}
-                width={100}
-                className="absolute right-[-20px] top-0 animate-[bounceY_12s_linear_infinite]"
-              />
-            </FadeWrapper>
+            {mediaAbove640 && (
+              <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
+                <NImage
+                  src="/assets/image-01.jpg"
+                  alt="2611"
+                  loading="eager"
+                  height={0}
+                  width={240}
+                  className="size-full rounded-full object-cover"
+                />
+                <NImage
+                  src="/images/icon-flower-3.png"
+                  alt="2611"
+                  height={0}
+                  width={120}
+                  className="absolute bottom-[-10px] left-[-55px] animate-[bounceY_12s_linear_infinite]"
+                />
+                <NImage
+                  src="/images/icon-flower-4.png"
+                  alt="2611"
+                  height={0}
+                  width={100}
+                  className="absolute right-[-20px] top-0 animate-[bounceY_12s_linear_infinite]"
+                />
+              </FadeWrapper>
+            )}
 
             <div className="relative flex flex-col items-center justify-center px-0 text-center max-sm:-order-1 sm:px-20">
               <div className={cn(Fonts.Manrope.className, "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8")}>CHÚNG MÌNH CƯỚI</div>
@@ -106,6 +115,7 @@ const Page = (props: { data: Sheet }) => {
               <NImage
                 src="/assets/image-02.jpg"
                 alt="2611"
+                loading="eager"
                 height={0}
                 width={240}
                 style={{ height: "100%" }}

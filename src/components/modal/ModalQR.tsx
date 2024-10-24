@@ -14,13 +14,13 @@ const ModalQR = ({ open, setOpen }: TModalQRProps) => {
       </div>
       <div className="flex min-h-0 flex-[1_1_auto] justify-between overflow-y-auto pb-24 max-sm:flex-col sm:pb-10 sm:[&>*]:w-1/2">
         <NImage
-          priority
+          loading="eager"
           src="/assets/linhny-qrqr.jpeg"
           width={400}
           height={400}
           className="object-cover max-sm:w-full max-sm:border-b-2 max-sm:border-dashed max-sm:border-b-amber-500"
         />
-        <NImage priority src="/assets/cuongnv-qrqr.jpeg" width={400} height={400} className=" object-cover max-sm:w-full" />
+        <NImage loading="eager" src="/assets/cuongnv-qrqr.jpeg" width={400} height={400} className=" object-cover max-sm:w-full" />
       </div>
     </Modal>
   );
