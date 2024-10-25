@@ -2,7 +2,6 @@ import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
-import FloatingDock from "@/components/navigation/FloatingDock";
 import SEO from "@/components/next/SEO";
 import {
   CalendarHeartIcon,
@@ -55,6 +54,10 @@ const Section08 = dynamic(() => import("@/components/sections/Section08"), {
   ssr: false,
   loading: () => <div>Loading...</div>,
 });
+const FloatingDock = dynamic(
+  () => import("@/components/navigation/FloatingDock"),
+  { ssr: false, loading: () => <div>Loading...</div> }
+);
 
 const getUser = (url: string) =>
   fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -101,7 +104,11 @@ const Page = (props: { data: Sheet }) => {
 
         <Section06 />
 
-        <Section07 onClickBtn01={() => setIsOpenSaveDate(true)} />
+        <Section07
+          onClickBtn01={() => {
+            setIsOpenSaveDate(true);
+          }}
+        />
 
         <Section08 />
 
@@ -134,7 +141,9 @@ const Page = (props: { data: Sheet }) => {
 
             {
               title: "Mừng Cưới",
-              icon: <GiftIcon className="size-full text-amber-500" />,
+              icon: (
+                <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />
+              ),
               onClick: () => {
                 setIsOpenQR(true);
               },
