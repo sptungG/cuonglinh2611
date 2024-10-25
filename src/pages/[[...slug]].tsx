@@ -55,7 +55,11 @@ const Page = (props: { data: Sheet }) => {
 
         <Section06 />
 
-        <Section07 onClickBtn01={() => setIsOpenSaveDate(true)} />
+        <Section07
+          onClickBtn01={() => {
+            setIsOpenSaveDate(true);
+          }}
+        />
 
         <Section08 />
 
