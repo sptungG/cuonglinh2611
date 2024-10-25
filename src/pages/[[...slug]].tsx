@@ -45,9 +45,9 @@ const Page = (props: { data: Sheet }) => {
       <Provider>
         <Section01 userData={userData} />
 
-        <Section02 />
-
         <Section03 userData={userData} />
+
+        <Section02 />
 
         <Section04 />
 
