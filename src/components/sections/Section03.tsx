@@ -7,6 +7,7 @@ import { Sheet } from "@/common/sheets";
 import { HeartIcon } from "lucide-react";
 import FlickeringGrid from "../background/FlickeringGrid";
 import { useMediaQuery } from "react-responsive";
+import { LeafCornorSvg } from "../icons/LeafCornorSvg";
 
 type TSection03Props = { userData: Sheet };
 
@@ -21,7 +22,7 @@ const Section03 = ({ userData }: TSection03Props) => {
         "text-lg min-h-dvh sm:max-h-[1000px] relative flex flex-col items-center justify-center overflow-hidden"
       )}
     >
-      <div className="relative flex flex-col items-center justify-center border-2 border-amber-500/20 p-4 pb-0 sm:rounded-2xl sm:p-10 sm:pb-12">
+      <div className="relative flex flex-col items-center justify-center border-b-2 border-amber-500/20 p-4 pb-0 sm:rounded-2xl sm:border-2 sm:p-10 sm:pb-12">
         <div className="mb-10 flex items-center max-sm:flex-col sm:mb-5">
           <FadeWrapper
             direction="left"
@@ -149,7 +150,7 @@ const Section03 = ({ userData }: TSection03Props) => {
           alt="2611"
           height={0}
           width={366}
-          className="absolute left-0 top-1/2 -z-10 min-h-full min-w-full -translate-y-1/2 object-cover sm:rounded-2xl"
+          className="absolute left-0 top-1/2 -z-10 min-h-full min-w-full -translate-y-1/2 object-cover max-sm:opacity-60 sm:rounded-2xl"
         />
 
         <NImage
@@ -159,6 +160,18 @@ const Section03 = ({ userData }: TSection03Props) => {
           width={330}
           className="bottom-0 left-0 z-10 object-cover sm:absolute sm:-translate-x-1/2"
         />
+
+        {mediaAbove640 && (
+          <NImage
+            src="/images/icon-flower-5.png"
+            alt="2611"
+            height={0}
+            width={250}
+            className="absolute bottom-2 right-2 z-10 -scale-x-100 object-cover opacity-80"
+          />
+        )}
+
+        {mediaAbove640 && <LeafCornorSvg className=" absolute left-0 top-0 z-10 size-[250px] translate-x-[-62px] translate-y-[-55px]" />}
       </div>
 
       {mediaAbove640 && (
