@@ -1,9 +1,10 @@
 import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import React from "react";
+import { m } from "framer-motion";
 import { RainbowButton } from "../button/RainbowButton";
 import { PartyPopperIcon } from "lucide-react";
-import ImageRotate from "../card/ImageRotate";
+import NImage from "../next/NextImage";
 
 type TSection07Props = { onClickBtn01?: () => void };
 
@@ -30,9 +31,36 @@ const Section07 = ({ onClickBtn01 }: TSection07Props) => {
             "/assets/pexels-nguyen-xuan-trung-17586999.jpg",
             "/assets/pexels-san-wedding-5544662.jpg",
             "/assets/pexels-san-wedding-5544650.jpg",
-          ].map((image, index) => (
-            <ImageRotate key={"ImageRotate" + index} src={image} style={index === 2 ? { width: 320, height: 320 } : {}} />
-          ))}
+          ].map((image, index) => {
+            const zIndex = 10;
+            return (
+              <m.div
+                key={"ImageRotate" + index}
+                style={{ rotate: Math.random() * 20 - 10 }}
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 0,
+                  zIndex,
+                }}
+                whileTap={{
+                  scale: 1.1,
+                  rotate: 0,
+                  zIndex,
+                }}
+                className="-mr-4 mt-4 shrink-0 overflow-hidden rounded-xl border border-neutral-100 bg-white p-1 dark:border-neutral-700 dark:bg-neutral-800"
+              >
+                <NImage
+                  src={image}
+                  alt="bali images"
+                  width={300}
+                  height={300}
+                  style={index === 2 ? { width: 320, height: 320 } : { width: 300, height: 300 }}
+                  className="shrink-0 rounded-lg object-cover"
+                  loading={index === 2 ? "eager" : "lazy"}
+                />
+              </m.div>
+            );
+          })}
         </div>
       </div>
     </section>
