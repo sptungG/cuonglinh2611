@@ -22,7 +22,7 @@ const Section05 = ({ children }: TSection05Props) => {
 
       <TimerCountDown targetDate={new Date("2024-11-26T00:00:01")} />
 
-      <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2">
+      <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2 -scale-x-100">
         <NImage
           src="/images/pattern-4.png"
           alt="2611"

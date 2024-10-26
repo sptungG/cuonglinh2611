@@ -85,7 +85,7 @@ const Section04 = () => {
         alt="2611"
         height={400}
         width={200}
-        className="absolute -bottom-16 left-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[160px]"
+        className="absolute -bottom-16 left-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[160px] sm:bottom-1/4"
       />
       <NImage
         src="/images/icon-flowers-2.png"
