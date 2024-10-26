@@ -53,7 +53,14 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
         />
         <p className="mt-2 text-amber-600 underline">10:00</p>
         {/* TODO: Sửa để thể hiện được lịch lễ thành hôn & lịch tiệc cưới */}
-        <p className={cn(Fonts.DancingScript.className, "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900")}>Đón khách</p>
+        <p
+          className={cn(
+            Fonts.DancingScript.className,
+            "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+          )}
+        >
+          Đón khách
+        </p>
         <p className="mt-2 text-amber-800">Bắt đầu đón khách</p>
       </m.div>
 
@@ -67,11 +74,23 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
             className="rounded-full transition-all group-hover:-scale-x-100"
           />
           <p className="mt-2 text-amber-600 underline">11:00</p>
-          <p className={cn(Fonts.DancingScript.className, "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900")}>Làm lễ</p>
-          <p className="mt-2 text-center text-amber-800 max-sm:mb-4">Tiến hành rước cô dâu vào sân khấu và làm lễ</p>
+          <p
+            className={cn(
+              Fonts.DancingScript.className,
+              "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+            )}
+          >
+            Làm lễ
+          </p>
+          <p className="mt-2 text-center text-amber-800 max-sm:mb-4">
+            Tiến hành rước cô dâu vào sân khấu và làm lễ
+          </p>
         </div>
 
-        <div className="absolute inset-0" style={{ borderRadius: `calc(16px * 0.96)` }}>
+        <div
+          className="absolute inset-0"
+          style={{ borderRadius: `calc(16px * 0.96)` }}
+        >
           <MovingBorder duration={5000} rx="50%" ry="30%">
             <div className="size-40 bg-[radial-gradient(var(--amber-100)_40%,transparent_60%)]" />
           </MovingBorder>
@@ -90,8 +109,15 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
           className="rounded-full transition-all group-hover:-scale-x-100"
         />
         <p className="mt-2 text-amber-600 underline">12:00</p>
-        <p className={cn(Fonts.DancingScript.className, "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900")}>Chụp ảnh</p>
-        <p className="mt-2 text-amber-800">Bắt đầu khai tiệc, Chụp ảnh,...</p>
+        <p
+          className={cn(
+            Fonts.DancingScript.className,
+            "mt-2 text-center text-3xl shrink-0 font-[700] text-amber-900"
+          )}
+        >
+          Chụp ảnh
+        </p>
+        <p className="mt-2 text-amber-800">Chụp ảnh kỷ niệm</p>
       </m.div>
     </m.div>
   );

@@ -4,8 +4,17 @@ import PageLoading from "@/components/background/PageLoading";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
 import SEO from "@/components/next/SEO";
-import { CalendarHeartIcon, GiftIcon, ImagesIcon, MapPinIcon } from "lucide-react";
-import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import {
+  CalendarHeartIcon,
+  GiftIcon,
+  ImagesIcon,
+  MapPinIcon,
+} from "lucide-react";
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from "next";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
@@ -46,13 +55,20 @@ const Section08 = dynamic(() => import("@/components/sections/Section08"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
-const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false, loading: () => <div>Loading...</div> });
+const FloatingDock = dynamic(
+  () => import("@/components/navigation/FloatingDock"),
+  { ssr: false, loading: () => <div>Loading...</div> }
+);
 
-const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
+const getUser = (url: string) =>
+  fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
-  const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
+  const { data: getUserRes } = useSWR(
+    id ? `/participants?id=${id}` : null,
+    getUser
+  );
 
   const userData = getUserRes?.data || props.data;
   const mapParty =
@@ -66,7 +82,13 @@ const Page = (props: { data: Sheet }) => {
   return (
     <>
       <SEO
-        title={[userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "", "Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
+        title={[
+          userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "",
+          "Welcome to Our Wedding",
+          "✨ 🎉 🎊",
+        ]
+          .filter(Boolean)
+          .join(" | ")}
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
 
@@ -120,7 +142,9 @@ const Page = (props: { data: Sheet }) => {
 
             {
               title: "Mừng Cưới",
-              icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
+              icon: (
+                <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />
+              ),
               onClick: () => {
                 setIsOpenQR(true);
               },
@@ -130,7 +154,11 @@ const Page = (props: { data: Sheet }) => {
 
         <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
-        <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+        <ModalAccept
+          open={isOpenSaveDate}
+          setOpen={setIsOpenSaveDate}
+          userData={userData}
+        />
       </Provider>
     </>
   );
@@ -146,22 +174,40 @@ export const getStaticProps = (async ({ params }) => {
   if (!partyType || !id)
     return {
       props: {
-        data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet,
+        data: {
+          partyName:
+            partyType === "l"
+              ? "NhaGai"
+              : partyType === "cf"
+                ? "NhaTraiChieu"
+                : "NhaTrai",
+        } as Sheet,
       },
     };
 
-  const sheetRow = await fetchReq<{ data: Sheet }>(`${nextAPIUrl}/participants?id=${id}`);
+  const sheetRow = await fetchReq<{ data: Sheet }>(
+    `${nextAPIUrl}/participants?id=${id}`
+  );
   if (!sheetRow?.data)
     return {
       props: {
-        data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet,
+        data: {
+          partyName:
+            partyType === "l"
+              ? "NhaGai"
+              : partyType === "cf"
+                ? "NhaTraiChieu"
+                : "NhaTrai",
+        } as Sheet,
       },
     };
 
   return { props: { data: sheetRow.data }, revalidate: 1 };
 }) satisfies GetStaticProps<{ data: Sheet }>;
 
-const PageWrapper = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PageWrapper = ({
+  data,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <SWRConfig
       value={{

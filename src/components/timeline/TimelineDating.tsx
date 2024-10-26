@@ -8,7 +8,7 @@ import { useMediaQuery } from "react-responsive";
 
 const dataText = [
   {
-    time1: "26",
+    time1: "24",
     time2: "12/2016",
     title: "Ngày bắt đầu",
     desc: "Vào một đêm Giáng sinh lung linh, sau hai năm quen biết, ánh mắt ta tìm thấy nhau giữa muôn ngàn ánh đèn, từ đó một câu chuyện tình yêu bắt đầu.",

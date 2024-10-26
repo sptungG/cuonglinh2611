@@ -65,7 +65,7 @@ const Section03 = ({ userData }: TSection03Props) => {
         >
           {userData?.fullName || "Bạn cùng gia đình"}
         </FadeWrapper>
-        <div className="text-base italic">{`(Tới dự Lễ Thành Hôn của gia đình chúng tôi)`}</div>
+        <div className="text-base italic">{`(Tới dự bữa tiệc chung vui cùng gia đình chúng tôi)`}</div>
 
         <div className="my-10 flex items-center max-sm:flex-col">
           <FadeWrapper
@@ -112,9 +112,12 @@ const Section03 = ({ userData }: TSection03Props) => {
             <FadeWrapper className="text-neutral-500">
               {userData?.invitedTime
                 ? `Tổ chức vào lúc ${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}`
-                : "Tổ chức vào lúc 09 giờ 00"}
+                : userData?.partyName === "NhaTraiChieu"
+                  ? "Tổ chức vào lúc 15 giờ 30 "
+                  : "Tổ chức vào lúc 09 giờ 00"}
             </FadeWrapper>
-            {userData?.partyDay === "25/11/2024" ? (
+            {userData?.partyDay === "25/11/2024" ||
+            userData?.partyName === "NhaTraiChieu" ? (
               <>
                 <FadeWrapper className="">
                   Thứ Hai, ngày 25 tháng 11 năm 2024
@@ -171,7 +174,9 @@ const Section03 = ({ userData }: TSection03Props) => {
           />
         )}
 
-        {mediaAbove640 && <LeafCornorSvg className=" absolute left-0 top-0 z-10 size-[250px] translate-x-[-62px] translate-y-[-55px]" />}
+        {mediaAbove640 && (
+          <LeafCornorSvg className=" absolute left-0 top-0 z-10 size-[250px] translate-x-[-62px] translate-y-[-55px]" />
+        )}
       </div>
 
       {mediaAbove640 && (
