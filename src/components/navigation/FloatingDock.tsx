@@ -171,7 +171,7 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
   const [seconds, setSeconds] = useState(0);
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { pause, duration, sound }] = useSound("/assets/audio-01.mp3", {
+  const [play, { stop, duration, sound }] = useSound("/assets/audio-01.mp3", {
     onend: () => setIsPlaying(false),
   });
 
@@ -218,7 +218,7 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
       sizeIconTransform={sizeIconTransform}
       onClick={() => {
         if (isPlaying) {
-          pause();
+          stop();
           setIsPlaying(false);
         } else {
           play();
@@ -254,8 +254,8 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
       }
       className=""
       icon={
-        <div className="z-10 flex size-full flex-col items-center justify-center">
-          {isPlaying ? <PauseIcon className="size-full fill-white/30 text-white" /> : <PlayIcon className="size-full fill-white/30 text-white" />}
+        <div className="z-10 flex size-full min-h-[34px] min-w-[34px] flex-col items-center justify-center">
+          {isPlaying ? <PauseIcon className="size-full fill-white text-white" /> : <PlayIcon className="size-full fill-white text-white" />}
         </div>
       }
       extra={
