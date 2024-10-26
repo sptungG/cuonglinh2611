@@ -248,9 +248,6 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
               max={(duration || 0) / 1000}
               className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-current dark:bg-gray-700"
               value={seconds}
-              onChange={(e) => {
-                sound.seek([e.target.value]);
-              }}
             />
           </div>
         </div>
