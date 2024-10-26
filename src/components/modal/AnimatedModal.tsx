@@ -43,38 +43,16 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
       >
         <Overlay />
 
-        <m.div
+        <div
           ref={modalRef}
           className={cn(
             "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
             className
           )}
-          initial={{
-            opacity: 0,
-            scale: 0.5,
-            rotateX: 40,
-            y: 40,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            rotateX: 0,
-            y: 0,
-          }}
-          exit={{
-            opacity: 0,
-            scale: 0.8,
-            rotateX: 10,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 15,
-          }}
         >
           <CloseIcon onClick={() => setOpen(false)} />
           {children}
-        </m.div>
+        </div>
       </m.div>
     </AnimatePresence>
   );

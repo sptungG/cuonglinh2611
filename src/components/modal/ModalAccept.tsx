@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/router";
+import CircleLoading from "../animation/CircleLoading";
 
 const appendUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "POST", body: JSON.stringify(arg) });
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
@@ -143,14 +144,18 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           </div>
         </div>
 
-        <div className="px-4 pb-1 pt-3 text-base uppercase text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+        <div className="px-4 pb-4 pt-3 text-base uppercase leading-[1.2] text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
 
         <form
           onSubmit={handleSubmitForm}
-          className="flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-4 pt-0 "
+          className="relative flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-4 pt-0 "
           style={{ scrollbarWidth: "thin" }}
         >
-          <div className="mb-1 font-[600] opacity-60"></div>
+          {isLoading && (
+            <div className="absolute left-0 top-0 z-50 flex size-full flex-col items-center justify-center bg-white/50 backdrop-blur-sm">
+              <CircleLoading className="size-10" />
+            </div>
+          )}
           <Controller
             name="fullName"
             control={methodForm.control}
@@ -165,6 +170,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                 classNameWrapper="mb-4"
                 required
                 disabled={userData?.id && userData.fullName}
+                placeholder="Bạn ABC và ny..."
               />
             )}
           />
@@ -181,6 +187,8 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                 onChange={(e) => field.onChange(e.target.value)}
                 classNameWrapper="mb-4"
                 type="tel"
+                placeholder="84xxxyyyzzz"
+                showCount
               />
             )}
           />
@@ -254,7 +262,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               type="submit"
               className="relative flex h-[60px] w-full shrink-0 items-center justify-center overflow-hidden rounded-lg border border-amber-500/50 bg-amber-600/10 "
             >
-              <span className="pointer-events-none text-xl font-[600] text-amber-600">Tham gia</span>
+              <span className="pointer-events-none text-xl font-[600] text-amber-600">{"Tham gia"}</span>
               <span className="ml-2 text-xl">{selectedAcceptItem.icon}</span>
               <BorderBeam size={100} duration={6} delay={2} />
             </button>

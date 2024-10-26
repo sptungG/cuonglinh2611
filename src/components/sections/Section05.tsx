@@ -4,12 +4,13 @@ import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import TimerCountDown from "../card/TimerCountDown";
 import NImage from "../next/NextImage";
+import Calendar from "../card/Calendar";
 
 type TSection05Props = { children?: React.ReactNode };
 
 const Section05 = ({ children }: TSection05Props) => {
   return (
-    <section className="relative flex min-h-[80dvh] max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden px-4 pb-10 sm:max-h-[800px] sm:px-6">
+    <section className="relative -mt-10 flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden px-4 pb-20 sm:max-h-[1400px] sm:px-6">
       <FadeWrapper direction="left" className="text-center text-xl uppercase text-amber-500">
         Cho đến ngày
       </FadeWrapper>
@@ -20,9 +21,11 @@ const Section05 = ({ children }: TSection05Props) => {
         Cùng chúng mình đếm ngược nhé!
       </FadeWrapper>
 
+      <Calendar initialRange={{ startDate: new Date(), endDate: new Date("2024-11-26T00:00:01") }} />
+
       <TimerCountDown targetDate={new Date("2024-11-26T00:00:01")} />
 
-      <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2">
+      <div className="absolute left-0 top-1/2 -z-10 w-full -translate-y-1/2 -scale-x-100">
         <NImage
           src="/images/pattern-4.png"
           alt="2611"

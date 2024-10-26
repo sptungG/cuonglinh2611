@@ -1,9 +1,15 @@
 import { cn } from "@/common/utils";
 import React, { useId } from "react";
 
-type TFormInputProps = React.InputHTMLAttributes<HTMLInputElement> & { label?: React.ReactNode; classNameWrapper?: string; classNameLabel?: string };
+type TFormInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  label?: React.ReactNode;
+  classNameWrapper?: string;
+  classNameLabel?: string;
+  showCount?: boolean;
+  maxCount?: number;
+};
 
-export const FormInputFloating = ({ label, classNameWrapper, classNameLabel, className, ...props }: TFormInputProps) => {
+export const FormInputFloating = ({ label, classNameWrapper, classNameLabel, className, showCount, maxCount, ...props }: TFormInputProps) => {
   const uid = useId();
   return (
     <div className={cn("relative", classNameWrapper)}>
@@ -11,7 +17,7 @@ export const FormInputFloating = ({ label, classNameWrapper, classNameLabel, cla
         type="text"
         id={uid + "FormInputFloating"}
         className={cn(
-          "peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-3.5 pt-5 text-sm text-gray-900 focus:border-amber-600 focus:outline-none focus:ring-0",
+          "peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pb-3.5 pt-5 text-base text-gray-900 focus:border-amber-600 focus:outline-none focus:ring-0 placeholder:text-transparent focus:placeholder:text-gray-400",
           className
         )}
         placeholder=" "
@@ -27,6 +33,12 @@ export const FormInputFloating = ({ label, classNameWrapper, classNameLabel, cla
         >
           {label}
         </label>
+      )}
+
+      {showCount && (
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 pr-4 text-sm text-gray-500">
+          {[String(props.value)?.length, maxCount].filter(Boolean).join("/")}
+        </div>
       )}
     </div>
   );

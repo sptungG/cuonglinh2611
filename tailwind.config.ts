@@ -39,6 +39,22 @@ const config: Config = {
             "offset-distance": "100%",
           },
         },
+        "stroke-animation": {
+          "0%": {
+            "stroke-dashoffset": "0",
+          },
+          "30%": {
+            "stroke-dashoffset": "1550",
+          },
+          "60%": {
+            "stroke-dashoffset": "3100",
+            fill: "transparent",
+            transform: "scale(1)",
+          },
+          "100%": {
+            "stroke-dashoffset": "3100",
+          },
+        },
       },
     },
   },

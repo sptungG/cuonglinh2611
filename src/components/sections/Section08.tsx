@@ -48,6 +48,7 @@ const Section08 = ({ children }: TSection08Props) => {
             className="col-span-2 rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544650.jpg"
             width={300}
+            loading="eager"
             height={0}
             style={{ width: "100%", height: "auto" }}
             alt=""
@@ -58,6 +59,7 @@ const Section08 = ({ children }: TSection08Props) => {
             className="col-span-2 rounded-xl object-cover max-sm:order-3"
             src="/assets/pexels-san-wedding-5544650.jpg"
             width={300}
+            loading="eager"
             height={0}
             style={{ width: "100%", height: "auto" }}
             alt=""

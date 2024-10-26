@@ -18,7 +18,7 @@ export interface Sheet {
   fullName?: any;
   phoneNumber?: any;
   invitedTime?: any;
-  partyTypeName?: any;
+  partyDay?: any;
   partyName?: any;
   accepted?: any;
   createdAt?: any;
@@ -26,7 +26,7 @@ export interface Sheet {
 }
 
 export class SheetsMethods {
-  constructor() {}
+  constructor() { }
 
   async findAll() {
     try {
@@ -34,13 +34,13 @@ export class SheetsMethods {
       const resRows = response.data.values;
       if (resRows?.length) {
         return resRows.slice(1).map((row) => {
-          const [id, fullName, phoneNumber, invitedTime, partyTypeName, partyName, accepted, createdAt, updatedAt] = row;
+          const [id, fullName, phoneNumber, invitedTime, partyDay, partyName, accepted, createdAt, updatedAt] = row;
           return {
             id,
             fullName,
             phoneNumber,
             invitedTime,
-            partyTypeName,
+            partyDay,
             partyName,
             accepted,
             createdAt,
