@@ -5,14 +5,7 @@
  **/
 
 import { cn } from "@/common/utils";
-import {
-  AnimatePresence,
-  MotionValue,
-  m,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { AnimatePresence, MotionValue, m, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { PauseIcon, PlayIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useId, useRef, useState } from "react";
@@ -32,14 +25,7 @@ interface IItem {
   extra?: React.ReactNode;
 }
 
-const FloatingDock = ({
-  items,
-  desktopClassName,
-}: {
-  items: IItem[];
-  desktopClassName?: string;
-  mobileClassName?: string;
-}) => {
+const FloatingDock = ({ items, desktopClassName }: { items: IItem[]; desktopClassName?: string; mobileClassName?: string }) => {
   return (
     <>
       <FloatingDockDesktop items={items} className={desktopClassName} />
@@ -47,13 +33,7 @@ const FloatingDock = ({
   );
 };
 
-const FloatingDockDesktop = ({
-  items,
-  className,
-}: {
-  items: IItem[];
-  className?: string;
-}) => {
+const FloatingDockDesktop = ({ items, className }: { items: IItem[]; className?: string }) => {
   const uid = useId();
   const mouseX = useMotionValue(Infinity);
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
@@ -62,10 +42,7 @@ const FloatingDockDesktop = ({
     <m.div
       onMouseMove={(e) => mediaAbove640 && mouseX.set(e.pageX)}
       onMouseLeave={() => mediaAbove640 && mouseX.set(Infinity)}
-      className={cn(
-        "mx-auto flex h-12 gap-3 sm:gap-4 items-end rounded-2xl bg-gray-50 px-4 sm:px-4 pb-3 shadow",
-        className
-      )}
+      className={cn("mx-auto flex h-12 gap-3 sm:gap-4 items-end rounded-2xl bg-gray-50 px-4 sm:px-4 pb-3 shadow", className)}
     >
       {items.map((item, index) => (
         <IconContainer
@@ -93,14 +70,7 @@ function IconContainer(
     sizeIconTransform?: [number, number, number];
   }
 ) {
-  const {
-    mouseX,
-    classNameTitle,
-    extra,
-    sizeTransform = [60, 100, 60],
-    sizeIconTransform = [30, 60, 30],
-    ...itemProps
-  } = props;
+  const { mouseX, classNameTitle, extra, sizeTransform = [60, 100, 60], sizeIconTransform = [30, 60, 30], ...itemProps } = props;
   const uid = useId();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -113,16 +83,8 @@ function IconContainer(
   const widthTransform = useTransform(distance, [-150, 0, 150], sizeTransform);
   const heightTransform = useTransform(distance, [-150, 0, 150], sizeTransform);
 
-  const widthTransformIcon = useTransform(
-    distance,
-    [-150, 0, 150],
-    sizeIconTransform
-  );
-  const heightTransformIcon = useTransform(
-    distance,
-    [-150, 0, 150],
-    sizeIconTransform
-  );
+  const widthTransformIcon = useTransform(distance, [-150, 0, 150], sizeIconTransform);
+  const heightTransformIcon = useTransform(distance, [-150, 0, 150], sizeIconTransform);
 
   const width = useSpring(widthTransform, {
     mass: 0.1,
@@ -173,10 +135,7 @@ function IconContainer(
             {itemProps.title}
           </m.div>
         </AnimatePresence>
-        <m.div
-          style={{ width: widthIcon, height: heightIcon }}
-          className="flex items-center justify-center"
-        >
+        <m.div style={{ width: widthIcon, height: heightIcon }} className="flex items-center justify-center">
           {itemProps.icon}
         </m.div>
         {extra}
@@ -185,18 +144,10 @@ function IconContainer(
   );
 }
 
-function ItemWrapper({
-  children,
-  ...itemProps
-}: IItem & { children: React.ReactNode }) {
+function ItemWrapper({ children, ...itemProps }: IItem & { children: React.ReactNode }) {
   if (itemProps?.href) {
     return (
-      <Link
-        href={itemProps.href}
-        target={itemProps?.target}
-        rel={itemProps?.rel}
-        className={itemProps?.className}
-      >
+      <Link href={itemProps.href} target={itemProps?.target} rel={itemProps?.rel} className={itemProps?.className}>
         {children}
       </Link>
     );
@@ -212,16 +163,8 @@ function ItemWrapper({
 }
 
 const formatNumber = (num: number) => ("0" + num).slice(-2);
-function ItemMusic(props: {
-  mouseX: MotionValue;
-  sizeTransform?: [number, number, number];
-  sizeIconTransform?: [number, number, number];
-}) {
-  const {
-    mouseX,
-    sizeTransform = [60, 100, 60],
-    sizeIconTransform = [30, 60, 30],
-  } = props;
+function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number, number]; sizeIconTransform?: [number, number, number] }) {
+  const { mouseX, sizeTransform = [60, 100, 60], sizeIconTransform = [30, 60, 30] } = props;
   const [time, setTime] = useState({ min: 2, sec: 44 });
   const [currTime, setCurrTime] = useState({ min: 0, sec: 0 });
 
@@ -258,6 +201,15 @@ function ItemMusic(props: {
     }, 1000);
     return () => clearInterval(interval);
   }, [sound]);
+
+  useEffect(() => {
+    if (!!play) {
+      setTimeout(() => {
+        play();
+        setIsPlaying(true);
+      }, 1000);
+    }
+  }, [play]);
 
   return (
     <IconContainer
@@ -306,11 +258,7 @@ function ItemMusic(props: {
       className=""
       icon={
         <div className="z-10 flex size-full flex-col items-center justify-center">
-          {isPlaying ? (
-            <PauseIcon className="size-full fill-white/30 text-white" />
-          ) : (
-            <PlayIcon className="size-full fill-white/30 text-white" />
-          )}
+          {isPlaying ? <PauseIcon className="size-full fill-white/30 text-white" /> : <PlayIcon className="size-full fill-white/30 text-white" />}
         </div>
       }
       extra={
@@ -323,9 +271,7 @@ function ItemMusic(props: {
             width: "100%",
             animationPlayState: isPlaying ? "running" : "paused",
           }}
-          className={cn(
-            "absolute left-0 top-0 z-0 rounded-full object-cover animate-[spin_5s_linear_infinite]"
-          )}
+          className={cn("absolute left-0 top-0 z-0 rounded-full object-cover animate-[spin_5s_linear_infinite]")}
         />
       }
     />

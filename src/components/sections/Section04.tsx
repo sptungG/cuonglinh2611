@@ -92,7 +92,7 @@ const Section04 = () => {
         alt="2611"
         height={320}
         width={160}
-        className="absolute right-0 top-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[140px]"
+        className="absolute -top-16 right-0 -z-10 animate-[bounceY_10s_linear_infinite] opacity-50 max-sm:w-[140px]"
       />
     </section>
   );
