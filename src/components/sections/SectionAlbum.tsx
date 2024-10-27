@@ -136,7 +136,7 @@ const SectionAlbum = () => {
         setOpen={(open) => {
           if (!open) setSelected(undefined);
         }}
-        className="min-h-fit max-sm:mt-auto md:max-w-fit"
+        className="min-h-fit border-0 max-sm:mt-auto md:max-w-fit"
       >
         <div className="overflow-y-auto">
           {!!selected && (
