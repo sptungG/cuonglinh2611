@@ -1,7 +1,7 @@
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
 import confetti from "canvas-confetti";
-import { ArrowRightIcon, CalendarHeartIcon } from "lucide-react";
+import { ArrowRightIcon, CalendarHeartIcon, CheckCircle, CheckIcon } from "lucide-react";
 import { useEffect, useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BorderBeam } from "../background/BorderBeam";
@@ -261,11 +261,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     name={field.name}
                     value={item.value}
                     onChange={field.onChange}
+                    classNameWrapper="relative"
                     className={cn(
                       "flex-col items-stretch px-2 pb-2 pt-4",
                       index === 2 && "border-amber-200",
                       field.value === item.value && "border-amber-600"
                     )}
+                    extra={field.value === item.value && <CheckIcon className="absolute right-2 top-2 size-5 fill-amber-50 text-amber-600" />}
                   >
                     <div
                       className={cn(
@@ -302,14 +304,19 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     className={cn("flex-col items-stretch px-2 pb-2 pt-4", item?.className, field.value === item.value && "border-amber-600")}
                     disabled={item.value !== userData?.partyName}
                     extra={
-                      item.value !== userData?.partyName && (
-                        <Link
-                          href={item.value === "NhaTrai" ? "/c#invitation" : "/l#invitation"}
-                          className="absolute right-2 top-2 flex items-center text-gray-600 underline hover:text-amber-600"
-                        >
-                          <span className="mr-1 text-xs">Xem thiệp mời</span>
-                          <ArrowRightIcon />
-                        </Link>
+                      item.value === userData?.partyName ? (
+                        <CheckIcon className="absolute right-2 top-2 size-5 fill-amber-50 text-amber-600" />
+                      ) : (
+                        !!userData?.id || (
+                          <Link
+                            href={item.value === "NhaTrai" ? "/c#invitation" : "/l#invitation"}
+                            className="absolute right-2 top-2 flex items-center text-gray-600 underline hover:text-amber-600"
+                            onClick={() => setOpen?.(false)}
+                          >
+                            <span className="mr-1 text-xs">Xem thiệp mời</span>
+                            <ArrowRightIcon className="size-5" />
+                          </Link>
+                        )
                       )
                     }
                   >
@@ -317,7 +324,9 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                       <span>{item.icon1}</span>
                       {!!item?.icon2 && <span className="absolute bottom-0 left-[30px] -mb-1 -ml-2 scale-90">{item.icon2}</span>}
                     </div>
-                    <div className={cn("mt-auto text-[17px] text-inherit", field.value === item.value && "text-amber-600")}>{item.label}</div>
+                    <div className={cn("mt-auto text-[17px] text-inherit", field.value === item.value && "text-amber-600 font-[600]")}>
+                      {item.label}
+                    </div>
                   </FormRadioBtn>
                 ))}
               </div>
