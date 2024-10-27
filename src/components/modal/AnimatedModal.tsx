@@ -21,7 +21,7 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
     }
   }, [open]);
 
-  const modalRef = useClickOutside(() => setOpen(false));
+  const ref = useClickOutside(() => setOpen(false));
 
   return (
     <AnimatePresence>
@@ -38,21 +38,23 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
           opacity: 0,
           backdropFilter: "blur(0px)",
         }}
-        className="fixed inset-0 z-50 flex size-full [perspective:800px] [transform-style:preserve-3d] sm:items-center sm:justify-center"
+        className="fixed inset-0 z-50 flex size-full sm:items-center sm:justify-center"
         style={{ display: open ? "flex" : "none" }}
       >
         <Overlay />
 
-        <m.div
-          ref={modalRef}
-          className={cn(
-            "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
-            className
-          )}
-        >
-          <CloseIcon onClick={() => setOpen(false)} />
-          {children}
-        </m.div>
+        {open && (
+          <m.div
+            ref={ref}
+            className={cn(
+              "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
+              className
+            )}
+          >
+            <CloseIcon onClick={() => setOpen(false)} />
+            {children}
+          </m.div>
+        )}
       </m.div>
     </AnimatePresence>
   );
