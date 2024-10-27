@@ -52,6 +52,8 @@ const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
+  const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
+  const [isOpenQR, setIsOpenQR] = useState(false);
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
 
   const userData = getUserRes?.data || props.data;
@@ -59,9 +61,6 @@ const Page = (props: { data: Sheet }) => {
     userData?.partyName === "NhaGai"
       ? "https://www.google.com/maps/search/?api=1&query=21.009745980494834,105.86708485767026"
       : "https://www.google.com/maps/search/?api=1&query=20.748664750735944,105.97718142951669";
-
-  const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
-  const [isOpenQR, setIsOpenQR] = useState(false);
 
   return (
     <>
@@ -154,8 +153,8 @@ export const getStaticProps = (async ({ params }) => {
         data: {
           id: "",
           partyName: partyType === "l" ? "NhaGai" : "NhaTrai",
-          invitedTime: partyType === "ca" ? "15:30" : "",
-          partyDay: partyType === "ca" ? "25/11/2024" : "",
+          invitedTime: partyType === "l" ? "17:00" : partyType === "ca" ? "15:30" : "09:00",
+          partyDay: partyType === "l" ? "23/11/2024" : partyType === "ca" ? "25/11/2024" : "26/11/2024",
         },
       },
     };

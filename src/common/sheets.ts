@@ -26,7 +26,7 @@ export interface Sheet {
 }
 
 export class SheetsMethods {
-  constructor() { }
+  constructor() {}
 
   async findAll() {
     try {
@@ -65,7 +65,7 @@ export class SheetsMethods {
       const rows = await this.findAll();
       const foundIndex = rows.findIndex((item) => item.id === values?.id);
       if (foundIndex === -1) throw new Error("No item found with ID: " + values?.id);
-      const { id, fullName, partyName, accepted } = values;
+      const { id, fullName, phoneNumber, invitedTime, partyDay, partyName, accepted } = values;
 
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
@@ -84,13 +84,13 @@ export class SheetsMethods {
     try {
       const rows = await this.findAll();
       const foundIndex = rows.findIndex((item) => !item?.fullName);
-      const { id, fullName, phoneNumber, partyName, accepted } = values;
+      const { id, fullName, phoneNumber, invitedTime, partyDay, partyName, accepted } = values;
 
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
         valueInputOption: "USER_ENTERED",
         range: `${SheetTarget.range}!B${foundIndex + 2}:G${foundIndex + 2}`,
-        requestBody: { values: [[fullName, phoneNumber, "", "", partyName, accepted]] },
+        requestBody: { values: [[fullName, phoneNumber, invitedTime, partyDay, partyName, accepted]] },
       });
       return rows[foundIndex];
     } catch (err) {
