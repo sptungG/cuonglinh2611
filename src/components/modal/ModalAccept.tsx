@@ -298,7 +298,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     value={item.value}
                     onChange={field.onChange}
                     className={cn("flex-col items-stretch px-2 pb-2 pt-4", item?.className, field.value === item.value && "border-amber-600")}
-                    disabled={userData?.id && item.value !== userData.partyName}
+                    disabled={item.value !== userData?.partyName}
                   >
                     <div className={cn("leading-none h-9 flex items-center mb-1 text-4xl relative")}>
                       <span>{item.icon1}</span>
