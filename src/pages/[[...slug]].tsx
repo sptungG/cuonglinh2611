@@ -137,25 +137,33 @@ const Page = (props: { data: Sheet }) => {
 };
 
 export const getStaticPaths = (async () => {
-  return { paths: [], fallback: "blocking" };
+  return { paths: [{ params: { slug: ["l"] } }, { params: { slug: ["c"] } }, { params: { slug: ["ca"] } }], fallback: "blocking" };
 }) satisfies GetStaticPaths;
 
 export const getStaticProps = (async ({ params }) => {
   const [partyType, id] = (params?.slug || []) as string[];
 
-  if (!partyType || !id)
+  if (!partyType || !["l", "c", "ca"].includes(partyType))
+    return {
+      notFound: true,
+    };
+
+  if (!id)
     return {
       props: {
-        data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet,
+        data: {
+          id: "",
+          partyName: partyType === "l" ? "NhaGai" : "NhaTrai",
+          invitedTime: partyType === "ca" ? "16:00" : "",
+          partyDay: partyType === "ca" ? "25/11/2024" : "",
+        },
       },
     };
 
   const sheetRow = await fetchReq<{ data: Sheet }>(`${nextAPIUrl}/participants?id=${id}`);
   if (!sheetRow?.data)
     return {
-      props: {
-        data: { partyName: partyType === "l" ? "NhaGai" : "NhaTrai" } as Sheet,
-      },
+      notFound: true,
     };
 
   return { props: { data: sheetRow.data }, revalidate: 1 };
