@@ -49,7 +49,7 @@ const Section03 = ({ userData }: TSection03Props) => {
         >
           {userData?.fullName || "Bạn cùng gia đình"}
         </FadeWrapper>
-        <div className="text-base italic">{`(Tới dự TIỆC CƯỚI của gia đình chúng tôi)`}</div>
+        <div className="text-base italic">{`(Tới dự bữa tiệc chung vui của gia đình chúng tôi)`}</div>
 
         <div className="my-10 flex items-center max-sm:flex-col">
           <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>
@@ -81,7 +81,7 @@ const Section03 = ({ userData }: TSection03Props) => {
                 {userData?.invitedTime ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}` : "09 giờ 00"}
               </span>
             </FadeWrapper>
-            {userData?.partyDay === "25/11/2024" ? (
+            {userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu" ? (
               <>
                 <FadeWrapper className="text-lg underline">Thứ Hai, ngày 25 tháng 11 năm 2024</FadeWrapper>
                 <FadeWrapper className="mb-6 text-base italic">{`(Tức ngày 25 tháng 10 năm 2024 Giáp Thìn)`}</FadeWrapper>

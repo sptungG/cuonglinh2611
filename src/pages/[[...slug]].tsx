@@ -154,7 +154,7 @@ export const getStaticProps = (async ({ params }) => {
         data: {
           id: "",
           partyName: partyType === "l" ? "NhaGai" : "NhaTrai",
-          invitedTime: partyType === "ca" ? "16:00" : "",
+          invitedTime: partyType === "ca" ? "15:30" : "",
           partyDay: partyType === "ca" ? "25/11/2024" : "",
         },
       },
