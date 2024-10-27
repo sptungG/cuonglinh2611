@@ -59,7 +59,7 @@ const SectionAlbum = () => {
   const virtualizer = useWindowVirtualizer({
     count: ALBUMS.length,
     estimateSize: (i) => 100,
-    overscan: mediaAbove640 ? 5 : 2,
+    overscan: mediaAbove640 ? 5 : 20,
     lanes: mediaAbove640 ? 5 : 2,
     gap: mediaAbove640 ? 20 : 10,
     scrollMargin: 0,
