@@ -108,7 +108,7 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
                   dateFns.isSameDay(currentDate, dateRange.startDate!) ? "text-amber-600 bg-amber-50 opacity-100" : "",
                   isBetween(currentDate, dateRange.startDate!, dateRange.endDate!, "[]") ? "bg-amber-50 text-amber-600" : "opacity-80",
                   dateFns.isSameDay(currentDate, new Date()) && "font-[600] text-amber-600 underline bg-amber-50 ring-2 ring-amber-100 opacity-100",
-                  dateFns.isSameDay(currentDate, dateRange.endDate!) ? "relative font-[600] text-xl text-white bg-transparent [&>svg]:block" : ""
+                  dateFns.isSameDay(currentDate, dateRange.endDate!) ? "relative font-[600] text-xl !text-white !bg-transparent [&>svg]:block" : ""
                 )}
               >
                 <span className="z-[2]">{item}</span>
@@ -139,7 +139,7 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
                 dateFns.isSameDay(currentDate, dateRange.startDate!) ? "text-amber-600 bg-amber-50 opacity-100" : "",
                 isBetween(currentDate, dateRange.startDate!, dateRange.endDate!, "[]") ? "bg-amber-50 text-amber-600" : "opacity-80",
                 dateFns.isSameDay(currentDate, new Date()) && "font-[600] text-amber-600 underline bg-amber-50 ring-2 ring-amber-100 opacity-100",
-                dateFns.isSameDay(currentDate, dateRange.endDate!) ? "relative font-[600] text-xl text-white bg-transparent [&>svg]:block" : ""
+                dateFns.isSameDay(currentDate, dateRange.endDate!) ? "relative font-[600] text-xl !text-white !bg-transparent [&>svg]:block" : ""
               )}
             >
               <span className="z-[2]">{item}</span>

@@ -15,6 +15,7 @@ const config: Config = {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
         gradient: "gradient 8s linear infinite",
         "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
+        aurora: "aurora 60s linear infinite",
       },
       keyframes: {
         rainbow: {
@@ -37,6 +38,14 @@ const config: Config = {
         "border-beam": {
           "100%": {
             "offset-distance": "100%",
+          },
+        },
+        aurora: {
+          from: {
+            backgroundPosition: "50% 50%, 50% 50%",
+          },
+          to: {
+            backgroundPosition: "350% 50%, 350% 50%",
           },
         },
         "stroke-animation": {
