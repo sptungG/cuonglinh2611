@@ -5,6 +5,7 @@ const nextConfig = {
   compress: process.env.NODE_ENV === "production",
   experimental: {
     optimizeCss: process.env.NODE_ENV === "production",
+    scrollRestoration: false,
   },
   async redirects() {
     return [
