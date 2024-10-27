@@ -209,6 +209,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           />
 
           <div className="mb-4 flex flex-col">
+            <div className="mb-2 italic leading-[1.2] text-amber-600">Trân trọng kính mời bạn tham dự Bữa tiệc chung vui của gia đình chúng mình</div>
             {userData?.partyName === "NhaGai" ? (
               <>
                 <div className="mb-1 flex items-baseline text-neutral-500">
