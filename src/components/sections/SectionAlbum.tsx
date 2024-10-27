@@ -59,7 +59,7 @@ const SectionAlbum = () => {
   const virtualizer = useWindowVirtualizer({
     count: ALBUMS.length,
     estimateSize: (i) => 100,
-    overscan: mediaAbove640 ? 5 : 2,
+    overscan: mediaAbove640 ? 5 : 100,
     lanes: mediaAbove640 ? 5 : 2,
     gap: mediaAbove640 ? 20 : 10,
     scrollMargin: 0,
@@ -83,7 +83,7 @@ const SectionAlbum = () => {
         </div>
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5" ref={listRef}>
+      <div className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5" ref={listRef} style={{ overflowAnchor: "none" }}>
         <div className="relative min-h-dvh w-full" style={{ height: `${virtualizer.getTotalSize()}px` }}>
           {virtualizer.getVirtualItems().map((item) => {
             const src = ALBUMS[item.index];
