@@ -59,10 +59,12 @@ const SectionAlbum = () => {
   const virtualizer = useWindowVirtualizer({
     count: ALBUMS.length,
     estimateSize: (i) => 100,
-    overscan: 5,
+    overscan: mediaAbove640 ? 5 : 2,
     lanes: mediaAbove640 ? 5 : 2,
     gap: mediaAbove640 ? 20 : 10,
-    scrollMargin: mediaAbove640 ? 20 : 8,
+    scrollMargin: 0,
+    paddingEnd: 80,
+    scrollPaddingEnd: 20,
   });
 
   const handleClick = (item: string) => {
@@ -71,7 +73,7 @@ const SectionAlbum = () => {
 
   return (
     <>
-      <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center px-2 pt-2 sm:px-5 sm:pt-5">
+      <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
         <Link href={"/c"}>
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
         </Link>
@@ -82,7 +84,7 @@ const SectionAlbum = () => {
       </div>
 
       <div className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5" ref={listRef}>
-        <div className="relative min-h-dvh w-full">
+        <div className="relative min-h-dvh w-full" style={{ height: `${virtualizer.getTotalSize()}px` }}>
           {virtualizer.getVirtualItems().map((item) => {
             const src = ALBUMS[item.index];
             return (

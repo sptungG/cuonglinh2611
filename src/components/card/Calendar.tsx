@@ -42,7 +42,6 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
       }
       return days[v - startDay];
     });
-    console.log("generateCalendar ~ calendar:", startDay, days, calendar);
     return calendar;
   };
 
