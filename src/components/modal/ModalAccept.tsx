@@ -1,7 +1,7 @@
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
 import confetti from "canvas-confetti";
-import { CalendarHeartIcon } from "lucide-react";
+import { ArrowRightIcon, CalendarHeartIcon } from "lucide-react";
 import { useEffect, useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BorderBeam } from "../background/BorderBeam";
@@ -14,6 +14,7 @@ import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/router";
 import CircleLoading from "../animation/CircleLoading";
 import useSWR from "swr";
+import Link from "next/link";
 
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 const appendUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "POST", body: JSON.stringify(arg) });
@@ -290,21 +291,33 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               <div className="mb-8 flex flex-nowrap justify-between gap-4 [&>*]:w-1/2">
                 {[
                   { value: "NhaTrai", label: "Nhà Trai", icon1: "💍", icon2: "💍", className: "border-slate-300" },
-                  { value: "NhaGai", label: "Nhà Gái", icon1: "💐", className: "border-rose-200" },
+                  { value: "NhaGai", label: "Nhà Gái", icon1: "💐", className: "border-rose-300" },
                 ].map((item, index) => (
                   <FormRadioBtn
                     key={uid + index + item.value}
                     name={field.name}
                     value={item.value}
                     onChange={field.onChange}
+                    classNameWrapper="relative"
                     className={cn("flex-col items-stretch px-2 pb-2 pt-4", item?.className, field.value === item.value && "border-amber-600")}
                     disabled={item.value !== userData?.partyName}
+                    extra={
+                      item.value !== userData?.partyName && (
+                        <Link
+                          href={item.value === "NhaTrai" ? "/c#invitation" : "/l#invitation"}
+                          className="absolute right-2 top-2 flex items-center text-gray-600 underline hover:text-amber-600"
+                        >
+                          <span className="mr-1 text-xs">Xem thiệp mời</span>
+                          <ArrowRightIcon />
+                        </Link>
+                      )
+                    }
                   >
                     <div className={cn("leading-none h-9 flex items-center mb-1 text-4xl relative")}>
                       <span>{item.icon1}</span>
                       {!!item?.icon2 && <span className="absolute bottom-0 left-[30px] -mb-1 -ml-2 scale-90">{item.icon2}</span>}
                     </div>
-                    <div className={cn("mt-auto text-base text-inherit")}>{item.label}</div>
+                    <div className={cn("mt-auto text-[17px] text-inherit", field.value === item.value && "text-amber-600")}>{item.label}</div>
                   </FormRadioBtn>
                 ))}
               </div>
