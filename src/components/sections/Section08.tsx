@@ -20,8 +20,6 @@ const Section08 = ({ children }: TSection08Props) => {
 
             <GradientButtonLink
               href="/albums"
-              target="_blank"
-              rel="noopener noreferrer"
               className="ml-auto rounded-full py-1.5 pl-3 pr-4 font-[600]"
               icon={<ImagesIcon className="mr-2 text-[#ffaa40]" />}
             >

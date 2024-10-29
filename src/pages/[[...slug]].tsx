@@ -113,8 +113,6 @@ const Page = (props: { data: Sheet }) => {
               title: "Album chúng mình",
               icon: <ImagesIcon className="size-full" />,
               href: "/albums",
-              target: "_blank",
-              rel: "noreferrer noopenner",
             },
 
             {
