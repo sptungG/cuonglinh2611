@@ -7,6 +7,7 @@ import Link from "next/link";
 import React, { useId, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Modal } from "../modal/AnimatedModal";
+import { useRouter } from "next/router";
 
 function shuffleArray(array: string[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -51,6 +52,7 @@ const ALBUMS = shuffleArray(ALBUMS_LIST);
 
 const SectionAlbum = () => {
   const uid = useId();
+  const router = useRouter();
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
 
   const [selected, setSelected] = useState<string>();
@@ -74,7 +76,7 @@ const SectionAlbum = () => {
   return (
     <>
       <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
-        <Link href={"/c"}>
+        <Link href={"#"} onClick={() => router.back()}>
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
         </Link>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
