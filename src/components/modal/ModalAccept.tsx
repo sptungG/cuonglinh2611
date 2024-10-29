@@ -334,7 +334,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           />
 
           <div className="sticky bottom-0 mt-auto flex flex-col bg-white pb-4 pt-0.5">
-            {!!userData?.updatedAt && (
+            {!!userData?.accepted && !!userData?.updatedAt && (
               <div className="mb-1 text-sm">
                 <span className="font-[600] text-amber-600">{`"${userData?.accepted}"`}</span>
                 <span className="mx-1 opacity-60">at</span>
