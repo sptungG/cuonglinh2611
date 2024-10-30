@@ -8,15 +8,27 @@ const Section04 = () => {
   return (
     <section className="relative flex min-h-dvh items-center justify-center max-sm:flex-col max-sm:py-40 sm:max-h-[1000px]">
       <div className="flex flex-col items-center justify-center max-sm:mt-20">
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
+        <FadeWrapper
+          direction="left"
+          className={cn(
+            Fonts.DancingScript.className,
+            "text-xl text-amber-400 font-[700] uppercase mb-1"
+          )}
+        >
           Cô dâu
         </FadeWrapper>
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>
+        <FadeWrapper
+          direction="left"
+          className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}
+        >
           Nguyễn Yến Linh
         </FadeWrapper>
-        <FadeWrapper direction="left" className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]">
+        <FadeWrapper
+          direction="left"
+          className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]"
+        >
           <NImage
-            src="/assets/pexels-agung-pandit-wiguna-9827356.jpg"
+            src="/album/codau1.JPG"
             height={0}
             width={172}
             className="max-h-full rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
@@ -34,7 +46,13 @@ const Section04 = () => {
       </div>
 
       <FadeWrapper className="relative mx-16 hidden h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 max-sm:-order-1 sm:flex">
-        <NImage src="/assets/image-02.jpg" alt="2611" height={0} width={300} className="size-full rounded-full object-cover sm:min-h-[600px]" />
+        <NImage
+          src="/album/tuong2.JPG"
+          alt="2611"
+          height={0}
+          width={300}
+          className="size-full rounded-full object-cover sm:min-h-[600px]"
+        />
         <NImage
           src="/images/icon-flowers-3.png"
           alt="2611"
@@ -57,7 +75,7 @@ const Section04 = () => {
           className="relative mb-3 flex size-[300px] items-center justify-center max-sm:order-3 max-sm:mt-6 sm:size-[260px]"
         >
           <NImage
-            src="/assets/image-01.jpg"
+            src="/album/chure1.JPG"
             height={0}
             width={172}
             className="max-h-full rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
@@ -72,10 +90,19 @@ const Section04 = () => {
             />
           </div>
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
+        <FadeWrapper
+          direction="right"
+          className={cn(
+            Fonts.DancingScript.className,
+            "text-xl text-amber-400 font-[700] uppercase mb-1"
+          )}
+        >
           Chú rể
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-5xl ")}>
+        <FadeWrapper
+          direction="right"
+          className={cn(Fonts.DancingScript.className, "text-5xl ")}
+        >
           Nguyễn Văn Cường
         </FadeWrapper>
       </div>

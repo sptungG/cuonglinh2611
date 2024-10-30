@@ -23,7 +23,14 @@ const Section01 = ({ userData }: TSection01Props) => {
       <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
         {mediaAbove640 && (
           <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
-            <NImage src="/assets/image-01.jpg" alt="2611" height={0} width={240} className="size-full rounded-full object-cover" loading="eager" />
+            <NImage
+              src="/assets/vuon2.JPG"
+              alt="2611"
+              height={0}
+              width={240}
+              className="size-full rounded-full object-cover"
+              loading="eager"
+            />
             <NImage
               src="/images/icon-flower-3.png"
               alt="2611"
@@ -42,17 +49,33 @@ const Section01 = ({ userData }: TSection01Props) => {
         )}
 
         <div className="relative flex flex-col items-center justify-center px-0 text-center max-sm:-order-1 sm:px-20">
-          <div className={cn(Fonts.Manrope.className, "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8")}>CHÚNG MÌNH CƯỚI</div>
+          <div
+            className={cn(
+              Fonts.Manrope.className,
+              "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8"
+            )}
+          >
+            CHÚNG MÌNH CƯỚI
+          </div>
           <h2
             className={cn(
               Fonts.GreatVibes.className,
               "text-4xl sm:text-6xl font-[600] text-center whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]"
             )}
           >
-            {userData?.partyName === "NhaGai" ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường` : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
+            {userData?.partyName === "NhaGai"
+              ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường`
+              : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
           </h2>
-          <div className={cn(Fonts.DancingScript.className, "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}>
-            {userData?.partyName === "NhaGai" ? `23 Tháng 11, 2024` : `26 Tháng 11, 2024`}
+          <div
+            className={cn(
+              Fonts.DancingScript.className,
+              "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6"
+            )}
+          >
+            {userData?.partyName === "NhaGai"
+              ? `23 Tháng 11, 2024`
+              : `26 Tháng 11, 2024`}
           </div>
 
           <div className="mb-2 flex items-center gap-1 text-base leading-[1.2] sm:text-lg">
@@ -76,7 +99,7 @@ const Section01 = ({ userData }: TSection01Props) => {
 
         <FadeWrapper className="relative h-[367px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
           <NImage
-            src="/assets/image-02.jpg"
+            src="/assets/tuong1.JPG"
             alt="2611"
             height={0}
             width={240}
