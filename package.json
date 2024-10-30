@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@firebase/firestore": "^4.7.3",
+    "@tanstack/react-virtual": "^3.10.8",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

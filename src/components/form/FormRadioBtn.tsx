@@ -7,12 +7,13 @@ type TFormRadioBtnProps = {
   required?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
+  extra?: React.ReactNode;
   className?: string;
   classNameWrapper?: string;
   onChange?: (v: string) => void;
 };
 
-const FormRadioBtn = ({ children, classNameWrapper, name, value, required, className, onChange, disabled }: TFormRadioBtnProps) => {
+const FormRadioBtn = ({ children, extra, classNameWrapper, name, value, required, className, onChange, disabled }: TFormRadioBtnProps) => {
   const uid = useId();
   return (
     <div className={classNameWrapper}>
@@ -29,12 +30,13 @@ const FormRadioBtn = ({ children, classNameWrapper, name, value, required, class
       <label
         htmlFor={uid}
         className={cn(
-          "inline-flex w-full relative cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-amber-600 peer-checked:text-amber-600 peer-checked:font-[600] peer-disabled:opacity-60 peer-disabled:cursor-not-allowed peer-disabled:pointer-events-none",
+          "inline-flex w-full relative cursor-pointer items-center justify-between rounded-lg border border-gray-200 bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-600 peer-checked:border-amber-600 peer-checked:text-amber-600 peer-checked:font-[600] peer-disabled:cursor-not-allowed peer-disabled:pointer-events-none",
           className
         )}
       >
         {children}
       </label>
+      {extra}
     </div>
   );
 };

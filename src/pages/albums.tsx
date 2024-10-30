@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <>
       <SEO title={["Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")} description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "} />
-      <AuroraBackground className="fixed left-0 top-0 h-screen w-dvw" />
+      <AuroraBackground className="fixed left-0 top-0 h-dvh w-dvw" />
 
       <Provider>
         <SectionAlbum />

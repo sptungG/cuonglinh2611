@@ -1,8 +1,8 @@
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
 import confetti from "canvas-confetti";
-import { CalendarHeartIcon } from "lucide-react";
-import { useId } from "react";
+import { ArrowRightIcon, CalendarHeartIcon, CheckCircle, CheckIcon } from "lucide-react";
+import { useEffect, useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BorderBeam } from "../background/BorderBeam";
 import { FormInputFloating } from "../form/FormInput";
@@ -13,7 +13,10 @@ import { fetchReq, nextAPIUrl } from "@/common/request";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/router";
 import CircleLoading from "../animation/CircleLoading";
+import useSWR from "swr";
+import Link from "next/link";
 
+const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 const appendUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "POST", body: JSON.stringify(arg) });
 const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 
@@ -24,11 +27,12 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   const methodForm = useForm({
     defaultValues: {
-      fullName: userData?.fullName || "",
-      email: "",
+      fullName: "",
       phoneNumber: "",
-      accepted: userData?.accepted || "YES",
-      partyName: userData?.partyName || "NhaTrai",
+      invitedTime: "",
+      partyDay: "",
+      accepted: "YES",
+      partyName: "NhaTrai",
     },
   });
   const AppendUserReq = useSWRMutation(`/participants`, appendUser);
@@ -94,13 +98,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   const handleSubmitForm = methodForm.handleSubmit(async (formData) => {
     try {
-      const { accepted, fullName, partyName, email, phoneNumber } = formData;
+      const { accepted, fullName, partyName, phoneNumber, invitedTime, partyDay } = formData;
 
       let res;
       if (userData?.id) {
-        res = await UpdateUserReq.trigger({ id: userData.id, partyName, accepted });
+        res = await UpdateUserReq.trigger({ id: userData.id, phoneNumber, partyName, accepted });
       } else {
-        res = await AppendUserReq.trigger({ fullName, phoneNumber, partyName, accepted });
+        res = await AppendUserReq.trigger({ fullName, phoneNumber, invitedTime, partyDay, partyName, accepted });
       }
       setOpen(false);
       methodForm.reset();
@@ -132,6 +136,17 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       toast.error("Something went wrong!");
     }
   });
+
+  useEffect(() => {
+    methodForm.reset({
+      fullName: userData?.fullName || "",
+      phoneNumber: userData?.phoneNumber || "",
+      invitedTime: userData?.invitedTime || "",
+      partyDay: userData?.partyDay || "",
+      accepted: userData?.accepted || "YES",
+      partyName: userData?.partyName || "NhaTrai",
+    });
+  }, [userData]);
 
   return (
     <>
@@ -189,9 +204,50 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                 type="tel"
                 placeholder="84xxxyyyzzz"
                 showCount
+                disabled={userData?.id && userData.phoneNumber}
               />
             )}
           />
+
+          <div className="mb-4 flex flex-col">
+            <div className="mb-2 italic leading-[1.2] text-amber-600">Trân trọng kính mời bạn tham dự Bữa tiệc chung vui của gia đình chúng mình</div>
+            {userData?.partyName === "NhaGai" ? (
+              <>
+                <div className="mb-1 flex items-baseline text-neutral-500">
+                  <span>Tổ chức vào lúc</span>
+                  <span className="ml-1 font-[600] underline">{"17 giờ 00"}</span>
+                </div>
+                <div className="text-base underline">Thứ Bảy, ngày 23 tháng 11 năm 2024</div>
+                <div className="mb-2 text-base italic">{`(Tức ngày 23 tháng 10 năm 2024 Giáp Thìn)`}</div>
+
+                <div className="text-base">Tại gia trung tâm tiệc cưới:</div>
+                <div className="underline">Trống Đồng Place Lãng Yên, Hà Nội</div>
+              </>
+            ) : (
+              <>
+                <div className="mb-1 flex items-baseline text-neutral-500">
+                  <span>Tổ chức vào lúc</span>
+                  <span className="ml-1 font-[600] underline">
+                    {userData?.invitedTime ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}` : "09 giờ 00"}
+                  </span>
+                </div>
+                {userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu" ? (
+                  <>
+                    <div className="text-base underline">Thứ Hai, ngày 25 tháng 11 năm 2024</div>
+                    <div className="mb-2 text-base italic">{`(Tức ngày 25 tháng 10 năm 2024 Giáp Thìn)`}</div>
+                  </>
+                ) : (
+                  <>
+                    <div className="text-base underline">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
+                    <div className="mb-2 text-base italic">{`(Tức ngày 26 tháng 10 năm 2024 Giáp Thìn)`}</div>
+                  </>
+                )}
+
+                <div className="text-base">Tại gia đình Nhà Trai:</div>
+                <div className="underline">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
+              </>
+            )}
+          </div>
 
           <div className="mb-1 font-[600] opacity-60">Bạn sẽ đến chứ? </div>
           <Controller
@@ -205,11 +261,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     name={field.name}
                     value={item.value}
                     onChange={field.onChange}
+                    classNameWrapper="relative"
                     className={cn(
                       "flex-col items-stretch px-2 pb-2 pt-4",
                       index === 2 && "border-amber-200",
                       field.value === item.value && "border-amber-600"
                     )}
+                    extra={field.value === item.value && <CheckIcon className="absolute right-2 top-2 size-5 fill-amber-50 text-amber-600" />}
                   >
                     <div
                       className={cn(
@@ -235,28 +293,54 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               <div className="mb-8 flex flex-nowrap justify-between gap-4 [&>*]:w-1/2">
                 {[
                   { value: "NhaTrai", label: "Nhà Trai", icon1: "💍", icon2: "💍", className: "border-slate-300" },
-                  { value: "NhaGai", label: "Nhà Gái", icon1: "💐", className: "border-rose-200" },
+                  { value: "NhaGai", label: "Nhà Gái", icon1: "💐", className: "border-rose-300" },
                 ].map((item, index) => (
                   <FormRadioBtn
                     key={uid + index + item.value}
                     name={field.name}
                     value={item.value}
                     onChange={field.onChange}
+                    classNameWrapper="relative"
                     className={cn("flex-col items-stretch px-2 pb-2 pt-4", item?.className, field.value === item.value && "border-amber-600")}
-                    disabled={userData?.id && item.value !== userData.partyName}
+                    disabled={item.value !== userData?.partyName}
+                    extra={
+                      item.value === userData?.partyName ? (
+                        <CheckIcon className="absolute right-2 top-2 size-5 fill-amber-50 text-amber-600" />
+                      ) : (
+                        !!userData?.id || (
+                          <Link
+                            href={item.value === "NhaTrai" ? "/c#invitation" : "/l#invitation"}
+                            className="absolute right-2 top-2 flex items-center text-gray-600 underline hover:text-amber-600"
+                            onClick={() => setOpen?.(false)}
+                          >
+                            <span className="mr-1 text-xs">Xem thiệp mời</span>
+                            <ArrowRightIcon className="size-5" />
+                          </Link>
+                        )
+                      )
+                    }
                   >
                     <div className={cn("leading-none h-9 flex items-center mb-1 text-4xl relative")}>
                       <span>{item.icon1}</span>
                       {!!item?.icon2 && <span className="absolute bottom-0 left-[30px] -mb-1 -ml-2 scale-90">{item.icon2}</span>}
                     </div>
-                    <div className={cn("mt-auto text-base text-inherit")}>{item.label}</div>
+                    <div className={cn("mt-auto text-[17px] text-inherit", field.value === item.value && "text-amber-600 font-[600]")}>
+                      {item.label}
+                    </div>
                   </FormRadioBtn>
                 ))}
               </div>
             )}
           />
 
-          <div className="sticky bottom-0 mt-auto bg-white pb-4">
+          <div className="sticky bottom-0 mt-auto flex flex-col bg-white pb-4 pt-0.5">
+            {!!userData?.accepted && !!userData?.updatedAt && (
+              <div className="mb-1 text-sm">
+                <span className="font-[600] text-amber-600">{`"${userData?.accepted}"`}</span>
+                <span className="mx-1 opacity-60">at</span>
+                <span className="font-[600] opacity-60">{userData?.updatedAt}</span>
+              </div>
+            )}
             <button
               disabled={isLoading}
               type="submit"

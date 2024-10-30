@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { forwardRef, ForwardRefRenderFunction, useMemo } from "react";
 import { m, Variants } from "framer-motion";
 
 type FadeWrapperProps = {
@@ -9,16 +9,20 @@ type FadeWrapperProps = {
   style?: React.CSSProperties;
 };
 
-function FadeWrapper({
-  direction = "down",
-  framerProps = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { type: "spring" } },
+const FadeWrapper: ForwardRefRenderFunction<HTMLDivElement, FadeWrapperProps> = (
+  {
+    direction = "down",
+    framerProps = {
+      hidden: { opacity: 0 },
+      show: { opacity: 1, transition: { type: "spring" } },
+    },
+    className,
+    style,
+    children,
+    ...props
   },
-  className,
-  style,
-  children,
-}: FadeWrapperProps) {
+  forwardedRef
+) => {
   const directionOffset = useMemo(() => {
     const map = { up: 10, down: -10, left: -10, right: 10 };
     return map[direction];
@@ -48,10 +52,19 @@ function FadeWrapper({
   }, [directionOffset, axis, framerProps]);
 
   return (
-    <m.div initial="hidden" whileInView="show" viewport={{ once: false }} variants={FADE_ANIMATION_VARIANTS} className={className} style={style}>
+    <m.div
+      ref={forwardedRef}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false }}
+      variants={FADE_ANIMATION_VARIANTS}
+      className={className}
+      style={style}
+      {...props}
+    >
       {children}
     </m.div>
   );
-}
+};
 
-export default FadeWrapper;
+export default forwardRef(FadeWrapper);
