@@ -209,7 +209,11 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
         setIsPlaying(true);
       }, 1000);
     }
-  }, [play]);
+    return () => {
+      stop();
+      setIsPlaying(false);
+    };
+  }, [play, stop]);
 
   return (
     <IconContainer
