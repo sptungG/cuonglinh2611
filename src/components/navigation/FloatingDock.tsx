@@ -202,18 +202,18 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
     return () => clearInterval(interval);
   }, [sound]);
 
-  useEffect(() => {
-    if (!!play) {
-      setTimeout(() => {
-        play();
-        setIsPlaying(true);
-      }, 1000);
-    }
-    return () => {
-      stop();
-      setIsPlaying(false);
-    };
-  }, [play, stop]);
+  // useEffect(() => {
+  //   if (!!play) {
+  //     setTimeout(() => {
+  //       play();
+  //       setIsPlaying(true);
+  //     }, 1000);
+  //   }
+  //   return () => {
+  //     stop();
+  //     setIsPlaying(false);
+  //   };
+  // }, [play, stop]);
 
   return (
     <IconContainer
