@@ -27,7 +27,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             </GradientButtonLink>
           </div>
           <NImage
-            className="rounded-xl object-cover"
+            className="cursor-pointer rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544662.jpg"
             onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544662.jpg")}
             width={300}
@@ -36,7 +36,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="rounded-xl object-cover"
+            className="cursor-pointer rounded-xl object-cover"
             src="/assets/pexels-trung-nguyen-9517421.jpg"
             onClick={() => setModalImage?.("/assets/pexels-trung-nguyen-9517421.jpg")}
             width={300}
@@ -45,7 +45,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="col-span-2 rounded-xl object-cover"
+            className="col-span-2 cursor-pointer rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544650.jpg"
             onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544650.jpg")}
             width={300}
@@ -57,7 +57,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
         </div>
         <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
           <NImage
-            className="col-span-2 rounded-xl object-cover max-sm:order-3"
+            className="col-span-2 cursor-pointer rounded-xl object-cover max-sm:order-3"
             src="/assets/pexels-san-wedding-5544650.jpg"
             onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544650.jpg")}
             width={300}
@@ -67,7 +67,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="rounded-xl object-cover"
+            className="cursor-pointer rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544662.jpg"
             onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544662.jpg")}
             width={300}
@@ -76,7 +76,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="rounded-xl object-cover"
+            className="cursor-pointer rounded-xl object-cover"
             src="/assets/pexels-trung-nguyen-9517421.jpg"
             onClick={() => setModalImage?.("/assets/pexels-trung-nguyen-9517421.jpg")}
             width={300}

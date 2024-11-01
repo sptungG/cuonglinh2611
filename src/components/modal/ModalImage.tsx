@@ -14,14 +14,14 @@ const ModalImage = ({ src, setSrc }: TModalImageProps) => {
       }}
       className="min-h-fit max-w-[1000px] border-0 max-sm:mt-auto md:max-w-fit"
     >
-      <div className="overflow-y-auto sm:max-h-[calc(100dvh-24px)]">
+      <div className="overflow-hidden">
         {!!src && (
           <NImage
             src={src}
             height={500}
             width={500}
             alt=""
-            className={cn("object-contain object-top inset-0 !h-auto w-auto transition duration-200 rounded max-w-[1000px]")}
+            className="inset-0 !h-auto w-auto rounded object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-40px)]"
           />
         )}
       </div>

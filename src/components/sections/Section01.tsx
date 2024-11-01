@@ -83,7 +83,7 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
           </RainbowButtonLink>
         </div>
 
-        <FadeWrapper className="relative h-[367px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
+        <FadeWrapper className="relative h-[480px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
           <NImage
             src="/assets/tuong1.JPG"
             alt="2611"
