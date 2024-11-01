@@ -2,6 +2,7 @@ import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
 import PageLoading from "@/components/background/PageLoading";
 import ModalAccept from "@/components/modal/ModalAccept";
+import ModalImage from "@/components/modal/ModalImage";
 import ModalQR from "@/components/modal/ModalQR";
 import SEO from "@/components/next/SEO";
 import { CalendarHeartIcon, GiftIcon, ImagesIcon, MapPinIcon } from "lucide-react";
@@ -52,6 +53,7 @@ const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
+  const [selected, setSelected] = useState<string>();
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
@@ -70,25 +72,26 @@ const Page = (props: { data: Sheet }) => {
       />
 
       <Provider>
-        <Section01 userData={userData} />
+        <Section01 userData={userData} setModalImage={setSelected} />
 
         <Section03 userData={userData} />
 
         <Section02 userData={userData} />
 
-        <Section04 />
+        <Section04 setModalImage={setSelected} />
 
-        <Section05 />
+        <Section05 setModalImage={setSelected} />
 
-        <Section06 />
+        <Section06 setModalImage={setSelected} />
 
         <Section07
           onClickBtn01={() => {
             setIsOpenSaveDate(true);
           }}
+          setModalImage={setSelected}
         />
 
-        <Section08 />
+        <Section08 setModalImage={setSelected} />
 
         <FloatingDock
           desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
@@ -128,6 +131,8 @@ const Page = (props: { data: Sheet }) => {
         <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
         <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+
+        <ModalImage src={selected} setSrc={setSelected} />
       </Provider>
     </>
   );

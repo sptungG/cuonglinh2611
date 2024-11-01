@@ -8,6 +8,7 @@ import React, { useId, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Modal } from "../modal/AnimatedModal";
 import { useRouter } from "next/router";
+import ModalImage from "../modal/ModalImage";
 
 function shuffleArray(array: string[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -133,25 +134,7 @@ const SectionAlbum = () => {
         <ArrowUpIcon className="size-7" />
       </Link>
 
-      <Modal
-        open={!!selected}
-        setOpen={(open) => {
-          if (!open) setSelected(undefined);
-        }}
-        className="min-h-fit border-0 max-sm:mt-auto md:max-w-fit"
-      >
-        <div className="overflow-y-auto">
-          {!!selected && (
-            <Image
-              src={selected}
-              height={500}
-              width={500}
-              alt=""
-              className={cn("object-contain object-top inset-0 !h-auto w-auto transition duration-200 rounded")}
-            />
-          )}
-        </div>
-      </Modal>
+      <ModalImage src={selected} setSrc={setSelected} />
     </>
   );
 };

@@ -5,9 +5,9 @@ import NImage from "../next/NextImage";
 import { GradientButtonLink } from "../button/GradientButton";
 import { ImagesIcon } from "lucide-react";
 
-type TSection08Props = { children?: React.ReactNode };
+type TSection08Props = { setModalImage?: (src?: string) => void };
 
-const Section08 = ({ children }: TSection08Props) => {
+const Section08 = ({ setModalImage }: TSection08Props) => {
   return (
     <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden pb-28">
       <div className="text-center text-xl uppercase text-amber-500">Kỉ niệm cưới</div>
@@ -29,6 +29,7 @@ const Section08 = ({ children }: TSection08Props) => {
           <NImage
             className="rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544662.jpg"
+            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544662.jpg")}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
@@ -37,6 +38,7 @@ const Section08 = ({ children }: TSection08Props) => {
           <NImage
             className="rounded-xl object-cover"
             src="/assets/pexels-trung-nguyen-9517421.jpg"
+            onClick={() => setModalImage?.("/assets/pexels-trung-nguyen-9517421.jpg")}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
@@ -45,6 +47,7 @@ const Section08 = ({ children }: TSection08Props) => {
           <NImage
             className="col-span-2 rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544650.jpg"
+            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544650.jpg")}
             width={300}
             loading="eager"
             height={0}
@@ -56,6 +59,7 @@ const Section08 = ({ children }: TSection08Props) => {
           <NImage
             className="col-span-2 rounded-xl object-cover max-sm:order-3"
             src="/assets/pexels-san-wedding-5544650.jpg"
+            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544650.jpg")}
             width={300}
             loading="eager"
             height={0}
@@ -65,6 +69,7 @@ const Section08 = ({ children }: TSection08Props) => {
           <NImage
             className="rounded-xl object-cover"
             src="/assets/pexels-san-wedding-5544662.jpg"
+            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544662.jpg")}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
@@ -73,6 +78,7 @@ const Section08 = ({ children }: TSection08Props) => {
           <NImage
             className="rounded-xl object-cover"
             src="/assets/pexels-trung-nguyen-9517421.jpg"
+            onClick={() => setModalImage?.("/assets/pexels-trung-nguyen-9517421.jpg")}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}

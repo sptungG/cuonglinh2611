@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NImage from "../next/NextImage";
 import FadeWrapper from "../animation/Fade";
 import { RainbowButtonLink } from "../button/RainbowButton";
@@ -7,10 +7,11 @@ import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { MapPinIcon } from "lucide-react";
 import { Sheet } from "@/common/sheets";
+import ModalImage from "../modal/ModalImage";
 
-type TSection01Props = { userData: Sheet };
+type TSection01Props = { userData: Sheet; setModalImage?: (src?: string) => void };
 
-const Section01 = ({ userData }: TSection01Props) => {
+const Section01 = ({ userData, setModalImage }: TSection01Props) => {
   const mapParty =
     userData?.partyName === "NhaGai"
       ? "https://www.google.com/maps/search/?api=1&query=21.009745980494834,105.86708485767026"
@@ -19,7 +20,7 @@ const Section01 = ({ userData }: TSection01Props) => {
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
 
   return (
-    <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:max-h-[1000px]">
+    <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:max-h-[1500px]">
       <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
         {mediaAbove640 && (
           <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
@@ -28,8 +29,9 @@ const Section01 = ({ userData }: TSection01Props) => {
               alt="2611"
               height={0}
               width={240}
-              className="size-full rounded-full object-cover"
+              className="size-full cursor-pointer rounded-full object-cover"
               loading="eager"
+              onClick={() => setModalImage?.("/assets/vuon2.JPG")}
             />
             <NImage
               src="/images/icon-flower-3.png"
@@ -49,33 +51,17 @@ const Section01 = ({ userData }: TSection01Props) => {
         )}
 
         <div className="relative flex flex-col items-center justify-center px-0 text-center max-sm:-order-1 sm:px-20">
-          <div
-            className={cn(
-              Fonts.Manrope.className,
-              "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8"
-            )}
-          >
-            CHÚNG MÌNH CƯỚI
-          </div>
+          <div className={cn(Fonts.Manrope.className, "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8")}>CHÚNG MÌNH CƯỚI</div>
           <h2
             className={cn(
               Fonts.GreatVibes.className,
               "text-4xl sm:text-6xl font-[600] text-center whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]"
             )}
           >
-            {userData?.partyName === "NhaGai"
-              ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường`
-              : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
+            {userData?.partyName === "NhaGai" ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường` : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
           </h2>
-          <div
-            className={cn(
-              Fonts.DancingScript.className,
-              "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6"
-            )}
-          >
-            {userData?.partyName === "NhaGai"
-              ? `23 Tháng 11, 2024`
-              : `26 Tháng 11, 2024`}
+          <div className={cn(Fonts.DancingScript.className, "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}>
+            {userData?.partyName === "NhaGai" ? `23 Tháng 11, 2024` : `26 Tháng 11, 2024`}
           </div>
 
           <div className="mb-2 flex items-center gap-1 text-base leading-[1.2] sm:text-lg">
@@ -104,8 +90,9 @@ const Section01 = ({ userData }: TSection01Props) => {
             height={0}
             width={240}
             style={{ height: "100%" }}
-            className="size-full min-h-full rounded-md object-cover sm:rounded-full"
+            className="size-full min-h-full cursor-pointer rounded-md object-cover sm:rounded-full"
             loading="eager"
+            onClick={() => setModalImage?.("/assets/tuong1.JPG")}
           />
           <NImage
             src="/images/icon-flowers-3.png"

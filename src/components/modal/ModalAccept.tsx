@@ -215,36 +215,36 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               <>
                 <div className="mb-1 flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
-                  <span className="ml-1 font-[600] underline">{"17 giờ 00"}</span>
+                  <span className="ml-1 font-[600] ">{"17 giờ 00"}</span>
                 </div>
-                <div className="text-base underline">Thứ Bảy, ngày 23 tháng 11 năm 2024</div>
+                <div className="text-base ">Thứ Bảy, ngày 23 tháng 11 năm 2024</div>
                 <div className="mb-2 text-base italic">{`(Tức ngày 23 tháng 10 năm 2024 Giáp Thìn)`}</div>
 
-                <div className="text-base">Tại gia trung tâm tiệc cưới:</div>
-                <div className="underline">Trống Đồng Place Lãng Yên, Hà Nội</div>
+                <div className="text-base opacity-60">Tại gia trung tâm tiệc cưới:</div>
+                <div className="">Trống Đồng Place Lãng Yên, Hà Nội</div>
               </>
             ) : (
               <>
                 <div className="mb-1 flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
-                  <span className="ml-1 font-[600] underline">
+                  <span className="ml-1 font-[600] ">
                     {userData?.invitedTime ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}` : "09 giờ 00"}
                   </span>
                 </div>
                 {userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu" ? (
                   <>
-                    <div className="text-base underline">Thứ Hai, ngày 25 tháng 11 năm 2024</div>
+                    <div className="text-base ">Thứ Hai, ngày 25 tháng 11 năm 2024</div>
                     <div className="mb-2 text-base italic">{`(Tức ngày 25 tháng 10 năm 2024 Giáp Thìn)`}</div>
                   </>
                 ) : (
                   <>
-                    <div className="text-base underline">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
+                    <div className="text-base ">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
                     <div className="mb-2 text-base italic">{`(Tức ngày 26 tháng 10 năm 2024 Giáp Thìn)`}</div>
                   </>
                 )}
 
-                <div className="text-base">Tại gia đình Nhà Trai:</div>
-                <div className="underline">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
+                <div className="text-base opacity-60">Tại gia đình Nhà Trai:</div>
+                <div className="">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
               </>
             )}
           </div>
