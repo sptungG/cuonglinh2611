@@ -21,7 +21,7 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
   const [currYear, setCurrYear] = useState<number>(new Date().getFullYear());
 
   const [dateRange, setDateRange] = useState<DateRange>({
-    startDate: initialRange?.startDate ?? new Date(),
+    startDate: new Date(),
     endDate: initialRange?.endDate ?? dateFns.add(new Date(), { days: 20 }),
   });
 
@@ -106,7 +106,7 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
                   "rounded-full flex size-11 sm:size-12 bg-white items-center justify-center p-2 hover:bg-amber-600 hover:text-white",
                   dateFns.isSameDay(currentDate, dateRange.startDate!) ? "text-amber-600 bg-amber-50 opacity-100" : "",
                   isBetween(currentDate, dateRange.startDate!, dateRange.endDate!, "[]") ? "bg-amber-50 text-amber-600" : "opacity-80",
-                  dateFns.isSameDay(currentDate, new Date()) && "font-[600] text-amber-600 underline bg-amber-50 ring-2 ring-amber-100 opacity-100",
+                  dateFns.isSameDay(currentDate, new Date()) && "font-[600] text-amber-600 underline bg-amber-50 ring-1 ring-amber-400 opacity-100",
                   dateFns.isSameDay(currentDate, dateRange.endDate!) ? "relative font-[600] text-xl !text-white !bg-transparent [&>svg]:block" : ""
                 )}
               >
@@ -137,7 +137,7 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
                 "rounded-full flex size-11 sm:size-12 bg-white items-center justify-center p-2 hover:bg-amber-600 hover:text-white",
                 dateFns.isSameDay(currentDate, dateRange.startDate!) ? "text-amber-600 bg-amber-50 opacity-100" : "",
                 isBetween(currentDate, dateRange.startDate!, dateRange.endDate!, "[]") ? "bg-amber-50 text-amber-600" : "opacity-80",
-                dateFns.isSameDay(currentDate, new Date()) && "font-[600] text-amber-600 underline bg-amber-50 ring-2 ring-amber-100 opacity-100",
+                dateFns.isSameDay(currentDate, new Date()) && "font-[600] text-amber-600 underline bg-amber-50 ring-1 ring-amber-400 opacity-100",
                 dateFns.isSameDay(currentDate, dateRange.endDate!) ? "relative font-[600] text-xl !text-white !bg-transparent [&>svg]:block" : ""
               )}
             >

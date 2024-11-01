@@ -21,7 +21,7 @@ const Section05 = ({ setModalImage }: TSection05Props) => {
         Cùng chúng mình đếm ngược nhé!
       </FadeWrapper>
 
-      <Calendar initialRange={{ startDate: new Date(), endDate: new Date("2024-11-26T00:00:01") }} />
+      <Calendar initialRange={{ startDate: new Date("2024-10-01T00:00:01"), endDate: new Date("2024-11-26T00:00:01") }} />
 
       <TimerCountDown targetDate={new Date("2024-11-26T00:00:01")} />
 
