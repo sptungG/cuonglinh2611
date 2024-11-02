@@ -72,7 +72,7 @@ const Page = (props: { data: Sheet }) => {
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
 
-      <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white" classNameContainer="-z-50 opacity-40" />
+      <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white max-sm:hidden" classNameContainer="-z-50 opacity-40" />
 
       <Provider>
         <Section01 userData={userData} setModalImage={setSelected} />
