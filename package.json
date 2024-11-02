@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@firebase/firestore": "^4.7.3",
+    "@splinetool/react-spline": "^4.0.0",
+    "@splinetool/runtime": "^1.9.35",
     "@tanstack/react-virtual": "^3.10.8",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "firebase": "^10.14.0",
     "framer-motion": "^11.11.1",
     "googleapis": "^144.0.0",
     "lucide-react": "^0.453.0",
