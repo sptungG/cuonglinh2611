@@ -1,5 +1,6 @@
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
+import { AuroraBackground } from "@/components/background/AuroraBackground";
 import PageLoading from "@/components/background/PageLoading";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalImage from "@/components/modal/ModalImage";
@@ -70,6 +71,8 @@ const Page = (props: { data: Sheet }) => {
         title={[userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "", "Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
+
+      <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white" classNameContainer="-z-50 opacity-40" />
 
       <Provider>
         <Section01 userData={userData} setModalImage={setSelected} />
