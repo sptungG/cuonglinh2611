@@ -36,21 +36,21 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             </GradientButtonLink>
           </div>
           <NImage
-            className="cursor-pointer rounded-xl object-cover"
+            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
             src={IMAGES[0]}
             onClick={() => setModalImage?.(IMAGES[0])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto", maxHeight: 160 }}
+            style={{ width: "100%", height: "auto" }}
             alt=""
           />
           <NImage
-            className="cursor-pointer rounded-xl object-cover"
+            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
             src={IMAGES[1]}
             onClick={() => setModalImage?.(IMAGES[1])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto", maxHeight: 160 }}
+            style={{ width: "100%", height: "auto" }}
             alt=""
           />
           <NImage
@@ -76,21 +76,21 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="cursor-pointer rounded-xl object-cover"
+            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
             src={IMAGES[4]}
             onClick={() => setModalImage?.(IMAGES[4])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto", maxHeight: 160 }}
+            style={{ width: "100%", height: "auto" }}
             alt=""
           />
           <NImage
-            className="cursor-pointer rounded-xl object-cover"
+            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
             src={IMAGES[5]}
             onClick={() => setModalImage?.(IMAGES[5])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto", maxHeight: 160 }}
+            style={{ width: "100%", height: "auto" }}
             alt=""
           />
           <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-neutral-500")}>
