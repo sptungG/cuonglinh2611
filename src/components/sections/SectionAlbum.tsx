@@ -76,9 +76,9 @@ const SectionAlbum = () => {
   return (
     <>
       <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
-        <Link href={"#"} onClick={() => router.back()}>
+        <button onClick={() => router.back()}>
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
-        </Link>
+        </button>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
         <div className={cn(Fonts.DancingScript.className, "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600")}>
           Album chúng mình
