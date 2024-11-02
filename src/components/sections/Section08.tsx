@@ -36,7 +36,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             </GradientButtonLink>
           </div>
           <NImage
-            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
             src={IMAGES[0]}
             onClick={() => setModalImage?.(IMAGES[0])}
             width={300}
@@ -45,7 +45,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
             src={IMAGES[1]}
             onClick={() => setModalImage?.(IMAGES[1])}
             width={300}
@@ -76,7 +76,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
             src={IMAGES[4]}
             onClick={() => setModalImage?.(IMAGES[4])}
             width={300}
@@ -85,7 +85,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             alt=""
           />
           <NImage
-            className="h-[160px] max-h-[160px] cursor-pointer rounded-xl object-cover sm:h-auto"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
             src={IMAGES[5]}
             onClick={() => setModalImage?.(IMAGES[5])}
             width={300}
