@@ -7,6 +7,15 @@ import { ImagesIcon } from "lucide-react";
 
 type TSection08Props = { setModalImage?: (src?: string) => void };
 
+const IMAGES = [
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487171/cuonglinh2611/albums/jqobblxufiurneld84be.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487167/cuonglinh2611/albums/f343zkiaynh7mjspuio7.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487152/cuonglinh2611/albums/ypw8ls6wyx0jo2ezu141.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487174/cuonglinh2611/albums/xr89qr0buoarwut8lhog.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487172/cuonglinh2611/albums/fyhxoiixev8hlkmk1trc.jpg",
+];
+
 const Section08 = ({ setModalImage }: TSection08Props) => {
   return (
     <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden pb-28">
@@ -28,26 +37,26 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
           </div>
           <NImage
             className="cursor-pointer rounded-xl object-cover"
-            src="/assets/pexels-san-wedding-5544662.jpg"
-            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544662.jpg")}
+            src={IMAGES[0]}
+            onClick={() => setModalImage?.(IMAGES[0])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", maxHeight: 160 }}
             alt=""
           />
           <NImage
             className="cursor-pointer rounded-xl object-cover"
-            src="/assets/pexels-trung-nguyen-9517421.jpg"
-            onClick={() => setModalImage?.("/assets/pexels-trung-nguyen-9517421.jpg")}
+            src={IMAGES[1]}
+            onClick={() => setModalImage?.(IMAGES[1])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", maxHeight: 160 }}
             alt=""
           />
           <NImage
             className="col-span-2 cursor-pointer rounded-xl object-cover"
-            src="/assets/pexels-san-wedding-5544650.jpg"
-            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544650.jpg")}
+            src={IMAGES[2]}
+            onClick={() => setModalImage?.(IMAGES[2])}
             width={300}
             loading="eager"
             height={0}
@@ -58,8 +67,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
         <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
           <NImage
             className="col-span-2 cursor-pointer rounded-xl object-cover max-sm:order-3"
-            src="/assets/pexels-san-wedding-5544650.jpg"
-            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544650.jpg")}
+            src={IMAGES[3]}
+            onClick={() => setModalImage?.(IMAGES[3])}
             width={300}
             loading="eager"
             height={0}
@@ -68,20 +77,20 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
           />
           <NImage
             className="cursor-pointer rounded-xl object-cover"
-            src="/assets/pexels-san-wedding-5544662.jpg"
-            onClick={() => setModalImage?.("/assets/pexels-san-wedding-5544662.jpg")}
+            src={IMAGES[4]}
+            onClick={() => setModalImage?.(IMAGES[4])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", maxHeight: 160 }}
             alt=""
           />
           <NImage
             className="cursor-pointer rounded-xl object-cover"
-            src="/assets/pexels-trung-nguyen-9517421.jpg"
-            onClick={() => setModalImage?.("/assets/pexels-trung-nguyen-9517421.jpg")}
+            src={IMAGES[5]}
+            onClick={() => setModalImage?.(IMAGES[5])}
             width={300}
             height={0}
-            style={{ width: "100%", height: "auto" }}
+            style={{ width: "100%", height: "auto", maxHeight: 160 }}
             alt=""
           />
           <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-neutral-500")}>

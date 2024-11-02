@@ -18,10 +18,11 @@ const ModalImage = ({ src, setSrc }: TModalImageProps) => {
         {!!src && (
           <NImage
             src={src}
-            height={500}
-            width={500}
+            height={1000}
+            width={1000}
             alt=""
             className="inset-0 !h-auto w-auto rounded object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-40px)]"
+            quality={90}
           />
         )}
       </div>

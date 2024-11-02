@@ -12,21 +12,21 @@ const dataText = [
     time2: "12/2016",
     title: "Ngày bắt đầu",
     desc: "Vào một đêm Giáng sinh lung linh, sau hai năm quen biết, ánh mắt ta tìm thấy nhau giữa muôn ngàn ánh đèn, từ đó một câu chuyện tình yêu bắt đầu.",
-    image: "/assets/sapa_noel.jpeg",
+    image: "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730426459/sapa_noel_nvx9a5.jpg",
   },
   {
     time1: "08",
     time2: "03/2024",
     title: "Anh ngỏ lời",
     desc: "Trong khoảnh khắc dịu dàng của tháng 3, anh bất ngờ quỳ gối, ánh mắt trao trọn tình yêu, ngỏ lời gắn kết đời ta mãi mãi.",
-    image: "/assets/cauhon.jpeg",
+    image: "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730426454/cauhon_k0c8lw.jpg",
   },
   {
     time1: "26",
     time2: "11/2024",
     title: "Chính thức ở bên nhau",
     desc: "Ngày 26 tháng 11 năm 2024, sau gần một thập kỷ cùng trải qua những thăng trầm, chúng mình chính thức trở về chung một mái nhà, viết tiếp câu chuyện tình yêu đẹp như mơ.",
-    image: "/album/vuon1.JPG",
+    image: "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg",
   },
 ];
 

@@ -30,4 +30,5 @@ const NImage = ({ src, alt, style, fill, ...props }: Omit<NextImageProps, "alt">
     />
   );
 };
+
 export default NImage;

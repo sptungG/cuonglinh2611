@@ -25,13 +25,15 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
         {mediaAbove640 && (
           <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
             <NImage
-              src="/assets/vuon2.JPG"
+              src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg"
               alt="2611"
               height={0}
               width={240}
               className="size-full cursor-pointer rounded-full object-cover"
               loading="eager"
-              onClick={() => setModalImage?.("/assets/vuon2.JPG")}
+              onClick={() =>
+                setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg")
+              }
             />
             <NImage
               src="/images/icon-flower-3.png"
@@ -85,14 +87,14 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
 
         <FadeWrapper className="relative h-[480px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
           <NImage
-            src="/assets/tuong1.JPG"
+            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730426454/tuong1_rita2l.jpg"
             alt="2611"
             height={0}
             width={240}
             style={{ height: "100%" }}
             className="size-full min-h-full cursor-pointer rounded-md object-cover sm:rounded-full"
             loading="eager"
-            onClick={() => setModalImage?.("/assets/tuong1.JPG")}
+            onClick={() => setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730426454/tuong1_rita2l.jpg")}
           />
           <NImage
             src="/images/icon-flowers-3.png"

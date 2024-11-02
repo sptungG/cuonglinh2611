@@ -18,12 +18,14 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
         </FadeWrapper>
         <FadeWrapper direction="left" className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]">
           <NImage
-            src="/album/codau1.JPG"
+            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/dx96rtpoodv1ly7c8xcj.jpg"
             height={0}
             width={172}
             loading="eager"
             className="max-h-full cursor-pointer rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
-            onClick={() => props?.setModalImage?.("/album/codau1.JPG")}
+            onClick={() =>
+              props?.setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/dx96rtpoodv1ly7c8xcj.jpg")
+            }
           />
           <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:right-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <NImage
@@ -40,12 +42,14 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
       {mediaAbove640 && (
         <FadeWrapper className="relative mx-16 hidden h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 max-sm:-order-1 sm:flex">
           <NImage
-            src="/album/tuong2.JPG"
+            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/pr8omw0riiihnokxibb7.jpg"
             alt="2611"
             height={0}
             width={300}
             className="size-full cursor-pointer rounded-full object-cover sm:min-h-[600px]"
-            onClick={() => props?.setModalImage?.("/album/tuong2.JPG")}
+            onClick={() =>
+              props?.setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/pr8omw0riiihnokxibb7.jpg")
+            }
           />
           <NImage
             src="/images/icon-flowers-3.png"
@@ -70,12 +74,14 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
           className="relative mb-3 flex size-[300px] items-center justify-center max-sm:order-3 max-sm:mt-6 sm:size-[260px]"
         >
           <NImage
-            src="/album/chure1.JPG"
+            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/cv5javq9t38zwfzaheuy.jpg"
             height={0}
             width={172}
             loading="eager"
             className="max-h-full cursor-pointer rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
-            onClick={() => props?.setModalImage?.("/album/chure1.JPG")}
+            onClick={() =>
+              props?.setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/cv5javq9t38zwfzaheuy.jpg")
+            }
           />
           <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:left-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <NImage

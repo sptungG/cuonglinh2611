@@ -7,6 +7,9 @@ const nextConfig = {
     optimizeCss: process.env.NODE_ENV === "production",
     scrollRestoration: false,
   },
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
   async redirects() {
     return [
       {

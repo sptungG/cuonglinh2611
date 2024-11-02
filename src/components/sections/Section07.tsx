@@ -26,11 +26,11 @@ const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
       <div className="relative min-h-fit w-full overflow-hidden">
         <div className="flex items-center justify-center py-8">
           {[
-            "/assets/pexels-tran-long-13114541.jpg",
-            "/assets/pexels-tuan-anh-nguyen-1806361.jpg",
-            "/assets/pexels-nguyen-xuan-trung-17586999.jpg",
-            "/assets/pexels-san-wedding-5544662.jpg",
-            "/assets/pexels-san-wedding-5544650.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487167/cuonglinh2611/albums/f343zkiaynh7mjspuio7.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/jm3pn3xcrm2n2qyrtwly.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/sjb4sqfg9jy3ik0lth9x.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487151/cuonglinh2611/albums/vgc8bcfwhfqdew2aqm93.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487156/cuonglinh2611/albums/jqhpuelqjqy7kiylyso2.jpg",
           ].map((image, index) => {
             const zIndex = 10;
             return (
