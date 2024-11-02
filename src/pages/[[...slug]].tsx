@@ -48,6 +48,10 @@ const Section08 = dynamic(() => import("@/components/sections/Section08"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
+const Tour = dynamic(() => import("@/components/modal/Tour"), {
+  ssr: false,
+  loading: () => <PageLoading />,
+});
 const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false, loading: () => <div>Loading...</div> });
 
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -130,6 +134,8 @@ const Page = (props: { data: Sheet }) => {
             },
           ]}
         />
+
+        <Tour />
 
         <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
