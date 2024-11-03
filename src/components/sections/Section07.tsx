@@ -5,10 +5,12 @@ import { m } from "framer-motion";
 import { RainbowButton } from "../button/RainbowButton";
 import { PartyPopperIcon } from "lucide-react";
 import NImage from "../next/NextImage";
+import { useMediaQuery } from "react-responsive";
 
 type TSection07Props = { onClickBtn01?: () => void; setModalImage?: (src?: string) => void };
 
 const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
+  const mediaAbove640 = useMediaQuery({ minWidth: 640 });
   return (
     <section className="relative flex min-h-fit max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden py-40">
       <div className="mb-1 text-center text-base uppercase text-amber-500 max-sm:px-8">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
@@ -57,7 +59,7 @@ const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
                   style={index === 2 ? { width: 320, height: 320 } : { width: 300, height: 300 }}
                   className="shrink-0 cursor-pointer rounded-lg object-cover"
                   loading={index === 2 ? "eager" : "lazy"}
-                  canPreview
+                  canPreview={mediaAbove640}
                 />
               </m.div>
             );

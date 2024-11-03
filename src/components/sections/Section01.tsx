@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import FadeWrapper from "../animation/Fade";
 import { RainbowButtonLink } from "../button/RainbowButton";
 import NImage from "../next/NextImage";
+import { IMG_BLUR } from "@/common/constant";
 
 type TSection01Props = { userData: Sheet; setModalImage?: (src?: string) => void };
 
@@ -30,6 +31,8 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
               className="size-full cursor-pointer rounded-full object-cover"
               loading="eager"
               canPreview
+              placeholder="blur"
+              blurDataURL={IMG_BLUR}
             />
             <NImage
               src="/images/icon-flower-3.png"
@@ -91,6 +94,8 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
             className="size-full min-h-full cursor-pointer rounded-md object-cover sm:rounded-full"
             loading="eager"
             canPreview
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
             src="/images/icon-flowers-3.png"

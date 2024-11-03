@@ -22,19 +22,20 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
       className="h-dvh max-h-[auto] min-h-fit max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14 md:max-w-fit"
       classNameCloseBtn="bg-gray-100/10 rounded-full top-2 right-2 size-9"
     >
-      <div className="flex h-full flex-col items-center justify-center overflow-hidden sm:bg-gray-100/10">
-        <NImage
-          key={uid + "ModalImage" + src}
-          src={src || ""}
-          height={1000}
-          width={1000}
-          alt=""
-          className="inset-0 !h-auto w-auto object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-100px)]"
-          quality={90}
-          loading="eager"
-          placeholder="blur"
-          blurDataURL={IMG_BLUR}
-        />
+      <div className="flex h-full flex-col items-center justify-center overflow-hidden pb-[60px] pt-[52px] sm:bg-gray-100/10">
+        {!!src && (
+          <NImage
+            src={src}
+            height={1000}
+            width={1000}
+            alt=""
+            className="inset-0 !h-auto !max-h-full w-auto min-w-[300px] object-contain"
+            quality={90}
+            loading="eager"
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
+          />
+        )}
       </div>
 
       {currentIndex !== undefined && (
