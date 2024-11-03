@@ -26,7 +26,7 @@ const NImage = ({
   ...props
 }: Omit<NextImageProps, "alt" | "src"> & { alt?: string; src: string; canPreview?: boolean }) => {
   const uid = useId();
-  const imageId = useRegisterImage(canPreview, { src, alt });
+  const imageId = useRegisterImage(src, { src, alt }, canPreview);
   const groupContext = usePreviewImagesContext();
   return (
     <NextImage

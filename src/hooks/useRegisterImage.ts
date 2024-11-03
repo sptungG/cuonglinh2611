@@ -2,13 +2,7 @@ import { usePreviewImagesContext } from "@/components/context/PreviewImagesConte
 import { ImageElementProps } from "@/types/preview-image-types";
 import { useEffect, useState } from "react";
 
-let uid = 0;
-
-export function useRegisterImage(canPreview: boolean, registerData: ImageElementProps) {
-  const [id] = useState(() => {
-    uid += 1;
-    return String(uid);
-  });
+export function useRegisterImage(id: string, registerData: ImageElementProps, canPreview: boolean) {
   const groupContext = usePreviewImagesContext();
 
   useEffect(() => {
