@@ -29,7 +29,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
           height={1000}
           width={1000}
           alt=""
-          className="inset-0 !h-auto w-auto object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-40px)]"
+          className="inset-0 !h-auto w-auto object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-100px)]"
           quality={90}
           loading="eager"
           placeholder="blur"
@@ -38,12 +38,12 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
       </div>
 
       {currentIndex !== undefined && (
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-0">
-          <span className="pb-2 text-lg text-gray-900">{`${currentIndex + 1} / ${mappedImagesKey.length}`}</span>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-2">
+          <span className="text-lg text-gray-900">{`${currentIndex + 1} / ${mappedImagesKey.length}`}</span>
         </div>
       )}
 
-      <div className="absolute bottom-2 left-2 sm:bottom-1/2 sm:translate-y-1/2">
+      <div className="absolute bottom-2 left-2 sm:bottom-1/2 sm:left-0 sm:translate-y-1/2">
         <button
           disabled={!canPreviewPrev}
           onClick={onPreviewPrev}
@@ -52,7 +52,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
           <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
         </button>
       </div>
-      <div className="absolute bottom-2 right-2 sm:bottom-1/2 sm:translate-y-1/2">
+      <div className="absolute bottom-2 right-2 sm:bottom-1/2 sm:right-0 sm:translate-y-1/2">
         <button
           disabled={!canPreviewNext}
           onClick={onPreviewNext}
