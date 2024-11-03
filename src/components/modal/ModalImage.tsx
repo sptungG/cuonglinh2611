@@ -29,7 +29,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
             height={1000}
             width={1000}
             alt=""
-            className="inset-0 !h-auto !max-h-full w-auto !min-w-[100dvw] object-contain"
+            className="inset-0 !h-auto !max-h-full w-auto !min-w-[300px] object-contain"
             quality={90}
             loading="eager"
             placeholder="blur"
