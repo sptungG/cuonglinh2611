@@ -20,16 +20,16 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
         if (!open) onOpenChange?.(undefined);
       }}
       className="h-dvh max-h-[auto] min-h-fit max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14 md:max-w-fit"
-      classNameCloseBtn="bg-gray-100/10 rounded-full top-2 right-2 size-9"
+      classNameCloseBtn="sm:bg-gray-100/10 rounded-full top-2 right-2 size-9"
     >
-      <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-gray-100/50 pb-[60px] pt-[56px] sm:bg-gray-100/10">
+      <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-gray-100/50 pb-[48px] pt-[44px] sm:bg-gray-100/10 sm:py-[60px]">
         {!!src && (
           <NImage
             src={src}
             height={1000}
             width={1000}
             alt=""
-            className="inset-0 !h-auto !max-h-full w-auto min-w-[300px] object-contain"
+            className="inset-0 !h-auto !max-h-full w-auto !min-w-[100dvw] object-contain"
             quality={90}
             loading="eager"
             placeholder="blur"
@@ -48,7 +48,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
         <button
           disabled={!canPreviewPrev}
           onClick={onPreviewPrev}
-          className="group flex size-11 items-center justify-center rounded-full bg-gray-100/10 text-gray-900 disabled:text-gray-500 disabled:opacity-60"
+          className="group flex size-10 items-center justify-center rounded-full bg-gray-100/10 text-gray-900 disabled:text-gray-500 disabled:opacity-60 sm:size-11"
         >
           <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
         </button>
@@ -57,7 +57,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
         <button
           disabled={!canPreviewNext}
           onClick={onPreviewNext}
-          className="group flex size-11 items-center justify-center rounded-full bg-gray-100/10 text-gray-900 disabled:cursor-not-allowed disabled:text-gray-500 disabled:opacity-60"
+          className="group flex size-10 items-center justify-center rounded-full bg-gray-100/10 text-gray-900 disabled:cursor-not-allowed disabled:text-gray-500 disabled:opacity-60 sm:size-11"
         >
           <ArrowRightIcon className={cn("size-6 transition duration-200", canPreviewNext && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
         </button>
