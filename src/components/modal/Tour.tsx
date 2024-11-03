@@ -88,7 +88,7 @@ function CustomTooltip(props: TooltipRenderProps) {
       </button>
 
       {step.title && <h4 className={cn(Fonts.DancingScript.className, "mb-3 text-3xl font-[600]")}>{step.title}</h4>}
-      <div className="min-h-14 text-base leading-[1.2]">{step.content}</div>
+      <div className="mb-2 min-h-14 text-base leading-[1.2]">{step.content}</div>
       <div className="flex items-center justify-between">
         <button className="flex h-8 items-center justify-center rounded bg-gray-100 px-3 font-[600] leading-[1.1] text-gray-600" {...skipProps}>
           {skipProps.title}
