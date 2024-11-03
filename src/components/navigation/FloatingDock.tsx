@@ -42,7 +42,10 @@ const FloatingDockDesktop = ({ items, className }: { items: IItem[]; className?:
     <m.div
       onMouseMove={(e) => mediaAbove640 && mouseX.set(e.pageX)}
       onMouseLeave={() => mediaAbove640 && mouseX.set(Infinity)}
-      className={cn("mx-auto flex h-12 gap-3 sm:gap-4 items-end rounded-2xl bg-gray-50 px-4 sm:px-4 pb-3 shadow", className)}
+      className={cn(
+        "mx-auto flex sm:h-12 gap-1 sm:gap-4 bg-gray-100 max-sm:pl-0.5 sm:items-end rounded-full max-sm:overflow-hidden sm:rounded-2xl sm:bg-gray-50 sm:px-4 sm:pb-3 shadow [&>*>div]:rounded-none",
+        className
+      )}
     >
       {items.map((item, index) => (
         <IconContainer
