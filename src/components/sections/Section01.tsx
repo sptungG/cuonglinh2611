@@ -4,13 +4,13 @@ import Fonts from "@/styles/fonts";
 import { MapPinIcon } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import FadeWrapper from "../animation/Fade";
-import { RainbowButtonLink } from "../button/RainbowButton";
+import { RainbowButton, RainbowButtonLink } from "../button/RainbowButton";
 import NImage from "../next/NextImage";
 import { IMG_BLUR } from "@/common/constant";
 
-type TSection01Props = { userData: Sheet; setModalImage?: (src?: string) => void };
+type TSection01Props = { userData: Sheet; onClickBtn01?: () => void };
 
-const Section01 = ({ userData, setModalImage }: TSection01Props) => {
+const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
   const mapParty =
     userData?.partyName === "NhaGai"
       ? "https://www.google.com/maps/search/?api=1&query=21.009745980494834,105.86708485767026"
@@ -74,14 +74,14 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
             </span>
           </div>
 
-          <RainbowButtonLink
-            href={mapParty}
-            target="_blank"
-            rel="noopener noreferrer"
+          <RainbowButton
             className="text-base uppercase tracking-[2px] text-amber-900 ring-1 ring-amber-300"
+            onClick={() => {
+              onClickBtn01?.();
+            }}
           >
-            Xem vị trí
-          </RainbowButtonLink>
+            THAM GIA NGAY
+          </RainbowButton>
         </div>
 
         <FadeWrapper className="relative h-[480px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
