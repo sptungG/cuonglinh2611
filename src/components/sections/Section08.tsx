@@ -25,7 +25,7 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
 
       <div className="flex max-w-screen-lg items-stretch gap-4 px-4 max-sm:flex-col">
         <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
-          <div className="col-span-2 flex min-h-16 items-center">
+          <div className="col-span-2 flex items-center sm:min-h-16">
             <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-amber-600 leading-[1.1]")}>
               Album chúng mình
             </div>
