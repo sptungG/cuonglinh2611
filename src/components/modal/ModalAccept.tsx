@@ -150,7 +150,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   return (
     <>
-      <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[600px]">
+      <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[600px]" classNameCloseBtn="top-4 right-4">
         <div className="flex items-center gap-4 bg-amber-50 p-4 pr-10 text-amber-500">
           <CalendarHeartIcon className="shrink-0" />
           <div className="-mb-1 flex items-baseline">

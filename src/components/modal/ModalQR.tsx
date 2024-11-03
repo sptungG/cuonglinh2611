@@ -7,7 +7,7 @@ type TModalQRProps = { open: boolean; setOpen: (open: boolean) => void };
 
 const ModalQR = ({ open, setOpen }: TModalQRProps) => {
   return (
-    <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[800px]">
+    <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[800px]" classNameCloseBtn="top-4 right-4">
       <div className="flex items-center justify-center gap-4 bg-amber-50 p-4 pr-10 text-amber-500">
         <GemIcon />
         <h4 className="text-lg font-bold md:text-2xl">Hộp mừng cưới</h4>
