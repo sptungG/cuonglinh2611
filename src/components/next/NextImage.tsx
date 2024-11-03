@@ -40,7 +40,7 @@ const NImage = ({
       onClick={() => {
         if (!canPreview) return;
         if (!groupContext) return;
-        groupContext.onPreview(imageId);
+        groupContext?.onPreview?.(imageId);
       }}
       {...props}
     />

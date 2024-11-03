@@ -4,6 +4,7 @@ import React from "react";
 import NImage from "../next/NextImage";
 import { GradientButtonLink } from "../button/GradientButton";
 import { ImagesIcon } from "lucide-react";
+import { IMG_BLUR } from "@/common/constant";
 
 type TSection08Props = { setModalImage?: (src?: string) => void };
 
@@ -43,6 +44,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             style={{ width: "100%", height: "auto" }}
             canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
             className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
@@ -52,6 +55,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             style={{ width: "100%", height: "auto" }}
             canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
             className="col-span-2 cursor-pointer rounded-xl object-cover"
@@ -62,6 +67,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             style={{ width: "100%", height: "auto" }}
             canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
         </div>
         <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
@@ -74,6 +81,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             style={{ width: "100%", height: "auto" }}
             canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
             className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
@@ -83,6 +92,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             style={{ width: "100%", height: "auto" }}
             canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
             className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
@@ -92,6 +103,8 @@ const Section08 = ({ setModalImage }: TSection08Props) => {
             style={{ width: "100%", height: "auto" }}
             canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-neutral-500")}>
             “ Hãy để tình yêu diễn biến thật tự nhiên, đã là duyên thì cũng chẳng sợ lạc đường. ”

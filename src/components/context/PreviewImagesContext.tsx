@@ -45,8 +45,8 @@ const PreviewImagesProvider = ({ children }: React.PropsWithChildren) => {
     }));
   }, []);
 
-  const handlePreviewFromImage = useCallback<(id: string) => void>(
-    (id) => {
+  const handlePreviewFromImage = useCallback(
+    (id: string) => {
       const foundSrc = images[id]?.src;
 
       if (!foundSrc) return;

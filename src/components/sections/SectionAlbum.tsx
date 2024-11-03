@@ -131,7 +131,7 @@ const SectionAlbum = () => {
 
       <Link
         href="#AlbumChungMinh"
-        className="fixed bottom-2 right-2 flex size-12 items-center justify-center rounded-full bg-white text-amber-600 shadow"
+        className="fixed bottom-2 right-2 hidden size-12 items-center justify-center rounded-full bg-white text-amber-600 shadow sm:flex"
       >
         <ArrowUpIcon className="size-7" />
       </Link>

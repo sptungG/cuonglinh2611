@@ -6,6 +6,7 @@ import { RainbowButton } from "../button/RainbowButton";
 import { PartyPopperIcon } from "lucide-react";
 import NImage from "../next/NextImage";
 import { useMediaQuery } from "react-responsive";
+import { IMG_BLUR } from "@/common/constant";
 
 type TSection07Props = { onClickBtn01?: () => void; setModalImage?: (src?: string) => void };
 
@@ -25,8 +26,8 @@ const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
         </RainbowButton>
       </div>
 
-      <div className="relative min-h-fit w-full overflow-hidden">
-        <div className="flex items-center justify-center py-8">
+      <div className="relative flex min-h-fit w-full justify-center overflow-hidden">
+        <div className="flex items-center overflow-x-auto px-10 py-8">
           {[
             "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487167/cuonglinh2611/albums/f343zkiaynh7mjspuio7.jpg",
             "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/jm3pn3xcrm2n2qyrtwly.jpg",
@@ -59,7 +60,9 @@ const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
                   style={index === 2 ? { width: 320, height: 320 } : { width: 300, height: 300 }}
                   className="shrink-0 cursor-pointer rounded-lg object-cover"
                   loading={index === 2 ? "eager" : "lazy"}
-                  canPreview={mediaAbove640}
+                  canPreview
+                  placeholder="blur"
+                  blurDataURL={IMG_BLUR}
                 />
               </m.div>
             );

@@ -13,7 +13,7 @@ export function useRegisterImage(canPreview: boolean, registerData: ImageElement
 
   useEffect(() => {
     if (canPreview && groupContext) {
-      groupContext.register(id, registerData);
+      groupContext?.register?.(id, registerData);
     }
   }, [canPreview, JSON.stringify(registerData)]);
 

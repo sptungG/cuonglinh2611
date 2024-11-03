@@ -77,26 +77,36 @@ const Page = (props: { data: Sheet }) => {
       <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white max-sm:hidden" classNameContainer="-z-50 opacity-40" />
 
       <Provider>
-        <PreviewImagesProvider>
-          <Section01 userData={userData} />
+        <>
+          <PreviewImagesProvider>
+            <Section01 userData={userData} />
+          </PreviewImagesProvider>
 
           <Section03 userData={userData} />
 
           <Section02 userData={userData} />
 
-          <Section04 />
+          <PreviewImagesProvider>
+            <Section04 />
+          </PreviewImagesProvider>
 
           <Section05 />
 
-          <Section06 />
+          <PreviewImagesProvider>
+            <Section06 />
+          </PreviewImagesProvider>
 
-          <Section07
-            onClickBtn01={() => {
-              setIsOpenSaveDate(true);
-            }}
-          />
+          <PreviewImagesProvider>
+            <Section07
+              onClickBtn01={() => {
+                setIsOpenSaveDate(true);
+              }}
+            />
+          </PreviewImagesProvider>
 
-          <Section08 />
+          <PreviewImagesProvider>
+            <Section08 />
+          </PreviewImagesProvider>
 
           <FloatingDock
             desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
@@ -136,7 +146,7 @@ const Page = (props: { data: Sheet }) => {
           <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
           <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
-        </PreviewImagesProvider>
+        </>
       </Provider>
     </>
   );
