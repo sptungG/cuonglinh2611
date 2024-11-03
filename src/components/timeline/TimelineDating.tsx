@@ -112,7 +112,7 @@ const TimelineDating = (props: { className?: string; setModalImage?: (src?: stri
                     height={0}
                     width={300}
                     className="size-full min-h-full cursor-pointer rounded-lg object-cover sm:rounded-full"
-                    onClick={() => props?.setModalImage?.(item.image)}
+                    canPreview
                   />
                   <NImage
                     src="/images/icon-flowers-3.png"

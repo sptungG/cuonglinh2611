@@ -1,30 +1,65 @@
-import React from "react";
-import { Modal } from "./AnimatedModal";
 import { cn } from "@/common/utils";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import { usePreviewImagesContext } from "../context/PreviewImagesContext";
 import NImage from "../next/NextImage";
+import { Modal } from "./AnimatedModal";
+import { useId } from "react";
+import { IMG_BLUR } from "@/common/constant";
 
-type TModalImageProps = { src?: string; setSrc?: (src?: string) => void };
+type TModalImageProps = { src?: string; onOpenChange?: (src?: string) => void };
 
-const ModalImage = ({ src, setSrc }: TModalImageProps) => {
+const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
+  const uid = useId();
+  const { canPreviewNext, canPreviewPrev, onPreviewNext, onPreviewPrev, currentIndex, images } = usePreviewImagesContext();
+  const mappedImagesKey = Object.keys(images);
+
   return (
     <Modal
       open={!!src}
       setOpen={(open) => {
-        if (!open) setSrc?.(undefined);
+        if (!open) onOpenChange?.(undefined);
       }}
-      className="min-h-fit max-w-[1000px] border-0 max-sm:mt-auto md:max-w-fit"
+      className="h-dvh max-h-[auto] min-h-fit max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14 md:max-w-fit"
+      classNameCloseBtn="bg-gray-100/10 rounded-full top-2 right-2 size-9"
     >
-      <div className="overflow-hidden">
-        {!!src && (
-          <NImage
-            src={src}
-            height={1000}
-            width={1000}
-            alt=""
-            className="inset-0 !h-auto w-auto rounded object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-40px)]"
-            quality={90}
-          />
-        )}
+      <div className="flex h-full flex-col items-center justify-center overflow-hidden sm:bg-gray-100/10">
+        <NImage
+          key={uid + "ModalImage" + src}
+          src={src || ""}
+          height={1000}
+          width={1000}
+          alt=""
+          className="inset-0 !h-auto w-auto object-contain object-top transition duration-200 sm:max-h-[calc(100dvh-40px)]"
+          quality={90}
+          loading="eager"
+          placeholder="blur"
+          blurDataURL={IMG_BLUR}
+        />
+      </div>
+
+      {currentIndex !== undefined && (
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-0">
+          <span className="pb-2 text-lg text-gray-900">{`${currentIndex + 1} / ${mappedImagesKey.length}`}</span>
+        </div>
+      )}
+
+      <div className="absolute bottom-2 left-2 sm:bottom-1/2 sm:translate-y-1/2">
+        <button
+          disabled={!canPreviewPrev}
+          onClick={onPreviewPrev}
+          className="group flex size-11 items-center justify-center rounded-full bg-gray-100/10 text-gray-900 disabled:opacity-60"
+        >
+          <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
+        </button>
+      </div>
+      <div className="absolute bottom-2 right-2 sm:bottom-1/2 sm:translate-y-1/2">
+        <button
+          disabled={!canPreviewNext}
+          onClick={onPreviewNext}
+          className="group flex size-11 items-center justify-center rounded-full bg-gray-100/10 text-gray-900 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          <ArrowRightIcon className={cn("size-6 transition duration-200", canPreviewNext && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
+        </button>
       </div>
     </Modal>
   );

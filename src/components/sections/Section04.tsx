@@ -23,9 +23,7 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
             width={172}
             loading="eager"
             className="max-h-full cursor-pointer rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
-            onClick={() =>
-              props?.setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/dx96rtpoodv1ly7c8xcj.jpg")
-            }
+            canPreview
           />
           <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:right-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <NImage
@@ -47,9 +45,7 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
             height={0}
             width={300}
             className="size-full cursor-pointer rounded-full object-cover sm:min-h-[600px]"
-            onClick={() =>
-              props?.setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/pr8omw0riiihnokxibb7.jpg")
-            }
+            canPreview
           />
           <NImage
             src="/images/icon-flowers-3.png"
@@ -79,9 +75,7 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
             width={172}
             loading="eager"
             className="max-h-full cursor-pointer rounded-xl object-cover max-sm:w-full sm:max-h-[172px] sm:rounded-full"
-            onClick={() =>
-              props?.setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/cv5javq9t38zwfzaheuy.jpg")
-            }
+            canPreview
           />
           <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:left-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <NImage

@@ -3,7 +3,6 @@ import { Sheet } from "@/common/sheets";
 import { AuroraBackground } from "@/components/background/AuroraBackground";
 import PageLoading from "@/components/background/PageLoading";
 import ModalAccept from "@/components/modal/ModalAccept";
-import ModalImage from "@/components/modal/ModalImage";
 import ModalQR from "@/components/modal/ModalQR";
 import SEO from "@/components/next/SEO";
 import { CalendarHeartIcon, GiftIcon, ImagesIcon, MapPinIcon } from "lucide-react";
@@ -12,7 +11,11 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 
-const Provider = dynamic(() => import("@/components/animation/Provider"), {
+const Provider = dynamic(() => import("@/components/context/Provider"), {
+  ssr: false,
+  loading: () => <PageLoading />,
+});
+const PreviewImagesProvider = dynamic(() => import("@/components/context/PreviewImagesContext"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
@@ -54,7 +57,6 @@ const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
-  const [selected, setSelected] = useState<string>();
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
@@ -75,67 +77,66 @@ const Page = (props: { data: Sheet }) => {
       <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white max-sm:hidden" classNameContainer="-z-50 opacity-40" />
 
       <Provider>
-        <Section01 userData={userData} setModalImage={setSelected} />
+        <PreviewImagesProvider>
+          <Section01 userData={userData} />
 
-        <Section03 userData={userData} />
+          <Section03 userData={userData} />
 
-        <Section02 userData={userData} />
+          <Section02 userData={userData} />
 
-        <Section04 setModalImage={setSelected} />
+          <Section04 />
 
-        <Section05 setModalImage={setSelected} />
+          <Section05 />
 
-        <Section06 setModalImage={setSelected} />
+          <Section06 />
 
-        <Section07
-          onClickBtn01={() => {
-            setIsOpenSaveDate(true);
-          }}
-          setModalImage={setSelected}
-        />
+          <Section07
+            onClickBtn01={() => {
+              setIsOpenSaveDate(true);
+            }}
+          />
 
-        <Section08 setModalImage={setSelected} />
+          <Section08 />
 
-        <FloatingDock
-          desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
-          items={[
-            {
-              title: `Xem vị trí ${userData?.partyName === "NhaGai" ? "Nhà Gái" : "Nhà Trai"}`,
-              icon: <MapPinIcon className="size-full" />,
-              href: mapParty,
-              target: "_blank",
-              rel: "noreferrer noopenner",
-            },
-
-            {
-              title: "Save the Date",
-              icon: <CalendarHeartIcon className="size-full" />,
-              onClick: () => {
-                setIsOpenSaveDate(true);
+          <FloatingDock
+            desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
+            items={[
+              {
+                title: `Xem vị trí ${userData?.partyName === "NhaGai" ? "Nhà Gái" : "Nhà Trai"}`,
+                icon: <MapPinIcon className="size-full" />,
+                href: mapParty,
+                target: "_blank",
+                rel: "noreferrer noopenner",
               },
-            },
 
-            {
-              title: "Album chúng mình",
-              icon: <ImagesIcon className="size-full" />,
-              href: "/albums",
-            },
-
-            {
-              title: "Mừng Cưới",
-              icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
-              onClick: () => {
-                setIsOpenQR(true);
+              {
+                title: "Save the Date",
+                icon: <CalendarHeartIcon className="size-full" />,
+                onClick: () => {
+                  setIsOpenSaveDate(true);
+                },
               },
-            },
-          ]}
-        />
 
-        <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
+              {
+                title: "Album chúng mình",
+                icon: <ImagesIcon className="size-full" />,
+                href: "/albums",
+              },
 
-        <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+              {
+                title: "Mừng Cưới",
+                icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
+                onClick: () => {
+                  setIsOpenQR(true);
+                },
+              },
+            ]}
+          />
 
-        <ModalImage src={selected} setSrc={setSelected} />
+          <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
+
+          <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+        </PreviewImagesProvider>
       </Provider>
     </>
   );

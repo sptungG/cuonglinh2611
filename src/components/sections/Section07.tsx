@@ -57,7 +57,7 @@ const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
                   style={index === 2 ? { width: 320, height: 320 } : { width: 300, height: 300 }}
                   className="shrink-0 cursor-pointer rounded-lg object-cover"
                   loading={index === 2 ? "eager" : "lazy"}
-                  onClick={() => setModalImage?.(image)}
+                  canPreview
                 />
               </m.div>
             );

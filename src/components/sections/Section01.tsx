@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import NImage from "../next/NextImage";
-import FadeWrapper from "../animation/Fade";
-import { RainbowButtonLink } from "../button/RainbowButton";
-import { useMediaQuery } from "react-responsive";
+import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { MapPinIcon } from "lucide-react";
-import { Sheet } from "@/common/sheets";
-import ModalImage from "../modal/ModalImage";
+import { useMediaQuery } from "react-responsive";
+import FadeWrapper from "../animation/Fade";
+import { RainbowButtonLink } from "../button/RainbowButton";
+import NImage from "../next/NextImage";
 
 type TSection01Props = { userData: Sheet; setModalImage?: (src?: string) => void };
 
@@ -31,9 +29,7 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
               width={240}
               className="size-full cursor-pointer rounded-full object-cover"
               loading="eager"
-              onClick={() =>
-                setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg")
-              }
+              canPreview
             />
             <NImage
               src="/images/icon-flower-3.png"
@@ -94,7 +90,7 @@ const Section01 = ({ userData, setModalImage }: TSection01Props) => {
             style={{ height: "100%" }}
             className="size-full min-h-full cursor-pointer rounded-md object-cover sm:rounded-full"
             loading="eager"
-            onClick={() => setModalImage?.("https://res.cloudinary.com/dcos6mpjy/image/upload/v1730426454/tuong1_rita2l.jpg")}
+            canPreview
           />
           <NImage
             src="/images/icon-flowers-3.png"

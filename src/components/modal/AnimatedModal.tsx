@@ -9,9 +9,10 @@ interface IModalBodyProps {
   setOpen: (open: boolean) => void;
   children: ReactNode;
   className?: string;
+  classNameCloseBtn?: string;
 }
 
-export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) => {
+export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }: IModalBodyProps) => {
   const uid = useId();
   useEffect(() => {
     if (open) {
@@ -51,7 +52,7 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
               className
             )}
           >
-            <CloseIcon onClick={() => setOpen(false)} />
+            <CloseIcon onClick={() => setOpen(false)} className={cn("absolute right-2 top-2", classNameCloseBtn)} />
             {children}
           </m.div>
         )}
@@ -81,8 +82,8 @@ const Overlay = ({ className }: { className?: string }) => {
 
 const CloseIcon = ({ onClick, className }: { className?: string; onClick?: () => void }) => {
   return (
-    <button onClick={onClick} className={cn("group absolute right-2 top-2 z-10 p-2", className)}>
-      <XIcon className="size-6 text-black transition duration-200 group-hover:rotate-3 group-hover:scale-125 dark:text-white" />
+    <button onClick={onClick} className={cn("group z-10 flex items-center justify-center", className)}>
+      <XIcon className="size-6 text-black transition duration-200 group-hover:rotate-3 group-hover:scale-125" />
     </button>
   );
 };

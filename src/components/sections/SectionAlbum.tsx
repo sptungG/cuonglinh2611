@@ -2,14 +2,13 @@ import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { ArrowUpIcon, HomeIcon, SlashIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useId, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Modal } from "../modal/AnimatedModal";
-import { useRouter } from "next/router";
-import ModalImage from "../modal/ModalImage";
 import NImage from "../next/NextImage";
+import PreviewImagesProvider from "../context/PreviewImagesContext";
+import { IMG_BLUR } from "@/common/constant";
 
 function shuffleArray(array: string[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -74,7 +73,7 @@ const SectionAlbum = () => {
   };
 
   return (
-    <>
+    <PreviewImagesProvider>
       <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
         <button onClick={() => router.back()}>
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
@@ -120,6 +119,9 @@ const SectionAlbum = () => {
                   alt=""
                   className="inset-0 !h-auto w-auto rounded object-cover object-top transition duration-200"
                   quality={25}
+                  canPreview
+                  placeholder="blur"
+                  blurDataURL={IMG_BLUR}
                 />
               </button>
             );
@@ -133,9 +135,7 @@ const SectionAlbum = () => {
       >
         <ArrowUpIcon className="size-7" />
       </Link>
-
-      <ModalImage src={selected} setSrc={setSelected} />
-    </>
+    </PreviewImagesProvider>
   );
 };
 
