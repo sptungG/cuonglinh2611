@@ -20,7 +20,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
         if (!open) onOpenChange?.(undefined);
       }}
       className="h-dvh max-h-[auto] min-h-fit max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14 md:max-w-fit"
-      classNameCloseBtn="sm:bg-gray-100/10 rounded-full top-2 right-2 size-9"
+      classNameCloseBtn="sm:bg-gray-100/10 rounded-full top-1 right-1 sm:top-2 sm:right-2 size-9"
     >
       <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-gray-100/50 pb-[48px] pt-[44px] sm:bg-gray-100/10 sm:py-[60px]">
         {!!src && (
@@ -39,12 +39,12 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
       </div>
 
       {currentIndex !== undefined && (
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-2">
+        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 sm:bottom-2">
           <span className="text-lg text-gray-900">{`${currentIndex + 1} / ${mappedImagesKey.length}`}</span>
         </div>
       )}
 
-      <div className="absolute bottom-2 left-2 sm:bottom-1/2 sm:left-0 sm:translate-y-1/2">
+      <div className="absolute bottom-1 left-1 sm:bottom-1/2 sm:left-0 sm:translate-y-1/2">
         <button
           disabled={!canPreviewPrev}
           onClick={onPreviewPrev}
@@ -53,7 +53,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
           <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
         </button>
       </div>
-      <div className="absolute bottom-2 right-2 sm:bottom-1/2 sm:right-0 sm:translate-y-1/2">
+      <div className="absolute bottom-1 right-1 sm:bottom-1/2 sm:right-0 sm:translate-y-1/2">
         <button
           disabled={!canPreviewNext}
           onClick={onPreviewNext}
