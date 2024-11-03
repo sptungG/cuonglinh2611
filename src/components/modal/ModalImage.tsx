@@ -12,6 +12,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
   const uid = useId();
   const { canPreviewNext, canPreviewPrev, onPreviewNext, onPreviewPrev, currentIndex, images } = usePreviewImagesContext();
   const mappedImagesKey = Object.keys(images);
+  const imagesLength = mappedImagesKey.length;
 
   return (
     <Modal
@@ -38,30 +39,36 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
         )}
       </div>
 
-      {currentIndex !== undefined && (
-        <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 sm:bottom-2">
-          <span className="text-lg text-gray-900">{`${currentIndex + 1} / ${mappedImagesKey.length}`}</span>
-        </div>
-      )}
+      {imagesLength > 1 && (
+        <>
+          {currentIndex !== undefined && (
+            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 sm:bottom-2">
+              <span className="text-lg text-gray-900">{`${currentIndex + 1} / ${imagesLength}`}</span>
+            </div>
+          )}
 
-      <div className="absolute bottom-1 left-1 sm:bottom-1/2 sm:left-0 sm:translate-y-1/2">
-        <button
-          disabled={!canPreviewPrev}
-          onClick={onPreviewPrev}
-          className="group flex size-10 items-center justify-center rounded-full text-gray-900 disabled:text-gray-500 disabled:opacity-60 sm:size-11 sm:bg-gray-100/10"
-        >
-          <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
-        </button>
-      </div>
-      <div className="absolute bottom-1 right-1 sm:bottom-1/2 sm:right-0 sm:translate-y-1/2">
-        <button
-          disabled={!canPreviewNext}
-          onClick={onPreviewNext}
-          className="group flex size-10 items-center justify-center rounded-full text-gray-900 disabled:cursor-not-allowed disabled:text-gray-500 disabled:opacity-60 sm:size-11 sm:bg-gray-100/10"
-        >
-          <ArrowRightIcon className={cn("size-6 transition duration-200", canPreviewNext && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
-        </button>
-      </div>
+          <div className="absolute bottom-1 left-1 sm:bottom-1/2 sm:left-0 sm:translate-y-1/2">
+            <button
+              disabled={!canPreviewPrev}
+              onClick={onPreviewPrev}
+              className="group flex size-10 items-center justify-center rounded-full text-gray-900 disabled:text-gray-500 disabled:opacity-60 sm:size-11 sm:bg-gray-100/10"
+            >
+              <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
+            </button>
+          </div>
+          <div className="absolute bottom-1 right-1 sm:bottom-1/2 sm:right-0 sm:translate-y-1/2">
+            <button
+              disabled={!canPreviewNext}
+              onClick={onPreviewNext}
+              className="group flex size-10 items-center justify-center rounded-full text-gray-900 disabled:cursor-not-allowed disabled:text-gray-500 disabled:opacity-60 sm:size-11 sm:bg-gray-100/10"
+            >
+              <ArrowRightIcon
+                className={cn("size-6 transition duration-200", canPreviewNext && "sm:group-hover:rotate-3 sm:group-hover:scale-125")}
+              />
+            </button>
+          </div>
+        </>
+      )}
     </Modal>
   );
 };
