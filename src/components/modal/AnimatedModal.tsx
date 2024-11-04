@@ -41,7 +41,7 @@ export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }:
           opacity: 0,
           backdropFilter: "blur(0px)",
         }}
-        className="fixed inset-0 z-50 flex size-full sm:items-center sm:justify-center"
+        className="fixed inset-0 z-[100] flex size-full sm:items-center sm:justify-center"
         style={{ display: open ? "flex" : "none" }}
       >
         <Overlay />
@@ -49,7 +49,7 @@ export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }:
         <m.div
           key={uid + "Modal" + open}
           className={cn(
-            "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative flex flex-col flex-1 overflow-hidden !z-50",
+            "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative flex flex-col flex-1 overflow-hidden !z-[100]",
             className
           )}
         >
@@ -75,7 +75,7 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={cn("fixed inset-0 z-50 size-full bg-black bg-opacity-50", className)}
+      className={cn("fixed inset-0 z-[100] size-full bg-black bg-opacity-50", className)}
     ></m.div>
   );
 };
