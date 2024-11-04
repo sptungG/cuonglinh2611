@@ -54,8 +54,6 @@ const SectionAlbum = () => {
   const router = useRouter();
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
 
-  const [selected, setSelected] = useState<string>();
-
   const listRef = React.useRef<HTMLDivElement | null>(null);
   const virtualizer = useWindowVirtualizer({
     count: ALBUMS.length,
@@ -66,11 +64,8 @@ const SectionAlbum = () => {
     scrollMargin: 0,
     paddingEnd: 80,
     scrollPaddingEnd: 20,
+    enabled: true,
   });
-
-  const handleClick = (item: string) => {
-    setSelected(item);
-  };
 
   return (
     <PreviewImagesProvider>
@@ -110,7 +105,6 @@ const SectionAlbum = () => {
                         transform: `translateY(${item.start}px)`,
                       }
                 }
-                onClick={() => handleClick(src)}
               >
                 <NImage
                   src={src}

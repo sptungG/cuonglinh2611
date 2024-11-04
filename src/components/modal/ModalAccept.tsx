@@ -159,11 +159,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           </div>
         </div>
 
-        <div className="px-4 pb-4 pt-3 text-base uppercase leading-[1.2] text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+        <div className="p-2 text-sm uppercase leading-[1.2] text-amber-500 sm:px-4 sm:pb-4 sm:pt-3 sm:text-base ">
+          Hãy dành chút thời gian để nói cho chúng mình biết nhé!
+        </div>
 
         <form
           onSubmit={handleSubmitForm}
-          className="relative flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-4 pt-0 "
+          className="relative flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-2 pt-0 sm:px-4 "
           style={{ scrollbarWidth: "thin" }}
         >
           {isLoading && (
@@ -254,7 +256,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             name="accepted"
             control={methodForm.control}
             render={({ field }) => (
-              <div className="mb-4 flex flex-nowrap justify-between gap-4 [&>*]:w-[33%]">
+              <div className="mb-4 flex flex-nowrap justify-between gap-2 sm:gap-4 [&>*]:w-[33%]">
                 {acceptItems.map((item, index) => (
                   <FormRadioBtn
                     key={uid + index + item.value}
@@ -290,7 +292,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             name="partyName"
             control={methodForm.control}
             render={({ field }) => (
-              <div className="mb-8 flex flex-nowrap justify-between gap-4 [&>*]:w-1/2">
+              <div className="mb-8 flex flex-nowrap justify-between gap-2 sm:gap-4 [&>*]:w-1/2">
                 {[
                   { value: "NhaTrai", label: "Nhà Trai", icon1: "💍", icon2: "💍", className: "border-slate-300" },
                   { value: "NhaGai", label: "Nhà Gái", icon1: "💐", className: "border-rose-300" },
@@ -333,7 +335,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             )}
           />
 
-          <div className="sticky bottom-0 mt-auto flex flex-col bg-white pb-4 pt-0.5">
+          <div className="sticky bottom-0 mt-auto flex flex-col bg-white pb-2 pt-0.5 sm:pb-4">
             {!!userData?.accepted && !!userData?.updatedAt && (
               <div className="mb-1 text-sm">
                 <span className="font-[600] text-amber-600">{`"${userData?.accepted}"`}</span>
