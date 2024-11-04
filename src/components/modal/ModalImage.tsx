@@ -23,7 +23,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
       className="h-dvh max-h-[auto] min-h-fit max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14 md:max-w-fit"
       classNameCloseBtn="sm:bg-gray-100/10 rounded-full top-1 right-1 sm:top-2 sm:right-2 size-9"
     >
-      <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-white pb-[48px] pt-[44px] sm:bg-gray-100/10 sm:py-[60px]">
+      <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-white/90 pb-[48px] pt-[44px] sm:bg-gray-100/10 sm:py-[60px]">
         {!!src && (
           <NImage
             src={src}
