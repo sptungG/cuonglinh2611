@@ -41,7 +41,7 @@ export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }:
           opacity: 0,
           backdropFilter: "blur(0px)",
         }}
-        className="fixed inset-0 z-40 flex size-full sm:items-center sm:justify-center"
+        className="fixed inset-0 z-50 flex size-full sm:items-center sm:justify-center"
         style={{ display: open ? "flex" : "none" }}
       >
         <Overlay />
