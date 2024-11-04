@@ -69,8 +69,13 @@ const SectionAlbum = () => {
 
   return (
     <PreviewImagesProvider>
-      <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
-        <button onClick={() => router.back()}>
+      <div className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
+        <button
+          onClick={() => {
+            window.scrollTo(0, 0);
+            router.back();
+          }}
+        >
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
         </button>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
@@ -123,12 +128,12 @@ const SectionAlbum = () => {
         </div>
       </div>
 
-      <Link
-        href="#AlbumChungMinh"
-        className="fixed bottom-2 right-2 hidden size-12 items-center justify-center rounded-full bg-white text-amber-600 shadow sm:flex"
+      <button
+        onClick={() => window.scrollTo(0, 0)}
+        className="fixed bottom-2 right-2 flex size-12 items-center justify-center rounded-full bg-white text-amber-600 shadow"
       >
         <ArrowUpIcon className="size-7" />
-      </Link>
+      </button>
     </PreviewImagesProvider>
   );
 };
