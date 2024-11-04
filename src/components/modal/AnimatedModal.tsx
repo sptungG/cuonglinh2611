@@ -22,7 +22,9 @@ export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }:
     }
   }, [open]);
 
-  const ref = useClickOutside(() => setOpen(false));
+  // const ref = useClickOutside(() => {
+  //   setOpen(false);
+  // });
 
   return (
     <AnimatePresence>
@@ -39,23 +41,21 @@ export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }:
           opacity: 0,
           backdropFilter: "blur(0px)",
         }}
-        className="fixed inset-0 z-[100] flex size-full sm:items-center sm:justify-center"
+        className="fixed inset-0 z-40 flex size-full sm:items-center sm:justify-center"
         style={{ display: open ? "flex" : "none" }}
       >
         <Overlay />
 
-        {open && (
-          <m.div
-            ref={ref}
-            className={cn(
-              "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative z-[100] flex flex-col flex-1 overflow-hidden",
-              className
-            )}
-          >
-            <CloseIcon onClick={() => setOpen(false)} className={cn("absolute right-2 top-2", classNameCloseBtn)} />
-            {children}
-          </m.div>
-        )}
+        <m.div
+          key={uid + "Modal" + open}
+          className={cn(
+            "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative flex flex-col flex-1 overflow-hidden !z-50",
+            className
+          )}
+        >
+          <CloseIcon onClick={() => setOpen(false)} className={cn("absolute right-2 top-2", classNameCloseBtn)} />
+          {children}
+        </m.div>
       </m.div>
     </AnimatePresence>
   );
@@ -75,7 +75,7 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={cn("fixed inset-0 z-[100] size-full bg-black bg-opacity-50", className)}
+      className={cn("fixed inset-0 z-50 size-full bg-black bg-opacity-50", className)}
     ></m.div>
   );
 };

@@ -115,7 +115,7 @@ const Page = (props: { data: Sheet }) => {
           </PreviewImagesProvider>
 
           <FloatingDock
-            desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
+            desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-40"
             items={[
               {
                 title: `Xem vị trí ${userData?.partyName === "NhaGai" ? "Nhà Gái" : "Nhà Trai"}`,
