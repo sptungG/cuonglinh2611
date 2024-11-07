@@ -1,12 +1,12 @@
+import { IMG_BLUR } from "@/common/constant";
 import { Sheet } from "@/common/sheets";
 import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { MapPinIcon } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import FadeWrapper from "../animation/Fade";
-import { RainbowButton, RainbowButtonLink } from "../button/RainbowButton";
+import { RainbowButton } from "../button/RainbowButton";
 import NImage from "../next/NextImage";
-import { IMG_BLUR } from "@/common/constant";
 
 type TSection01Props = { userData: Sheet; onClickBtn01?: () => void };
 

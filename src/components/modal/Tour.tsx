@@ -1,17 +1,22 @@
 import { cn } from "@/common/utils";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 import Fonts from "@/styles/fonts";
 import { XIcon } from "lucide-react";
+import { useEffect, useId } from "react";
 import Joyride, { CallBackProps, STATUS, TooltipRenderProps } from "react-joyride";
 
 type TTourProps = { run?: boolean; onStartChange?: (run: boolean) => void };
 
 const Tour = ({ run, onStartChange }: TTourProps) => {
+  const [initialRun, setInitialRun] = useLocalStorage<boolean>("run", true);
+
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { status, type } = data;
     const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED];
 
     if (finishedStatuses.includes(status)) {
       onStartChange?.(false);
+      setInitialRun(false);
     }
   };
 
@@ -19,7 +24,7 @@ const Tour = ({ run, onStartChange }: TTourProps) => {
     <Joyride
       callback={handleJoyrideCallback}
       continuous
-      run={run}
+      run={initialRun || run}
       scrollToFirstStep={false}
       showProgress
       showSkipButton
@@ -59,7 +64,7 @@ const Tour = ({ run, onStartChange }: TTourProps) => {
         },
         {
           title: "Hộp Mừng cưới",
-          content: "Nếu chúng mình tổ chức sự kiện ở quá xa",
+          content: "Chúc mừng Cô dâu và Chú rể  🧧🧧",
           target: "#FloatingDock3",
           placement: "top",
           disableScrolling: true,
