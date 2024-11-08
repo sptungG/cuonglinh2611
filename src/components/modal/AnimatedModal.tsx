@@ -9,9 +9,10 @@ interface IModalBodyProps {
   setOpen: (open: boolean) => void;
   children: ReactNode;
   className?: string;
+  classNameCloseBtn?: string;
 }
 
-export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) => {
+export const Modal = ({ open, children, className, classNameCloseBtn, setOpen }: IModalBodyProps) => {
   const uid = useId();
   useEffect(() => {
     if (open) {
@@ -21,7 +22,9 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
     }
   }, [open]);
 
-  const ref = useClickOutside(() => setOpen(false));
+  // const ref = useClickOutside(() => {
+  //   setOpen(false);
+  // });
 
   return (
     <AnimatePresence>
@@ -38,23 +41,21 @@ export const Modal = ({ open, children, className, setOpen }: IModalBodyProps) =
           opacity: 0,
           backdropFilter: "blur(0px)",
         }}
-        className="fixed inset-0 z-50 flex size-full sm:items-center sm:justify-center"
+        className="fixed inset-0 z-[100] flex size-full sm:items-center sm:justify-center"
         style={{ display: open ? "flex" : "none" }}
       >
         <Overlay />
 
-        {open && (
-          <m.div
-            ref={ref}
-            className={cn(
-              "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
-              className
-            )}
-          >
-            <CloseIcon onClick={() => setOpen(false)} />
-            {children}
-          </m.div>
-        )}
+        <m.div
+          key={uid + "Modal" + open}
+          className={cn(
+            "min-h-[50%] max-h-[calc(100dvh-40px)] md:max-w-[1000px] bg-white  border border-transparent md:rounded-2xl relative flex flex-col flex-1 overflow-hidden !z-[100]",
+            className
+          )}
+        >
+          <CloseIcon onClick={() => setOpen(false)} className={cn("absolute right-2 top-2", classNameCloseBtn)} />
+          {children}
+        </m.div>
       </m.div>
     </AnimatePresence>
   );
@@ -74,15 +75,15 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={cn("fixed inset-0 z-50 size-full bg-black bg-opacity-50", className)}
+      className={cn("fixed inset-0 z-[100] size-full bg-black bg-opacity-50", className)}
     ></m.div>
   );
 };
 
 const CloseIcon = ({ onClick, className }: { className?: string; onClick?: () => void }) => {
   return (
-    <button onClick={onClick} className={cn("group absolute right-2 top-2 z-10 p-2", className)}>
-      <XIcon className="size-6 text-black transition duration-200 group-hover:rotate-3 group-hover:scale-125 dark:text-white" />
+    <button onClick={onClick} className={cn("group z-10 flex items-center justify-center", className)}>
+      <XIcon className="size-6 text-black transition duration-200 group-hover:rotate-3 group-hover:scale-125" />
     </button>
   );
 };

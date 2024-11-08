@@ -4,10 +4,20 @@ import React from "react";
 import NImage from "../next/NextImage";
 import { GradientButtonLink } from "../button/GradientButton";
 import { ImagesIcon } from "lucide-react";
+import { IMG_BLUR } from "@/common/constant";
 
-type TSection08Props = { children?: React.ReactNode };
+type TSection08Props = { setModalImage?: (src?: string) => void };
 
-const Section08 = ({ children }: TSection08Props) => {
+const IMAGES = [
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487171/cuonglinh2611/albums/jqobblxufiurneld84be.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487167/cuonglinh2611/albums/f343zkiaynh7mjspuio7.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487152/cuonglinh2611/albums/ypw8ls6wyx0jo2ezu141.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487174/cuonglinh2611/albums/xr89qr0buoarwut8lhog.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487172/cuonglinh2611/albums/fyhxoiixev8hlkmk1trc.jpg",
+];
+
+const Section08 = ({ setModalImage }: TSection08Props) => {
   return (
     <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden pb-28">
       <div className="text-center text-xl uppercase text-amber-500">Kỉ niệm cưới</div>
@@ -15,68 +25,88 @@ const Section08 = ({ children }: TSection08Props) => {
 
       <div className="flex max-w-screen-lg items-stretch gap-4 px-4 max-sm:flex-col">
         <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
-          <div className="col-span-2 flex items-center">
-            <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-amber-600")}>Album chúng mình</div>
+          <div className="col-span-2 flex items-center sm:min-h-16">
+            <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-amber-600 leading-[1.1]")}>
+              Album chúng mình
+            </div>
 
             <GradientButtonLink
               href="/albums"
-              className="ml-auto rounded-full py-1.5 pl-3 pr-4 font-[600]"
+              className="ml-auto whitespace-nowrap rounded-full py-1.5 pl-3 pr-4 font-[600]"
               icon={<ImagesIcon className="mr-2 text-[#ffaa40]" />}
             >
               Xem tất cả
             </GradientButtonLink>
           </div>
           <NImage
-            className="rounded-xl object-cover"
-            src="/assets/pexels-san-wedding-5544662.jpg"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
+            src={IMAGES[0]}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
+            canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
-            className="rounded-xl object-cover"
-            src="/assets/pexels-trung-nguyen-9517421.jpg"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
+            src={IMAGES[1]}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
+            canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
-            className="col-span-2 rounded-xl object-cover"
-            src="/assets/pexels-san-wedding-5544650.jpg"
+            className="col-span-2 cursor-pointer rounded-xl object-cover"
+            src={IMAGES[2]}
             width={300}
             loading="eager"
             height={0}
             style={{ width: "100%", height: "auto" }}
+            canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
         </div>
         <div className="grid flex-1 grid-cols-2 items-stretch gap-4">
           <NImage
-            className="col-span-2 rounded-xl object-cover max-sm:order-3"
-            src="/assets/pexels-san-wedding-5544650.jpg"
+            className="col-span-2 cursor-pointer rounded-xl object-cover max-sm:order-3"
+            src={IMAGES[3]}
             width={300}
             loading="eager"
             height={0}
             style={{ width: "100%", height: "auto" }}
+            canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
-            className="rounded-xl object-cover"
-            src="/assets/pexels-san-wedding-5544662.jpg"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
+            src={IMAGES[4]}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
+            canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <NImage
-            className="rounded-xl object-cover"
-            src="/assets/pexels-trung-nguyen-9517421.jpg"
+            className="max-h-[160px] cursor-pointer rounded-xl object-cover max-sm:min-h-[160px] sm:h-auto"
+            src={IMAGES[5]}
             width={300}
             height={0}
             style={{ width: "100%", height: "auto" }}
+            canPreview
             alt=""
+            placeholder="blur"
+            blurDataURL={IMG_BLUR}
           />
           <div className={cn(Fonts.DancingScript.className, "text-3xl text-left font-[600] col-span-2 text-neutral-500")}>
             “ Hãy để tình yêu diễn biến thật tự nhiên, đã là duyên thì cũng chẳng sợ lạc đường. ”

@@ -5,9 +5,9 @@ import { cn } from "@/common/utils";
 import TimelineDating from "../timeline/TimelineDating";
 import NImage from "../next/NextImage";
 
-type TSection06Props = { children?: React.ReactNode };
+type TSection06Props = { setModalImage?: (src?: string) => void };
 
-const Section06 = ({ children }: TSection06Props) => {
+const Section06 = ({ setModalImage }: TSection06Props) => {
   return (
     <section className="relative flex min-h-dvh flex-col items-center justify-center">
       <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500 max-sm:w-[90dvw] max-sm:overflow-hidden">
@@ -20,7 +20,7 @@ const Section06 = ({ children }: TSection06Props) => {
         Đã bắt đầu như thế nào
       </FadeWrapper>
 
-      <TimelineDating />
+      <TimelineDating setModalImage={setModalImage} />
 
       <NImage
         src="/images/icon-flowers-1.png"

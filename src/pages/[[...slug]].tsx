@@ -1,5 +1,6 @@
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
+import { AuroraBackground } from "@/components/background/AuroraBackground";
 import PageLoading from "@/components/background/PageLoading";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
@@ -10,7 +11,11 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
 
-const Provider = dynamic(() => import("@/components/animation/Provider"), {
+const Provider = dynamic(() => import("@/components/context/Provider"), {
+  ssr: false,
+  loading: () => <PageLoading />,
+});
+const PreviewImagesProvider = dynamic(() => import("@/components/context/PreviewImagesContext"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
@@ -46,6 +51,10 @@ const Section08 = dynamic(() => import("@/components/sections/Section08"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
+const Tour = dynamic(() => import("@/components/modal/Tour"), {
+  ssr: false,
+  loading: () => <PageLoading />,
+});
 const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false, loading: () => <div>Loading...</div> });
 
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -55,6 +64,8 @@ const Page = (props: { data: Sheet }) => {
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
+
+  const [runTour, setRunTour] = useState(false);
 
   const userData = getUserRes?.data || props.data;
   const mapParty =
@@ -69,65 +80,83 @@ const Page = (props: { data: Sheet }) => {
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
 
+      <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white max-sm:hidden" classNameContainer="-z-50 opacity-40" />
+
       <Provider>
-        <Section01 userData={userData} />
+        <>
+          <PreviewImagesProvider>
+            <Section01 userData={userData} onClickBtn01={() => setRunTour(true)} />
+          </PreviewImagesProvider>
 
-        <Section03 userData={userData} />
+          <Section03 userData={userData} />
 
-        <Section02 userData={userData} />
+          <Section02 userData={userData} />
 
-        <Section04 />
+          <PreviewImagesProvider>
+            <Section04 />
+          </PreviewImagesProvider>
 
-        <Section05 />
+          <Section05 />
 
-        <Section06 />
+          <PreviewImagesProvider>
+            <Section06 />
+          </PreviewImagesProvider>
 
-        <Section07
-          onClickBtn01={() => {
-            setIsOpenSaveDate(true);
-          }}
-        />
-
-        <Section08 />
-
-        <FloatingDock
-          desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-50"
-          items={[
-            {
-              title: `Xem vị trí ${userData?.partyName === "NhaGai" ? "Nhà Gái" : "Nhà Trai"}`,
-              icon: <MapPinIcon className="size-full" />,
-              href: mapParty,
-              target: "_blank",
-              rel: "noreferrer noopenner",
-            },
-
-            {
-              title: "Save the Date",
-              icon: <CalendarHeartIcon className="size-full" />,
-              onClick: () => {
+          <PreviewImagesProvider>
+            <Section07
+              onClickBtn01={() => {
                 setIsOpenSaveDate(true);
+              }}
+            />
+          </PreviewImagesProvider>
+
+          <PreviewImagesProvider>
+            <Section08 />
+          </PreviewImagesProvider>
+
+          <FloatingDock
+            desktopClassName="fixed bottom-4 left-1/2 -translate-x-1/2 z-40"
+            items={[
+              {
+                title: `Xem vị trí ${userData?.partyName === "NhaGai" ? "Nhà Gái" : "Nhà Trai"}`,
+                icon: <MapPinIcon className="size-full" />,
+                href: mapParty,
+                target: "_blank",
+                rel: "noreferrer noopenner",
               },
-            },
 
-            {
-              title: "Album chúng mình",
-              icon: <ImagesIcon className="size-full" />,
-              href: "/albums",
-            },
-
-            {
-              title: "Mừng Cưới",
-              icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
-              onClick: () => {
-                setIsOpenQR(true);
+              {
+                title: "Save the Date",
+                icon: <CalendarHeartIcon className="size-full max-sm:-mt-0.5" />,
+                onClick: () => {
+                  setIsOpenSaveDate(true);
+                },
               },
-            },
-          ]}
-        />
 
-        <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
+              {
+                title: "Album chúng mình",
+                icon: <ImagesIcon className="size-full" />,
+                href: "/albums",
+              },
 
-        <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+              {
+                title: "Mừng Cưới",
+                icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
+                onClick: () => {
+                  setIsOpenQR(true);
+                },
+              },
+            ]}
+          />
+
+          <Tour run={runTour} onStartChange={setRunTour} />
+
+          <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
+
+          <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
+
+          <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
+        </>
       </Provider>
     </>
   );

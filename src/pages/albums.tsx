@@ -4,7 +4,7 @@ import SEO from "@/components/next/SEO";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const Provider = dynamic(() => import("@/components/animation/Provider"), {
+const Provider = dynamic(() => import("@/components/context/Provider"), {
   ssr: false,
   loading: () => <PageLoading />,
 });

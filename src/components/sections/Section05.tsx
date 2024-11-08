@@ -6,9 +6,9 @@ import TimerCountDown from "../card/TimerCountDown";
 import NImage from "../next/NextImage";
 import Calendar from "../card/Calendar";
 
-type TSection05Props = { children?: React.ReactNode };
+type TSection05Props = { setModalImage?: (src?: string) => void };
 
-const Section05 = ({ children }: TSection05Props) => {
+const Section05 = ({ setModalImage }: TSection05Props) => {
   return (
     <section className="relative -mt-10 flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden px-4 pb-20 sm:max-h-[1400px] sm:px-6">
       <FadeWrapper direction="left" className="text-center text-xl uppercase text-amber-500">
@@ -21,7 +21,7 @@ const Section05 = ({ children }: TSection05Props) => {
         Cùng chúng mình đếm ngược nhé!
       </FadeWrapper>
 
-      <Calendar initialRange={{ startDate: new Date(), endDate: new Date("2024-11-26T00:00:01") }} />
+      <Calendar initialRange={{ startDate: new Date("2024-10-01T00:00:01"), endDate: new Date("2024-11-26T00:00:01") }} />
 
       <TimerCountDown targetDate={new Date("2024-11-26T00:00:01")} />
 

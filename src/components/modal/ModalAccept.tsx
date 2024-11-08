@@ -150,7 +150,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   return (
     <>
-      <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[600px]">
+      <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[600px]" classNameCloseBtn="top-4 right-4">
         <div className="flex items-center gap-4 bg-amber-50 p-4 pr-10 text-amber-500">
           <CalendarHeartIcon className="shrink-0" />
           <div className="-mb-1 flex items-baseline">
@@ -159,11 +159,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           </div>
         </div>
 
-        <div className="px-4 pb-4 pt-3 text-base uppercase leading-[1.2] text-amber-500">Hãy dành chút thời gian để nói cho chúng mình biết nhé!</div>
+        <div className="p-2 text-sm uppercase leading-[1.2] text-amber-500 sm:px-4 sm:pb-4 sm:pt-3 sm:text-base ">
+          Hãy dành chút thời gian để nói cho chúng mình biết nhé!
+        </div>
 
         <form
           onSubmit={handleSubmitForm}
-          className="relative flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-4 pt-0 "
+          className="relative flex min-h-0 flex-[1_1_auto] flex-col overflow-y-auto px-2 pt-0 sm:px-4 "
           style={{ scrollbarWidth: "thin" }}
         >
           {isLoading && (
@@ -215,36 +217,36 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               <>
                 <div className="mb-1 flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
-                  <span className="ml-1 font-[600] underline">{"17 giờ 00"}</span>
+                  <span className="ml-1 font-[600] ">{"17 giờ 00"}</span>
                 </div>
-                <div className="text-base underline">Thứ Bảy, ngày 23 tháng 11 năm 2024</div>
+                <div className="text-base ">Thứ Bảy, ngày 23 tháng 11 năm 2024</div>
                 <div className="mb-2 text-base italic">{`(Tức ngày 23 tháng 10 năm 2024 Giáp Thìn)`}</div>
 
-                <div className="text-base">Tại gia trung tâm tiệc cưới:</div>
-                <div className="underline">Trống Đồng Place Lãng Yên, Hà Nội</div>
+                <div className="text-base opacity-60">Tại gia trung tâm tiệc cưới:</div>
+                <div className="">Trống Đồng Place Lãng Yên, Hà Nội</div>
               </>
             ) : (
               <>
                 <div className="mb-1 flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
-                  <span className="ml-1 font-[600] underline">
+                  <span className="ml-1 font-[600] ">
                     {userData?.invitedTime ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}` : "09 giờ 00"}
                   </span>
                 </div>
                 {userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu" ? (
                   <>
-                    <div className="text-base underline">Thứ Hai, ngày 25 tháng 11 năm 2024</div>
+                    <div className="text-base ">Thứ Hai, ngày 25 tháng 11 năm 2024</div>
                     <div className="mb-2 text-base italic">{`(Tức ngày 25 tháng 10 năm 2024 Giáp Thìn)`}</div>
                   </>
                 ) : (
                   <>
-                    <div className="text-base underline">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
+                    <div className="text-base ">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
                     <div className="mb-2 text-base italic">{`(Tức ngày 26 tháng 10 năm 2024 Giáp Thìn)`}</div>
                   </>
                 )}
 
-                <div className="text-base">Tại gia đình Nhà Trai:</div>
-                <div className="underline">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
+                <div className="text-base opacity-60">Tại gia đình Nhà Trai:</div>
+                <div className="">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
               </>
             )}
           </div>
@@ -254,7 +256,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             name="accepted"
             control={methodForm.control}
             render={({ field }) => (
-              <div className="mb-4 flex flex-nowrap justify-between gap-4 [&>*]:w-[33%]">
+              <div className="mb-4 flex flex-nowrap justify-between gap-2 sm:gap-4 [&>*]:w-[33%]">
                 {acceptItems.map((item, index) => (
                   <FormRadioBtn
                     key={uid + index + item.value}
@@ -290,7 +292,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             name="partyName"
             control={methodForm.control}
             render={({ field }) => (
-              <div className="mb-8 flex flex-nowrap justify-between gap-4 [&>*]:w-1/2">
+              <div className="mb-8 flex flex-nowrap justify-between gap-2 sm:gap-4 [&>*]:w-1/2">
                 {[
                   { value: "NhaTrai", label: "Nhà Trai", icon1: "💍", icon2: "💍", className: "border-slate-300" },
                   { value: "NhaGai", label: "Nhà Gái", icon1: "💐", className: "border-rose-300" },
@@ -333,7 +335,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             )}
           />
 
-          <div className="sticky bottom-0 mt-auto flex flex-col bg-white pb-4 pt-0.5">
+          <div className="sticky bottom-0 mt-auto flex flex-col bg-white pb-2 pt-0.5 sm:pb-4">
             {!!userData?.accepted && !!userData?.updatedAt && (
               <div className="mb-1 text-sm">
                 <span className="font-[600] text-amber-600">{`"${userData?.accepted}"`}</span>

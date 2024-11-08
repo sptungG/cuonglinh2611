@@ -4,12 +4,13 @@ import React, { ReactNode } from "react";
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
   children?: ReactNode;
   showRadialGradient?: boolean;
+  classNameContainer?: string;
 }
 
-export const AuroraBackground = ({ className, showRadialGradient = true, ...props }: AuroraBackgroundProps) => {
+export const AuroraBackground = ({ className, showRadialGradient = true, classNameContainer, ...props }: AuroraBackgroundProps) => {
   return (
-    <div className={cn("relative flex flex-col  h-[100vh] items-center justify-center bg-zinc-50 transition-bg", className)} {...props}>
-      <div className="absolute inset-0 overflow-hidden">
+    <div className={cn("relative flex flex-col h-[100vh] items-center justify-center bg-white transition-bg", className)} {...props}>
+      <div className={cn("absolute inset-0 overflow-hidden", classNameContainer)}>
         <div
           //   I'm sorry but this is what peak developer performance looks like // trigger warning
           className={cn(

@@ -2,12 +2,13 @@ import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { ArrowUpIcon, HomeIcon, SlashIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useId, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Modal } from "../modal/AnimatedModal";
-import { useRouter } from "next/router";
+import NImage from "../next/NextImage";
+import PreviewImagesProvider from "../context/PreviewImagesContext";
+import { IMG_BLUR } from "@/common/constant";
 
 function shuffleArray(array: string[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -17,36 +18,34 @@ function shuffleArray(array: string[]) {
   return array;
 }
 const ALBUMS_LIST = [
-  "/album/pexels-tran-long-13114541.jpg",
-  "/album/pexels-tuan-anh-nguyen-1806361.jpg",
-  "/album/pexels-nguyen-xuan-trung-17586999.jpg",
-  "/album/pexels-san-wedding-5544662.jpg",
-  "/album/pexels-san-wedding-5544650.jpg",
-  "/album/pexels-tran-long-13114541.jpg",
-  "/album/pexels-tuan-anh-nguyen-1806361.jpg",
-  "/album/pexels-nguyen-xuan-trung-17586999.jpg",
-  "/album/pexels-san-wedding-5544662.jpg",
-  "/album/pexels-san-wedding-5544650.jpg",
-  "/album/pexels-tran-long-13114541.jpg",
-  "/album/pexels-tuan-anh-nguyen-1806361.jpg",
-  "/album/pexels-nguyen-xuan-trung-17586999.jpg",
-  "/album/pexels-san-wedding-5544662.jpg",
-  "/album/pexels-san-wedding-5544650.jpg",
-  "/album/pexels-tran-long-13114541.jpg",
-  "/album/pexels-tuan-anh-nguyen-1806361.jpg",
-  "/album/pexels-nguyen-xuan-trung-17586999.jpg",
-  "/album/pexels-san-wedding-5544662.jpg",
-  "/album/pexels-san-wedding-5544650.jpg",
-  "/album/pexels-tran-long-13114541.jpg",
-  "/album/pexels-tuan-anh-nguyen-1806361.jpg",
-  "/album/pexels-nguyen-xuan-trung-17586999.jpg",
-  "/album/pexels-san-wedding-5544662.jpg",
-  "/album/pexels-san-wedding-5544650.jpg",
-  "/album/pexels-tran-long-13114541.jpg",
-  "/album/pexels-tuan-anh-nguyen-1806361.jpg",
-  "/album/pexels-nguyen-xuan-trung-17586999.jpg",
-  "/album/pexels-san-wedding-5544662.jpg",
-  "/album/pexels-san-wedding-5544650.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487174/cuonglinh2611/albums/hjxx9mrwkilmlxpab95p.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487174/cuonglinh2611/albums/xr89qr0buoarwut8lhog.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487173/cuonglinh2611/albums/ddnk58qaa40et3opjmjl.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487173/cuonglinh2611/albums/bygc1uvdcp8sssvosah0.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487172/cuonglinh2611/albums/fyhxoiixev8hlkmk1trc.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487171/cuonglinh2611/albums/jqobblxufiurneld84be.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/sjb4sqfg9jy3ik0lth9x.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/cv5javq9t38zwfzaheuy.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487168/cuonglinh2611/albums/luhrhhxn1dsd5x20jlgz.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487167/cuonglinh2611/albums/f343zkiaynh7mjspuio7.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487165/cuonglinh2611/albums/nqfxygyeju6tssxwzzjm.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487160/cuonglinh2611/albums/t3zyf53w2kw5aqqaedr0.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487160/cuonglinh2611/albums/tn13c7f1agrybsh0utcy.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487156/cuonglinh2611/albums/jqhpuelqjqy7kiylyso2.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487155/cuonglinh2611/albums/nng9e6urtj6qclwmqghp.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487155/cuonglinh2611/albums/gdfbybldvrc6qnby0bhp.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487154/cuonglinh2611/albums/ullr9z4l2wga1umepqjt.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487154/cuonglinh2611/albums/heep1txy6d0d3hvqq5in.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/jm3pn3xcrm2n2qyrtwly.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/dx96rtpoodv1ly7c8xcj.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487152/cuonglinh2611/albums/ypw8ls6wyx0jo2ezu141.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487152/cuonglinh2611/albums/mkf5wzetrfrnma8sigdh.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487151/cuonglinh2611/albums/ducg6fms51qvoekp0qqd.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487151/cuonglinh2611/albums/vgc8bcfwhfqdew2aqm93.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/pr8omw0riiihnokxibb7.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/hmotrtcp9mbzfowyzyig.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/qvhwfzvej6pdshzb8mdf.jpg",
 ];
 const ALBUMS = shuffleArray(ALBUMS_LIST);
 
@@ -54,8 +53,6 @@ const SectionAlbum = () => {
   const uid = useId();
   const router = useRouter();
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
-
-  const [selected, setSelected] = useState<string>();
 
   const listRef = React.useRef<HTMLDivElement | null>(null);
   const virtualizer = useWindowVirtualizer({
@@ -67,18 +64,20 @@ const SectionAlbum = () => {
     scrollMargin: 0,
     paddingEnd: 80,
     scrollPaddingEnd: 20,
+    enabled: true,
   });
 
-  const handleClick = (item: string) => {
-    setSelected(item);
-  };
-
   return (
-    <>
-      <div id="AlbumChungMinh" className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
-        <Link href={"#"} onClick={() => router.back()}>
+    <PreviewImagesProvider>
+      <div className="relative mx-auto flex w-full max-w-[1900px] items-center p-2 sm:p-5">
+        <button
+          onClick={() => {
+            window.scrollTo(0, 0);
+            router.back();
+          }}
+        >
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
-        </Link>
+        </button>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
         <div className={cn(Fonts.DancingScript.className, "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600")}>
           Album chúng mình
@@ -111,14 +110,17 @@ const SectionAlbum = () => {
                         transform: `translateY(${item.start}px)`,
                       }
                 }
-                onClick={() => handleClick(src)}
               >
-                <Image
+                <NImage
                   src={src}
                   height={500}
                   width={500}
                   alt=""
-                  className={cn("object-cover object-top inset-0 !h-auto w-auto transition duration-200 rounded")}
+                  className="inset-0 !h-auto w-auto rounded object-cover object-top transition duration-200"
+                  quality={25}
+                  canPreview
+                  placeholder="blur"
+                  blurDataURL={IMG_BLUR}
                 />
               </button>
             );
@@ -126,33 +128,13 @@ const SectionAlbum = () => {
         </div>
       </div>
 
-      <Link
-        href="#AlbumChungMinh"
+      <button
+        onClick={() => window.scrollTo(0, 0)}
         className="fixed bottom-2 right-2 flex size-12 items-center justify-center rounded-full bg-white text-amber-600 shadow"
       >
         <ArrowUpIcon className="size-7" />
-      </Link>
-
-      <Modal
-        open={!!selected}
-        setOpen={(open) => {
-          if (!open) setSelected(undefined);
-        }}
-        className="min-h-fit border-0 max-sm:mt-auto md:max-w-fit"
-      >
-        <div className="overflow-y-auto">
-          {!!selected && (
-            <Image
-              src={selected}
-              height={500}
-              width={500}
-              alt=""
-              className={cn("object-contain object-top inset-0 !h-auto w-auto transition duration-200 rounded")}
-            />
-          )}
-        </div>
-      </Modal>
-    </>
+      </button>
+    </PreviewImagesProvider>
   );
 };
 

@@ -42,10 +42,14 @@ const FloatingDockDesktop = ({ items, className }: { items: IItem[]; className?:
     <m.div
       onMouseMove={(e) => mediaAbove640 && mouseX.set(e.pageX)}
       onMouseLeave={() => mediaAbove640 && mouseX.set(Infinity)}
-      className={cn("mx-auto flex h-12 gap-3 sm:gap-4 items-end rounded-2xl bg-gray-50 px-4 sm:px-4 pb-3 shadow", className)}
+      className={cn(
+        "mx-auto flex sm:h-12 gap-1 sm:gap-4 bg-gray-100 max-sm:pl-0.5 sm:items-end rounded-full max-sm:overflow-hidden sm:rounded-2xl sm:bg-gray-50 sm:px-4 sm:pb-3 shadow max-sm:[&>*>div]:rounded-none",
+        className
+      )}
     >
       {items.map((item, index) => (
         <IconContainer
+          id={"FloatingDock" + index}
           mouseX={mouseX}
           key={uid + item.title + index}
           sizeTransform={mediaAbove640 ? [60, 100, 60] : [55, 80, 55]}
@@ -55,6 +59,7 @@ const FloatingDockDesktop = ({ items, className }: { items: IItem[]; className?:
       ))}
 
       <ItemMusic
+        id={"FloatingDock" + items.length}
         mouseX={mouseX}
         sizeTransform={mediaAbove640 ? [60, 100, 60] : [55, 80, 55]}
         // sizeIconTransform={mediaAbove640 ? [30, 60, 30] : [30, 60, 30]}
@@ -68,6 +73,7 @@ function IconContainer(
     mouseX: MotionValue;
     sizeTransform?: [number, number, number];
     sizeIconTransform?: [number, number, number];
+    id?: string;
   }
 ) {
   const { mouseX, classNameTitle, extra, sizeTransform = [60, 100, 60], sizeIconTransform = [30, 60, 30], ...itemProps } = props;
@@ -144,17 +150,17 @@ function IconContainer(
   );
 }
 
-function ItemWrapper({ children, ...itemProps }: IItem & { children: React.ReactNode }) {
+function ItemWrapper({ children, ...itemProps }: IItem & { children: React.ReactNode; id?: string }) {
   if (itemProps?.href) {
     return (
-      <Link href={itemProps.href} target={itemProps?.target} rel={itemProps?.rel} className={itemProps?.className}>
+      <Link href={itemProps.href} target={itemProps?.target} rel={itemProps?.rel} className={itemProps?.className} id={itemProps?.id}>
         {children}
       </Link>
     );
   }
   if (itemProps?.onClick) {
     return (
-      <button onClick={itemProps?.onClick} className={itemProps?.className}>
+      <button onClick={itemProps?.onClick} className={itemProps?.className} id={itemProps?.id}>
         {children}
       </button>
     );
@@ -163,7 +169,12 @@ function ItemWrapper({ children, ...itemProps }: IItem & { children: React.React
 }
 
 const formatNumber = (num: number) => ("0" + num).slice(-2);
-function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number, number]; sizeIconTransform?: [number, number, number] }) {
+function ItemMusic(props: {
+  mouseX: MotionValue;
+  sizeTransform?: [number, number, number];
+  sizeIconTransform?: [number, number, number];
+  id?: string;
+}) {
   const { mouseX, sizeTransform = [60, 100, 60], sizeIconTransform = [30, 60, 30] } = props;
   const [time, setTime] = useState({ min: 2, sec: 44 });
   const [currTime, setCurrTime] = useState({ min: 0, sec: 0 });
@@ -217,6 +228,7 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
 
   return (
     <IconContainer
+      id={props?.id}
       mouseX={mouseX}
       sizeTransform={sizeTransform}
       sizeIconTransform={sizeIconTransform}
@@ -252,6 +264,9 @@ function ItemMusic(props: { mouseX: MotionValue; sizeTransform?: [number, number
               max={(duration || 0) / 1000}
               className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-current dark:bg-gray-700"
               value={seconds}
+              onChange={(e) => {
+                //
+              }}
             />
           </div>
         </div>

@@ -2,6 +2,8 @@ import { default as NextImage, ImageProps as NextImageProps } from "next/image";
 import { useId } from "react";
 
 import imageLoader from "./next-image-loader";
+import { useRegisterImage } from "@/hooks/useRegisterImage";
+import { usePreviewImagesContext } from "../context/PreviewImagesContext";
 
 // Pixel GIF code adapted from https://stackoverflow.com/a/33919020/266535
 const keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -15,8 +17,17 @@ const rgbDataURL = (r: number, g: number, b: number) =>
 /**
  * for internal images only (/assets,...)
  */
-const NImage = ({ src, alt, style, fill, ...props }: Omit<NextImageProps, "alt"> & { alt?: string }) => {
+const NImage = ({
+  src,
+  alt,
+  style,
+  fill,
+  canPreview = false,
+  ...props
+}: Omit<NextImageProps, "alt" | "src"> & { alt?: string; src: string; canPreview?: boolean }) => {
   const uid = useId();
+  const imageId = useRegisterImage(src, { src, alt }, canPreview);
+  const groupContext = usePreviewImagesContext();
   return (
     <NextImage
       src={src}
@@ -26,8 +37,14 @@ const NImage = ({ src, alt, style, fill, ...props }: Omit<NextImageProps, "alt">
       style={fill ? style : { height: "auto", ...style }}
       fill={fill}
       quality={25}
+      onClick={() => {
+        if (!canPreview) return;
+        if (!groupContext) return;
+        groupContext?.onPreview?.(imageId);
+      }}
       {...props}
     />
   );
 };
+
 export default NImage;
