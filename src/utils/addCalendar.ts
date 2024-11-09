@@ -31,17 +31,24 @@ function formatDateICS(date: Date): string {
     return date.toISOString().replace(/-|:|\.\d+/g, "");
 }
 
-export function downloadIcsFile(event: IcsEvent) {
-    const icsUrl = createICSFile({
-        title: event.title,
-        description: event.description,
-        location: event.location,
-        start: event.start,
-        end: event.end,
-    });
+export function downloadIcsFile(event: IcsEvent): Promise<void> {
+    return new Promise((resolve) => {
+        const icsUrl = createICSFile({
+            title: event.title,
+            description: event.description,
+            location: event.location,
+            start: event.start,
+            end: event.end,
+        });
 
-    const link = document.createElement("a");
-    link.href = icsUrl;
-    link.download = `${event.title}.ics`;
-    link.click();
+        const link = document.createElement("a");
+        link.href = icsUrl;
+        link.download = `${event.title}.ics`;
+
+        link.addEventListener("click", () => {
+            setTimeout(() => resolve(), 1500);
+        });
+
+        link.click();
+    });
 }

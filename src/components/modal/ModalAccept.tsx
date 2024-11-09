@@ -162,15 +162,12 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
         );
         const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);
 
-        console.log("start", start);
-        console.log("end", end);
-        console.log("formData", formData);
-
         const location =
           partyName == "NhaGai"
             ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7"
             : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";
-        downloadIcsFile({
+
+        await downloadIcsFile({
           title: "Lễ Cưới Văn Cường & Yến Linh",
           description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
           location: location,
