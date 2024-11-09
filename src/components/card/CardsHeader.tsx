@@ -51,8 +51,9 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
           width={200}
           className="rounded-full object-cover transition-all group-hover:-scale-x-100"
         />
-        <p className="mt-2 text-amber-600 underline">10:00</p>
-        {/* TODO: Sửa để thể hiện được lịch lễ thành hôn & lịch tiệc cưới */}
+        <p className="mt-2 text-amber-600 underline">
+          {userData?.partyName === "NhaGai" ? "08:00" : "10:00"}
+        </p>
         <p
           className={cn(
             Fonts.DancingScript.className,
@@ -73,7 +74,10 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
             width={200}
             className="rounded-full transition-all group-hover:-scale-x-100"
           />
-          <p className="mt-2 text-amber-600 underline">11:00</p>
+          <p className="mt-2 text-amber-600 underline">
+            {" "}
+            {userData?.partyName === "NhaGai" ? "08:30" : "10:30"}
+          </p>
           <p
             className={cn(
               Fonts.DancingScript.className,
@@ -83,7 +87,9 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
             Làm lễ
           </p>
           <p className="mt-2 text-center text-amber-800 max-sm:mb-4">
-            Tiến hành rước cô dâu vào sân khấu và làm lễ
+            {userData?.partyName === "NhaGai"
+              ? "Chú rể rước cô dâu và làm lễ"
+              : "Tiến hành rước cô dâu vào sân khấu và làm lễ"}
           </p>
         </div>
 
@@ -108,7 +114,10 @@ const CardsHeader01 = ({ userData }: TSection02Props) => {
           width={200}
           className="rounded-full transition-all group-hover:-scale-x-100"
         />
-        <p className="mt-2 text-amber-600 underline">12:00</p>
+        <p className="mt-2 text-amber-600 underline">
+          {" "}
+          {userData?.partyName === "NhaGai" ? "09:00" : "11:00"}
+        </p>
         <p
           className={cn(
             Fonts.DancingScript.className,
