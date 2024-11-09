@@ -161,6 +161,11 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           `${partyDay.split("/").reverse().join("-")}T${invitedTime}:00`
         );
         const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);
+
+        console.log("start", start);
+        console.log("end", end);
+        console.log("formData", formData);
+
         const location =
           partyName == "NhaGai"
             ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7"
