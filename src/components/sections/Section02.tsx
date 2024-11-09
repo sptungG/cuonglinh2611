@@ -9,7 +9,7 @@ export type TSection02Props = { userData: Sheet };
 
 const Section02 = ({ userData }: TSection02Props) => {
   return (
-    <section className="relative flex max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:mb-20">
+    <section className="relative flex max-w-[100dvw] flex-col items-center justify-center overflow-hidden max-sm:py-20 sm:pb-20">
       <div className="mb-2 text-center text-xl uppercase text-amber-500">26/11/2024</div>
       <div className={cn(Fonts.DancingScript.className, "text-4xl sm:text-6xl text-center font-[600] mb-4 ")}>Lễ Thành Hôn </div>
       <div className="mb-4 text-center text-xl uppercase text-amber-500">Tại nhà trai</div>
