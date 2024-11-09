@@ -51,10 +51,6 @@ const Section08 = dynamic(() => import("@/components/sections/Section08"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
-const Tour = dynamic(() => import("@/components/modal/Tour"), {
-  ssr: false,
-  loading: () => <PageLoading />,
-});
 const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false, loading: () => <div>Loading...</div> });
 
 const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
@@ -64,8 +60,6 @@ const Page = (props: { data: Sheet }) => {
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
-
-  const [runTour, setRunTour] = useState(false);
 
   const userData = getUserRes?.data || props.data;
   const mapParty =
@@ -85,7 +79,12 @@ const Page = (props: { data: Sheet }) => {
       <Provider>
         <>
           <PreviewImagesProvider>
-            <Section01 userData={userData} onClickBtn01={() => setRunTour(true)} />
+            <Section01
+              userData={userData}
+              onClickBtn01={() => {
+                setIsOpenSaveDate(true);
+              }}
+            />
           </PreviewImagesProvider>
 
           <Section03 userData={userData} />
@@ -148,8 +147,6 @@ const Page = (props: { data: Sheet }) => {
               },
             ]}
           />
-
-          <Tour run={runTour} onStartChange={setRunTour} />
 
           <ModalQR open={isOpenQR} setOpen={setIsOpenQR} />
 
