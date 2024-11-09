@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import NImage from "../next/NextImage";
 import PreviewImagesProvider from "../context/PreviewImagesContext";
 import { IMG_BLUR } from "@/common/constant";
-
+// shuffleArray
 function shuffleArray(array: string[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -91,25 +91,13 @@ const SectionAlbum = () => {
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
         </button>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
-        <div
-          className={cn(
-            Fonts.DancingScript.className,
-            "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600"
-          )}
-        >
+        <div className={cn(Fonts.DancingScript.className, "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600")}>
           Album chúng mình
         </div>
       </div>
 
-      <div
-        className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5"
-        ref={listRef}
-        style={{ overflowAnchor: "none" }}
-      >
-        <div
-          className="relative min-h-dvh w-full"
-          style={{ height: `${virtualizer.getTotalSize()}px` }}
-        >
+      <div className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5" ref={listRef} style={{ overflowAnchor: "none" }}>
+        <div className="relative min-h-dvh w-full" style={{ height: `${virtualizer.getTotalSize()}px` }}>
           {virtualizer.getVirtualItems().map((item) => {
             const src = ALBUMS[item.index];
             return (
