@@ -9,9 +9,8 @@ import { AnimatePresence, MotionValue, m, useMotionValue, useSpring, useTransfor
 import { PauseIcon, PlayIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useId, useRef, useState } from "react";
-import useSound from "use-sound";
-import NImage from "../next/NextImage";
 import { useMediaQuery } from "react-responsive";
+import NImage from "../next/NextImage";
 
 interface IItem {
   title: React.ReactNode;
@@ -168,7 +167,17 @@ function ItemWrapper({ children, ...itemProps }: IItem & { children: React.React
   return <div className={itemProps?.className}>{children}</div>;
 }
 
-const formatNumber = (num: number) => ("0" + num).slice(-2);
+const formatTime = (time: number | undefined): string => {
+  if (typeof time === "number" && !isNaN(time)) {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    // Convert to string and pad with leading zeros if necessary
+    const formatMinutes = minutes.toString().padStart(2, "0");
+    const formatSeconds = seconds.toString().padStart(2, "0");
+    return `${formatMinutes}:${formatSeconds}`;
+  }
+  return "00:00";
+};
 function ItemMusic(props: {
   mouseX: MotionValue;
   sizeTransform?: [number, number, number];
@@ -176,121 +185,125 @@ function ItemMusic(props: {
   id?: string;
 }) {
   const { mouseX, sizeTransform = [60, 100, 60], sizeIconTransform = [30, 60, 30] } = props;
-  const [time, setTime] = useState({ min: 2, sec: 44 });
-  const [currTime, setCurrTime] = useState({ min: 0, sec: 0 });
+  const audioRef = useRef<HTMLAudioElement>(null);
 
-  const [seconds, setSeconds] = useState(0);
-
+  const [timeProgress, setTimeProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, duration, sound }] = useSound("/assets/audio-01.mp3", {
-    onend: () => setIsPlaying(false),
-  });
 
-  useEffect(() => {
-    if (duration) {
-      const sec = duration / 1000;
-      const min = Math.floor(sec / 60);
-      const secRemain = Math.floor(sec % 60);
-      setTime({
-        min: min,
-        sec: secRemain,
-      });
+  const onLoadedMetadata = () => {
+    const seconds = audioRef.current?.duration;
+    if (seconds !== undefined) {
+      setDuration(seconds);
     }
-  }, [isPlaying]);
+  };
 
   useEffect(() => {
+    const currentAudioRef = audioRef.current;
+    if (currentAudioRef && duration) {
+      if (isPlaying) {
+        currentAudioRef?.play();
+      } else {
+        currentAudioRef?.pause();
+        const currentTime = currentAudioRef.currentTime;
+        setTimeProgress(currentTime);
+      }
+    }
+  }, [isPlaying, duration]);
+
+  useEffect(() => {
+    const currentAudioRef = audioRef.current;
     const interval = setInterval(() => {
-      if (sound) {
-        setSeconds(sound.seek([]));
-        const min = Math.floor(sound.seek([]) / 60);
-        const sec = Math.floor(sound.seek([]) % 60);
-        setCurrTime({
-          min,
-          sec,
-        });
+      if (currentAudioRef && duration) {
+        const currentTime = currentAudioRef.currentTime;
+        setTimeProgress(currentTime);
+
+        if (isPlaying && currentTime === duration) {
+          setIsPlaying(false);
+        }
       }
     }, 1000);
-    return () => clearInterval(interval);
-  }, [sound]);
 
-  // useEffect(() => {
-  //   if (!!play) {
-  //     setTimeout(() => {
-  //       play();
-  //       setIsPlaying(true);
-  //     }, 1000);
-  //   }
-  //   return () => {
-  //     stop();
-  //     setIsPlaying(false);
-  //   };
-  // }, [play, stop]);
+    return () => clearInterval(interval);
+  }, [isPlaying, duration]);
+
+  useEffect(() => {
+    setIsPlaying(true);
+  }, []);
 
   return (
-    <IconContainer
-      id={props?.id}
-      mouseX={mouseX}
-      sizeTransform={sizeTransform}
-      sizeIconTransform={sizeIconTransform}
-      onClick={() => {
-        if (isPlaying) {
-          stop();
-          setIsPlaying(false);
-        } else {
-          play();
-          setIsPlaying(true);
-        }
-      }}
-      classNameTitle="top-[-106px]"
-      title={
-        <div className="flex flex-col pb-3 pt-2">
-          <div className="mb-1 flex flex-col text-xs">
-            <span>UNSECRET X TIM HALPERIN</span>
-            <span>ONE DAY AT A TIME</span>
-          </div>
-          <div className="flex flex-col">
-            <div className="mb-1 flex items-center justify-between">
-              <span>
-                {formatNumber(currTime.min)}:{formatNumber(currTime.sec)}
-              </span>
-              <span>
-                {formatNumber(time.min)}:{formatNumber(time.sec)}
-              </span>
+    <>
+      <audio src="/assets/audio-01.mp3" className="hidden" ref={audioRef} controls onLoadedMetadata={onLoadedMetadata} />
+      <IconContainer
+        id={props?.id}
+        mouseX={mouseX}
+        sizeTransform={sizeTransform}
+        sizeIconTransform={sizeIconTransform}
+        onClick={() => {
+          setIsPlaying((p) => !p);
+        }}
+        classNameTitle="top-[-106px]"
+        title={
+          <div className="flex flex-col pb-3 pt-2">
+            <div className="mb-1 flex flex-col text-xs">
+              <span>UNSECRET X TIM HALPERIN</span>
+              <span>ONE DAY AT A TIME</span>
             </div>
-            <input
-              id="small-range"
-              type="range"
-              min="0"
-              max={(duration || 0) / 1000}
-              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 accent-current dark:bg-gray-700"
-              value={seconds}
-              onChange={(e) => {
-                //
-              }}
-            />
+            <div className="flex flex-col">
+              <div className="mb-1 flex items-center justify-between">
+                <span>{formatTime(timeProgress)}</span>
+                <span>{formatTime(duration)}</span>
+              </div>
+              <div className="relative h-2 w-[200px] rounded-full bg-gray-200 [--range-progress:0%]">
+                <div
+                  className="absolute left-0 top-0 z-0 h-2 w-[var(--range-progress)] rounded-full bg-current"
+                  style={{ width: `calc(${(timeProgress / duration) * 100}% + 0px)` }}
+                ></div>
+                <input
+                  type="range"
+                  min="0"
+                  max={duration || 0}
+                  className="absolute left-0 top-0 h-2 w-full cursor-pointer appearance-none rounded-full bg-transparent accent-current"
+                  value={timeProgress}
+                  onChange={(e) => {
+                    if (audioRef.current) {
+                      setIsPlaying(false);
+                      audioRef.current?.pause();
+                      const newTime = Number(e.target.value);
+                      audioRef.current.currentTime = newTime;
+                      setTimeProgress(newTime);
+                      setTimeout(() => {
+                        setIsPlaying(true);
+                        audioRef.current?.play();
+                      }, 100);
+                    }
+                  }}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      }
-      className=""
-      icon={
-        <div className="z-10 flex size-full min-h-[34px] min-w-[34px] flex-col items-center justify-center">
-          {isPlaying ? <PauseIcon className="size-full fill-white text-white" /> : <PlayIcon className="size-full fill-white text-white" />}
-        </div>
-      }
-      extra={
-        <NImage
-          src="/assets/dianhac.png"
-          height={60}
-          width={60}
-          style={{
-            height: "100%",
-            width: "100%",
-            animationPlayState: isPlaying ? "running" : "paused",
-          }}
-          className={cn("absolute left-0 top-0 z-0 rounded-full object-cover animate-[spin_5s_linear_infinite]")}
-        />
-      }
-    />
+        }
+        className=""
+        icon={
+          <div className="z-10 flex size-full min-h-[34px] min-w-[34px] flex-col items-center justify-center">
+            {isPlaying ? <PauseIcon className="size-full fill-white text-white" /> : <PlayIcon className="size-full fill-white text-white" />}
+          </div>
+        }
+        extra={
+          <NImage
+            src="/assets/dianhac.png"
+            height={60}
+            width={60}
+            style={{
+              height: "100%",
+              width: "100%",
+              animationPlayState: isPlaying ? "running" : "paused",
+            }}
+            className={cn("absolute left-0 top-0 z-0 rounded-full object-cover animate-[spin_5s_linear_infinite]")}
+          />
+        }
+      />
+    </>
   );
 }
 
