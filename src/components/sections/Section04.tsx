@@ -27,11 +27,11 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
           />
           <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:right-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <NImage
-              src="/images/couple-frame-2.png"
+              src="/images/cricle2.png"
               alt="2611"
               height={260}
               width={260}
-              className="-ml-1 -mt-1 size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
+              className="size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
             />
           </div>
         </FadeWrapper>
@@ -79,11 +79,11 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
           />
           <div className="absolute -z-10 max-sm:bottom-[-60px] max-sm:left-[-40px] sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2">
             <NImage
-              src="/images/couple-frame-2.png"
+              src="/images/cricle1.png"
               alt="2611"
               height={260}
               width={260}
-              className="-ml-1 -mt-1 size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
+              className="size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
             />
           </div>
         </FadeWrapper>
