@@ -239,6 +239,7 @@ function ItemMusic(props: {
         ref={audioRef}
         controls
         onLoadedMetadata={onLoadedMetadata}
+        autoPlay
       />
       <IconContainer
         id={props?.id}
