@@ -233,7 +233,13 @@ function ItemMusic(props: {
 
   return (
     <>
-      <audio src="/assets/audio-01.mp3" className="hidden" ref={audioRef} controls onLoadedMetadata={onLoadedMetadata} />
+      <audio
+        src="https://res.cloudinary.com/dcos6mpjy/video/upload/v1731195961/audio-01_oluwt2.mp3"
+        className="hidden"
+        ref={audioRef}
+        controls
+        onLoadedMetadata={onLoadedMetadata}
+      />
       <IconContainer
         id={props?.id}
         mouseX={mouseX}
