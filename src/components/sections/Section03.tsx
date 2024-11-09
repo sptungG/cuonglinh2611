@@ -26,43 +26,27 @@ const Section03 = ({ userData }: TSection03Props) => {
     >
       <div className="relative flex flex-col items-center justify-center border-b-2 border-amber-500/20 p-4 pb-0 sm:rounded-2xl sm:border-2 sm:p-10 sm:pb-12">
         <div className="mb-10 flex items-center max-sm:flex-col sm:mb-5">
-          <FadeWrapper
-            direction="left"
-            className="flex flex-col max-sm:mb-4 max-sm:text-center"
-          >
-            <div className="text-center text-xl uppercase sm:mb-4">
-              Nhà Trai
-            </div>
+          <FadeWrapper direction="left" className="flex w-[220px] flex-col max-sm:mb-4 max-sm:text-center">
+            <div className="text-center text-xl uppercase sm:mb-4">Nhà Trai</div>
             <div className="">Ông: Nguyễn Văn Linh</div>
             <div className="">Bà: Nguyễn Thị Hoàn</div>
           </FadeWrapper>
 
-          <NImage
-            src="/images/flower.png"
-            alt="2611"
-            height={0}
-            width={366}
-            className="max-sm:-order-1 sm:mx-10"
-          />
+          <NImage src="/images/flower1.png" alt="2611" height={0} width={306} className="max-sm:-order-1 sm:mx-10" />
 
-          <FadeWrapper
-            direction="right"
-            className="flex flex-col max-sm:text-center"
-          >
+          <FadeWrapper direction="right" className="flex w-[220px] flex-col max-sm:text-center">
             <div className="text-center text-xl uppercase sm:mb-4">Nhà Gái</div>
             <div className="">Ông: Nguyễn Phương Dũng</div>
             <div className="">Bà: Nguyễn Thị Minh</div>
           </FadeWrapper>
         </div>
 
-        <FadeWrapper className="mb-2 text-lg font-[600]">
-          TRÂN TRỌNG KÍNH MỜI
-        </FadeWrapper>
+        <FadeWrapper className="mb-2 text-lg font-[600]">TRÂN TRỌNG KÍNH MỜI</FadeWrapper>
 
         <FadeWrapper
           className={cn(
             "text-2xl font-[700] px-1 text-center",
-            "[--bg-size:300%] animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent"
+            "[--bg-size:300%] animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#fde68a] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent"
           )}
         >
           {userData?.fullName || "Bạn cùng gia đình"}
@@ -70,25 +54,12 @@ const Section03 = ({ userData }: TSection03Props) => {
         <div className="text-base italic">{`(Tới dự bữa tiệc chung vui của gia đình chúng tôi)`}</div>
 
         <div className="my-10 flex items-center max-sm:flex-col">
-          <FadeWrapper
-            direction="left"
-            className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}
-          >
-            {userData?.partyName === "NhaGai"
-              ? "Nguyễn Yến Linh"
-              : "Nguyễn Văn Cường"}
+          <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>
+            {userData?.partyName === "NhaGai" ? "Nguyễn Yến Linh" : "Nguyễn Văn Cường"}
           </FadeWrapper>
-          <HeartIcon
-            className="size-10 text-red-500 max-sm:my-4 sm:mx-10"
-            fill="currentColor"
-          />
-          <FadeWrapper
-            direction="right"
-            className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}
-          >
-            {userData?.partyName === "NhaGai"
-              ? "Nguyễn Văn Cường"
-              : "Nguyễn Yến Linh"}
+          <HeartIcon className="size-10 text-red-500 max-sm:my-4 sm:mx-10" fill="currentColor" />
+          <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "font-[600] text-4xl")}>
+            {userData?.partyName === "NhaGai" ? "Nguyễn Văn Cường" : "Nguyễn Yến Linh"}
           </FadeWrapper>
         </div>
 
@@ -98,57 +69,38 @@ const Section03 = ({ userData }: TSection03Props) => {
               <span>Tổ chức vào lúc</span>
               <span className="ml-1 font-[600]">{"17 giờ 00"}</span>
             </FadeWrapper>
-            <FadeWrapper className="text-lg">
-              Thứ Bảy, ngày 23 tháng 11 năm 2024
-            </FadeWrapper>
+            <FadeWrapper className="text-lg">Thứ Bảy, ngày 23 tháng 11 năm 2024</FadeWrapper>
             <FadeWrapper className="mb-6 text-base italic">{`(Tức ngày 23 tháng 10 năm 2024 Giáp Thìn)`}</FadeWrapper>
 
-            <FadeWrapper className="text-xl text-gray-600">
-              Tại gia trung tâm tiệc cưới:
-            </FadeWrapper>
-            <FadeWrapper className="mb-10">
-              Trống Đồng Place Lãng Yên, Hà Nội
-            </FadeWrapper>
+            <FadeWrapper className="text-xl text-gray-600">Tại gia trung tâm tiệc cưới:</FadeWrapper>
+            <FadeWrapper className="mb-10">Trống Đồng Place Lãng Yên, Hà Nội</FadeWrapper>
           </>
         ) : (
           <>
             <FadeWrapper className="flex items-baseline text-neutral-500">
               <span>Tổ chức vào lúc</span>
               <span className="ml-1 font-[600]">
-                {userData?.invitedTime
-                  ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}`
-                  : "09 giờ 00"}
+                {userData?.invitedTime ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}` : "09 giờ 00"}
               </span>
             </FadeWrapper>
-            {userData?.partyDay === "25/11/2024" ||
-            userData?.partyName === "NhaTraiChieu" ? (
+            {userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu" ? (
               <>
-                <FadeWrapper className="text-lg">
-                  Thứ Hai, ngày 25 tháng 11 năm 2024
-                </FadeWrapper>
+                <FadeWrapper className="text-lg">Thứ Hai, ngày 25 tháng 11 năm 2024</FadeWrapper>
                 <FadeWrapper className="mb-6 text-base italic">{`(Tức ngày 25 tháng 10 năm 2024 Giáp Thìn)`}</FadeWrapper>
               </>
             ) : (
               <>
-                <FadeWrapper className="text-lg">
-                  Thứ Ba, ngày 26 tháng 11 năm 2024
-                </FadeWrapper>
+                <FadeWrapper className="text-lg">Thứ Ba, ngày 26 tháng 11 năm 2024</FadeWrapper>
                 <FadeWrapper className="mb-6 text-base italic">{`(Tức ngày 26 tháng 10 năm 2024 Giáp Thìn)`}</FadeWrapper>
               </>
             )}
 
-            <FadeWrapper className="text-xl text-gray-600">
-              Tại gia đình Nhà Trai:
-            </FadeWrapper>
-            <FadeWrapper className="mb-10">
-              Đội 5, Phú Thịnh, Kim Động, Hưng Yên
-            </FadeWrapper>
+            <FadeWrapper className="text-xl text-gray-600">Tại gia đình Nhà Trai:</FadeWrapper>
+            <FadeWrapper className="mb-10">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</FadeWrapper>
           </>
         )}
 
-        <FadeWrapper
-          className={cn(Fonts.DancingScript.className, "text-center text-2xl")}
-        >
+        <FadeWrapper className={cn(Fonts.DancingScript.className, "text-center text-2xl")}>
           Sự hiện diện của bạn là niềm vinh hạnh của gia đình chúng tôi!
         </FadeWrapper>
 
@@ -160,13 +112,10 @@ const Section03 = ({ userData }: TSection03Props) => {
           className="absolute left-0 top-1/2 -z-10 min-h-full min-w-full -translate-y-1/2 object-cover max-sm:opacity-60 sm:rounded-2xl"
         />
 
-        <NImage
-          src="/images/savethedate.svg"
-          alt="2611"
-          height={0}
-          width={230}
-          className="bottom-0 left-0 z-10 object-cover sm:absolute sm:-translate-x-1/2"
-        />
+        <div className="bottom-0 left-0 z-10 flex items-center justify-center rounded-full sm:absolute sm:-translate-x-1/2">
+          <NImage src="/images/savethedate.svg" alt="2611" height={0} width={250} className="z-10 bg-transparent object-cover" />
+          <div className="absolute left-1/2 top-[33px] z-0 size-[220px] -translate-x-1/2 rounded-full border border-amber-500/20 bg-white"></div>
+        </div>
 
         {mediaAbove640 && (
           <NImage
@@ -178,23 +127,12 @@ const Section03 = ({ userData }: TSection03Props) => {
           />
         )}
 
-        {mediaAbove640 && (
-          <LeafCornorSvg className=" absolute left-0 top-0 z-10 size-[250px] translate-x-[-62px] translate-y-[-55px]" />
-        )}
+        {mediaAbove640 && <LeafCornorSvg className=" absolute left-0 top-0 z-10 size-[250px] translate-x-[-62px] translate-y-[-55px]" />}
       </div>
 
       {mediaAbove640 && (
         <div className="absolute left-0 top-1/2 -z-20 w-dvw -translate-y-1/2 ">
-          <FlickeringGrid
-            className=""
-            squareSize={4}
-            gridGap={6}
-            color="#d97706"
-            maxOpacity={0.5}
-            flickerChance={0.1}
-            height={300}
-            width={3000}
-          />
+          <FlickeringGrid className="" squareSize={4} gridGap={6} color="#d97706" maxOpacity={0.5} flickerChance={0.1} height={300} width={3000} />
         </div>
       )}
     </section>
