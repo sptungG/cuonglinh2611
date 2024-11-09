@@ -46,6 +46,18 @@ const ALBUMS_LIST = [
   "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/pr8omw0riiihnokxibb7.jpg",
   "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/hmotrtcp9mbzfowyzyig.jpg",
   "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/qvhwfzvej6pdshzb8mdf.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/id2uzctozekzwzd9imgs.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/vozpxxvtgvegvxljffba.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/f9rayufebx4tjxxlqlfa.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/ivcfrrxvoazuol8uhfky.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/vgbhhtidetaxuj4yyofi.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/sye9k3khgdj9t8smy3uj.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/bd0yypy6ow7sjot3ul9p.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/hl8rmit2gz19iskhqvh8.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/jqofrdkcacj66bqiptts.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/saj6tyqpq9f2vzt1ibt9.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/ulunqtpkinh0bkxh1ul9.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/fqn5nu8fun96dd0d3f9s.jpg",
 ];
 const ALBUMS = shuffleArray(ALBUMS_LIST);
 
@@ -79,13 +91,25 @@ const SectionAlbum = () => {
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
         </button>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
-        <div className={cn(Fonts.DancingScript.className, "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600")}>
+        <div
+          className={cn(
+            Fonts.DancingScript.className,
+            "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600"
+          )}
+        >
           Album chúng mình
         </div>
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5" ref={listRef} style={{ overflowAnchor: "none" }}>
-        <div className="relative min-h-dvh w-full" style={{ height: `${virtualizer.getTotalSize()}px` }}>
+      <div
+        className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5"
+        ref={listRef}
+        style={{ overflowAnchor: "none" }}
+      >
+        <div
+          className="relative min-h-dvh w-full"
+          style={{ height: `${virtualizer.getTotalSize()}px` }}
+        >
           {virtualizer.getVirtualItems().map((item) => {
             const src = ALBUMS[item.index];
             return (
