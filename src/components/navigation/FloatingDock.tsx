@@ -202,7 +202,17 @@ function ItemMusic(props: {
     const currentAudioRef = audioRef.current;
     if (currentAudioRef && duration) {
       if (isPlaying) {
-        currentAudioRef?.play();
+        const promise = currentAudioRef?.play();
+        if (promise !== undefined) {
+          promise
+            .then(() => {
+              // Autoplay started!
+            })
+            .catch((error) => {
+              console.log(error);
+              setIsPlaying(false);
+            });
+        }
       } else {
         currentAudioRef?.pause();
         const currentTime = currentAudioRef.currentTime;
@@ -239,7 +249,6 @@ function ItemMusic(props: {
         ref={audioRef}
         controls
         onLoadedMetadata={onLoadedMetadata}
-        autoPlay
       />
       <IconContainer
         id={props?.id}
