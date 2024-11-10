@@ -66,7 +66,7 @@ export class SheetsMethods {
       const foundIndex = rows.findIndex((item) => item.id === values?.id);
       if (foundIndex === -1) throw new Error("No item found with ID: " + values?.id);
       const { id, fullName, phoneNumber, invitedTime, partyDay, partyName, accepted } = values;
-      console.log("SheetsMethods ~ updateRow ~ values:", values);
+      console.log("updateRow ~ values:", values);
 
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
@@ -86,6 +86,7 @@ export class SheetsMethods {
       const rows = await this.findAll();
       const foundIndex = rows.findIndex((item) => !item?.fullName);
       const { id, fullName, phoneNumber, invitedTime, partyDay, partyName, accepted } = values;
+      console.log("appendRow ~ values:", values);
 
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
