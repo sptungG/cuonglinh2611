@@ -44,7 +44,7 @@ export function downloadIcsFile(event: IcsEvent): Promise<void> {
     });
 
     setTimeout(() => {
-      openInNewTab(icsUrl);
+      openInNewTab(icsUrl, `${event.title}.ics`);
       resolve();
     }, 1000);
   });

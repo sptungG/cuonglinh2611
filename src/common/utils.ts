@@ -18,11 +18,12 @@ export function flattenColorPalette(colors: any): { [key: string]: string } {
   );
 }
 
-export function openInNewTab(href: string) {
+export function openInNewTab(href: string, download?: string) {
   Object.assign(document.createElement("a"), {
     target: "_blank",
     rel: "noopener noreferrer",
     href: href,
+    download,
   }).click();
   return href;
 }
