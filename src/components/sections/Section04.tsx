@@ -8,7 +8,7 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
 
   return (
-    <section className="relative flex min-h-dvh items-center justify-center max-sm:flex-col max-sm:py-40 sm:max-h-[1500px]">
+    <section className="relative flex min-h-dvh items-center justify-center max-sm:flex-col max-sm:pb-40 max-sm:pt-20 sm:max-h-[1500px]">
       <div className="flex flex-col items-center justify-center max-sm:mt-20">
         <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
           Cô dâu

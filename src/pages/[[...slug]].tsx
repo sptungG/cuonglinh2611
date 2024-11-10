@@ -1,21 +1,13 @@
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import { Sheet } from "@/common/sheets";
+import { getUserDataBySlug } from "@/common/utils";
 import { AuroraBackground } from "@/components/background/AuroraBackground";
 import PageLoading from "@/components/background/PageLoading";
 import ModalAccept from "@/components/modal/ModalAccept";
 import ModalQR from "@/components/modal/ModalQR";
 import SEO from "@/components/next/SEO";
-import {
-  CalendarHeartIcon,
-  GiftIcon,
-  ImagesIcon,
-  MapPinIcon,
-} from "lucide-react";
-import type {
-  GetStaticPaths,
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from "next";
+import { CalendarHeartIcon, GiftIcon, ImagesIcon, MapPinIcon } from "lucide-react";
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import useSWR, { SWRConfig } from "swr";
@@ -24,13 +16,10 @@ const Provider = dynamic(() => import("@/components/context/Provider"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
-const PreviewImagesProvider = dynamic(
-  () => import("@/components/context/PreviewImagesContext"),
-  {
-    ssr: false,
-    loading: () => <PageLoading />,
-  }
-);
+const PreviewImagesProvider = dynamic(() => import("@/components/context/PreviewImagesContext"), {
+  ssr: false,
+  loading: () => <PageLoading />,
+});
 const Section01 = dynamic(() => import("@/components/sections/Section01"), {
   ssr: false,
   loading: () => <PageLoading />,
@@ -63,24 +52,24 @@ const Section08 = dynamic(() => import("@/components/sections/Section08"), {
   ssr: false,
   loading: () => <PageLoading />,
 });
-const FloatingDock = dynamic(
-  () => import("@/components/navigation/FloatingDock"),
-  { ssr: false, loading: () => <div>Loading...</div> }
-);
+const FloatingDock = dynamic(() => import("@/components/navigation/FloatingDock"), { ssr: false, loading: () => <div>Loading...</div> });
 
-const getUser = (url: string) =>
-  fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
+const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 
 const Page = (props: { data: Sheet }) => {
   const id = props.data?.id;
   const [isOpenSaveDate, setIsOpenSaveDate] = useState(false);
   const [isOpenQR, setIsOpenQR] = useState(false);
-  const { data: getUserRes } = useSWR(
-    id ? `/participants?id=${id}` : null,
-    getUser
-  );
+  const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
 
-  const userData = getUserRes?.data || props.data;
+  const defaultData = props.data;
+  const resData = getUserRes?.data || defaultData;
+  const userData = {
+    ...resData,
+    invitedTime: resData.invitedTime || defaultData.invitedTime,
+    partyDay: resData.partyDay || defaultData.partyDay,
+    partyName: resData.partyName || defaultData.partyName,
+  };
   const mapParty =
     userData?.partyName === "NhaGai"
       ? "https://www.google.com/maps/search/?api=1&query=21.009745980494834,105.86708485767026"
@@ -89,20 +78,11 @@ const Page = (props: { data: Sheet }) => {
   return (
     <>
       <SEO
-        title={[
-          userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "",
-          "Welcome to Our Wedding",
-          "✨ 🎉 🎊",
-        ]
-          .filter(Boolean)
-          .join(" | ")}
+        title={[userData?.fullName ? "✨ " + userData?.fullName + " ✨" : "", "Welcome to Our Wedding", "✨ 🎉 🎊"].filter(Boolean).join(" | ")}
         description={"✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 • ✨ 🎉 🎊 "}
       />
 
-      <AuroraBackground
-        className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white max-sm:hidden"
-        classNameContainer="-z-50 opacity-40"
-      />
+      <AuroraBackground className="fixed left-0 top-0 -z-50 h-dvh w-dvw bg-white max-sm:hidden" classNameContainer="-z-50 opacity-40" />
 
       <Provider>
         <>
@@ -154,9 +134,7 @@ const Page = (props: { data: Sheet }) => {
 
               {
                 title: "Save the Date",
-                icon: (
-                  <CalendarHeartIcon className="size-full max-sm:-mt-0.5" />
-                ),
+                icon: <CalendarHeartIcon className="size-full max-sm:-mt-0.5" />,
                 onClick: () => {
                   setIsOpenSaveDate(true);
                 },
@@ -170,9 +148,7 @@ const Page = (props: { data: Sheet }) => {
 
               {
                 title: "Mừng Cưới",
-                icon: (
-                  <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />
-                ),
+                icon: <GiftIcon className="size-full !min-h-[40px] !min-w-[40px] text-amber-500" />,
                 onClick: () => {
                   setIsOpenQR(true);
                 },
@@ -184,11 +160,7 @@ const Page = (props: { data: Sheet }) => {
 
           {/* <ModalQR open={isOpenQR} setOpen={setIsOpenQR} /> */}
 
-          <ModalAccept
-            open={isOpenSaveDate}
-            setOpen={setIsOpenSaveDate}
-            userData={userData}
-          />
+          <ModalAccept open={isOpenSaveDate} setOpen={setIsOpenSaveDate} userData={userData} />
         </>
       </Provider>
     </>
@@ -197,11 +169,7 @@ const Page = (props: { data: Sheet }) => {
 
 export const getStaticPaths = (async () => {
   return {
-    paths: [
-      { params: { slug: ["l"] } },
-      { params: { slug: ["c"] } },
-      { params: { slug: ["ca"] } },
-    ],
+    paths: [{ params: { slug: ["l"] } }, { params: { slug: ["c"] } }, { params: { slug: ["ca"] } }],
     fallback: "blocking",
   };
 }) satisfies GetStaticPaths;
@@ -214,42 +182,39 @@ export const getStaticProps = (async ({ params }) => {
       notFound: true,
     };
 
+  const defaultData = getUserDataBySlug(partyType);
+
   if (!id)
     return {
       props: {
         data: {
           id: "",
-          partyName: partyType === "l" ? "NhaGai" : "NhaTrai",
-          invitedTime:
-            partyType === "l"
-              ? "17:00"
-              : partyType === "ca"
-                ? "15:30"
-                : "09:00",
-          partyDay:
-            partyType === "l"
-              ? "23/11/2024"
-              : partyType === "ca"
-                ? "25/11/2024"
-                : "26/11/2024",
+          ...defaultData,
         },
       },
     };
 
-  const sheetRow = await fetchReq<{ data: Sheet }>(
-    `${nextAPIUrl}/participants?id=${id}`
-  );
+  const sheetRow = await fetchReq<{ data: Sheet }>(`${nextAPIUrl}/participants?id=${id}`);
   if (!sheetRow?.data)
     return {
       notFound: true,
     };
 
-  return { props: { data: sheetRow.data }, revalidate: 1 };
+  const data = sheetRow.data;
+  return {
+    props: {
+      data: {
+        ...data,
+        invitedTime: data.invitedTime || defaultData.invitedTime,
+        partyDay: data.partyDay || defaultData.partyDay,
+        partyName: data.partyName || defaultData.partyName,
+      },
+    },
+    revalidate: 1,
+  };
 }) satisfies GetStaticProps<{ data: Sheet }>;
 
-const PageWrapper = ({
-  data,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const PageWrapper = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <SWRConfig
       value={{

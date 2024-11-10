@@ -1,8 +1,9 @@
 import React, { useEffect, useId, useState } from "react";
-import * as dateFns from "date-fns";
+
 import { cn } from "@/common/utils";
 import { HeartIcon } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
+import { dateFns } from "@/common/date";
 
 interface DateRange {
   startDate: Date | null;
