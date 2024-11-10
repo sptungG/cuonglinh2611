@@ -1,12 +1,7 @@
 import { Sheet } from "@/common/sheets";
-import { cn } from "@/common/utils";
+import { cn, getUserDataBySlug } from "@/common/utils";
 import confetti from "canvas-confetti";
-import {
-  ArrowRightIcon,
-  CalendarHeartIcon,
-  CheckCircle,
-  CheckIcon,
-} from "lucide-react";
+import { ArrowRightIcon, CalendarHeartIcon, CheckCircle, CheckIcon } from "lucide-react";
 import { useEffect, useId } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { BorderBeam } from "../background/BorderBeam";
@@ -21,16 +16,15 @@ import CircleLoading from "../animation/CircleLoading";
 import useSWR from "swr";
 import Link from "next/link";
 import { downloadIcsFile } from "@/utils/addCalendar";
+import { dateFns } from "@/common/date";
 
-const getUser = (url: string) =>
-  fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
+const getUser = (url: string) => fetchReq<{ data: Sheet }>(`${nextAPIUrl}${url}`);
 const appendUser = (url: string, { arg }: { arg: Sheet }) =>
   fetchReq(`${nextAPIUrl}${url}`, {
     method: "POST",
     body: JSON.stringify(arg),
   });
-const updateUser = (url: string, { arg }: { arg: Sheet }) =>
-  fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
+const updateUser = (url: string, { arg }: { arg: Sheet }) => fetchReq(`${nextAPIUrl}${url}`, { method: "PUT", body: JSON.stringify(arg) });
 
 type TModalAcceptProps = {
   open: boolean;
@@ -52,23 +46,15 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
     },
   });
   const AppendUserReq = useSWRMutation(`/participants`, appendUser);
-  const UpdateUserReq = useSWRMutation(
-    userData?.id ? `/participants?id=${userData.id}` : null,
-    updateUser
-  );
-  const isLoading =
-    methodForm.formState.isSubmitting ||
-    AppendUserReq?.isMutating ||
-    UpdateUserReq?.isMutating;
+  const UpdateUserReq = useSWRMutation(userData?.id ? `/participants?id=${userData.id}` : null, updateUser);
+  const isLoading = methodForm.formState.isSubmitting || AppendUserReq?.isMutating || UpdateUserReq?.isMutating;
 
   const acceptItems = [
     { value: "NO", label: "Ko đi đc", icon: "😐" },
     { value: "MAYBE", label: "Có thể đi...", icon: "🤔" },
     { value: "YES", label: "YESSS", icon: "🎉" },
   ];
-  const selectedAcceptItem =
-    acceptItems.find((item) => item.value === methodForm.watch("accepted")) ||
-    acceptItems[2];
+  const selectedAcceptItem = acceptItems.find((item) => item.value === methodForm.watch("accepted")) || acceptItems[2];
 
   const handleFire = () => {
     const scalar = 2;
@@ -122,14 +108,10 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   const handleSubmitForm = methodForm.handleSubmit(async (formData) => {
     try {
-      const {
-        accepted,
-        fullName,
-        partyName,
-        phoneNumber,
-        invitedTime,
-        partyDay,
-      } = formData;
+      const [partyType] = (router.query?.slug || []) as string[];
+      const { accepted, fullName, partyName, phoneNumber, invitedTime, partyDay } = formData;
+
+      const defaultData = getUserDataBySlug(partyType);
 
       let res;
       if (userData?.id) {
@@ -157,22 +139,22 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
         toast.success(`Your answer is "YES" 🎉`, {
           description: `Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`,
         });
-        const start = new Date(
-          `${partyDay.split("/").reverse().join("-")}T${invitedTime}:00`
-        );
-        const end = new Date(start.getTime() + 3 * 60 * 60 * 1000);
 
-        const location =
-          partyName == "NhaGai"
-            ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7"
-            : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";
+        const mappedStartDate = dateFns.parse(
+          `${partyDay || defaultData.partyDay} ${invitedTime || defaultData.invitedTime}`,
+          "dd/MM/yyyy H:mm",
+          new Date()
+        );
+        const endDate = dateFns.add(mappedStartDate, { hours: 3 });
+
+        const location = partyName == "NhaGai" ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7" : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";
 
         await downloadIcsFile({
           title: "Lễ Cưới Văn Cường & Yến Linh",
           description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
           location: location,
-          start: start,
-          end: end,
+          start: mappedStartDate,
+          end: endDate,
         });
       } else if (formData.accepted === "MAYBE") {
         toast(`Your answer is "MAYBE" 🤔`, {
@@ -191,13 +173,9 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       }
 
       if (userData?.id) {
-        router.replace(
-          `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}#invitation`
-        );
+        router.replace(`/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}#invitation`);
       } else if (res?.data?.id) {
-        router.replace(
-          `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}#invitation`
-        );
+        router.replace(`/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}#invitation`);
       }
     } catch (error) {
       console.log("error:", error);
@@ -218,12 +196,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   return (
     <>
-      <Modal
-        open={open}
-        setOpen={setOpen}
-        className="max-sm:mt-auto md:max-w-[600px]"
-        classNameCloseBtn="top-4 right-4"
-      >
+      <Modal open={open} setOpen={setOpen} className="max-sm:mt-auto md:max-w-[600px]" classNameCloseBtn="top-4 right-4">
         <div className="flex items-center gap-4 bg-amber-50 p-4 pr-10 text-amber-500">
           <CalendarHeartIcon className="shrink-0" />
           <div className="-mb-1 flex items-baseline">
@@ -285,24 +258,17 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           />
 
           <div className="mb-4 flex flex-col">
-            <div className="mb-2 italic leading-[1.2] text-amber-600">
-              Trân trọng kính mời bạn tham dự Bữa tiệc chung vui của gia đình
-              chúng mình
-            </div>
+            <div className="mb-2 italic leading-[1.2] text-amber-600">Trân trọng kính mời bạn tham dự Bữa tiệc chung vui của gia đình chúng mình</div>
             {userData?.partyName === "NhaGai" ? (
               <>
                 <div className="mb-1 flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
                   <span className="ml-1 font-[600] ">{"17 giờ 00"}</span>
                 </div>
-                <div className="text-base ">
-                  Thứ Bảy, ngày 23 tháng 11 năm 2024
-                </div>
+                <div className="text-base ">Thứ Bảy, ngày 23 tháng 11 năm 2024</div>
                 <div className="mb-2 text-base italic">{`(Tức ngày 23 tháng 10 năm 2024 Giáp Thìn)`}</div>
 
-                <div className="text-base opacity-60">
-                  Tại gia trung tâm tiệc cưới:
-                </div>
+                <div className="text-base opacity-60">Tại gia trung tâm tiệc cưới:</div>
                 <div className="">Trống Đồng Place Lãng Yên, Hà Nội</div>
               </>
             ) : (
@@ -310,31 +276,22 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                 <div className="mb-1 flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
                   <span className="ml-1 font-[600] ">
-                    {userData?.invitedTime
-                      ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}`
-                      : "09 giờ 00"}
+                    {userData?.invitedTime ? `${userData?.invitedTime.split(":")[0]} giờ ${userData?.invitedTime.split(":")[1]}` : "09 giờ 00"}
                   </span>
                 </div>
-                {userData?.partyDay === "25/11/2024" ||
-                userData?.partyName === "NhaTraiChieu" ? (
+                {userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu" ? (
                   <>
-                    <div className="text-base ">
-                      Thứ Hai, ngày 25 tháng 11 năm 2024
-                    </div>
+                    <div className="text-base ">Thứ Hai, ngày 25 tháng 11 năm 2024</div>
                     <div className="mb-2 text-base italic">{`(Tức ngày 25 tháng 10 năm 2024 Giáp Thìn)`}</div>
                   </>
                 ) : (
                   <>
-                    <div className="text-base ">
-                      Thứ Ba, ngày 26 tháng 11 năm 2024
-                    </div>
+                    <div className="text-base ">Thứ Ba, ngày 26 tháng 11 năm 2024</div>
                     <div className="mb-2 text-base italic">{`(Tức ngày 26 tháng 10 năm 2024 Giáp Thìn)`}</div>
                   </>
                 )}
 
-                <div className="text-base opacity-60">
-                  Tại gia đình Nhà Trai:
-                </div>
+                <div className="text-base opacity-60">Tại gia đình Nhà Trai:</div>
                 <div className="">Đội 5, Phú Thịnh, Kim Động, Hưng Yên</div>
               </>
             )}
@@ -358,11 +315,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                       index === 2 && "border-amber-200",
                       field.value === item.value && "border-amber-600"
                     )}
-                    extra={
-                      field.value === item.value && (
-                        <CheckIcon className="absolute right-2 top-2 size-5 fill-amber-50 text-amber-600" />
-                      )
-                    }
+                    extra={field.value === item.value && <CheckIcon className="absolute right-2 top-2 size-5 fill-amber-50 text-amber-600" />}
                   >
                     <div
                       className={cn(
@@ -374,7 +327,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     >
                       {item.icon}
                     </div>
-                    <div className="mt-auto text-base text-inherit">
+                    <div className={cn("mt-auto text-[17px] text-inherit", field.value === item.value && "text-amber-600 font-[600]")}>
                       {item.label}
                     </div>
                   </FormRadioBtn>
@@ -409,11 +362,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                     value={item.value}
                     onChange={field.onChange}
                     classNameWrapper="relative"
-                    className={cn(
-                      "flex-col items-stretch px-2 pb-2 pt-4",
-                      item?.className,
-                      field.value === item.value && "border-amber-600"
-                    )}
+                    className={cn("flex-col items-stretch px-2 pb-2 pt-4", item?.className, field.value === item.value && "border-amber-600")}
                     disabled={item.value !== userData?.partyName}
                     extra={
                       item.value === userData?.partyName ? (
@@ -421,11 +370,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                       ) : (
                         !!userData?.id || (
                           <Link
-                            href={
-                              item.value === "NhaTrai"
-                                ? "/c#invitation"
-                                : "/l#invitation"
-                            }
+                            href={item.value === "NhaTrai" ? "/c#invitation" : "/l#invitation"}
                             className="absolute right-2 top-2 flex items-center text-gray-600 underline hover:text-amber-600"
                             onClick={() => setOpen?.(false)}
                           >
@@ -436,25 +381,11 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
                       )
                     }
                   >
-                    <div
-                      className={cn(
-                        "leading-none h-9 flex items-center mb-1 text-4xl relative"
-                      )}
-                    >
+                    <div className={cn("leading-none h-9 flex items-center mb-1 text-4xl relative")}>
                       <span>{item.icon1}</span>
-                      {!!item?.icon2 && (
-                        <span className="absolute bottom-0 left-[30px] -mb-1 -ml-2 scale-90">
-                          {item.icon2}
-                        </span>
-                      )}
+                      {!!item?.icon2 && <span className="absolute bottom-0 left-[30px] -mb-1 -ml-2 scale-90">{item.icon2}</span>}
                     </div>
-                    <div
-                      className={cn(
-                        "mt-auto text-[17px] text-inherit",
-                        field.value === item.value &&
-                          "text-amber-600 font-[600]"
-                      )}
-                    >
+                    <div className={cn("mt-auto text-[17px] text-inherit", field.value === item.value && "text-amber-600 font-[600]")}>
                       {item.label}
                     </div>
                   </FormRadioBtn>
@@ -468,9 +399,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               <div className="mb-1 text-sm">
                 <span className="font-[600] text-amber-600">{`"${userData?.accepted}"`}</span>
                 <span className="mx-1 opacity-60">at</span>
-                <span className="font-[600] opacity-60">
-                  {userData?.updatedAt}
-                </span>
+                <span className="font-[600] opacity-60">{userData?.updatedAt}</span>
               </div>
             )}
             <button
@@ -478,9 +407,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               type="submit"
               className="relative flex h-[60px] w-full shrink-0 items-center justify-center overflow-hidden rounded-lg border border-amber-500/50 bg-amber-600/10 "
             >
-              <span className="pointer-events-none text-xl font-[600] text-amber-600">
-                {"Tham gia"}
-              </span>
+              <span className="pointer-events-none text-xl font-[600] text-amber-600">{"Tham gia"}</span>
               <span className="ml-2 text-xl">{selectedAcceptItem.icon}</span>
               <BorderBeam size={100} duration={6} delay={2} />
             </button>

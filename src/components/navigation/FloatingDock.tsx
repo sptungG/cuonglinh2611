@@ -191,6 +191,21 @@ function ItemMusic(props: {
   const [duration, setDuration] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const handleAudioStart = () => {
+    const currentAudioRef = audioRef.current;
+    const promise = currentAudioRef?.play();
+    if (promise !== undefined) {
+      promise
+        .then(() => {
+          // Autoplay started!
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsPlaying(false);
+        });
+    }
+  };
+
   const onLoadedMetadata = () => {
     const seconds = audioRef.current?.duration;
     if (seconds !== undefined) {
@@ -198,21 +213,26 @@ function ItemMusic(props: {
     }
   };
 
+  const handleProgressChange = (value: string) => {
+    const currentAudioRef = audioRef.current;
+    if (currentAudioRef) {
+      setIsPlaying(false);
+      currentAudioRef?.pause();
+      const newTime = Number(value);
+      currentAudioRef.currentTime = newTime;
+      setTimeProgress(newTime);
+      setTimeout(() => {
+        setIsPlaying(true);
+        handleAudioStart();
+      }, 100);
+    }
+  };
+
   useEffect(() => {
     const currentAudioRef = audioRef.current;
     if (currentAudioRef && duration) {
       if (isPlaying) {
-        const promise = currentAudioRef?.play();
-        if (promise !== undefined) {
-          promise
-            .then(() => {
-              // Autoplay started!
-            })
-            .catch((error) => {
-              console.log(error);
-              setIsPlaying(false);
-            });
-        }
+        handleAudioStart();
       } else {
         currentAudioRef?.pause();
         const currentTime = currentAudioRef.currentTime;
@@ -282,17 +302,7 @@ function ItemMusic(props: {
                   className="absolute left-0 top-0 h-2 w-full cursor-pointer appearance-none rounded-full bg-transparent accent-current"
                   value={timeProgress}
                   onChange={(e) => {
-                    if (audioRef.current) {
-                      setIsPlaying(false);
-                      audioRef.current?.pause();
-                      const newTime = Number(e.target.value);
-                      audioRef.current.currentTime = newTime;
-                      setTimeProgress(newTime);
-                      setTimeout(() => {
-                        setIsPlaying(true);
-                        audioRef.current?.play();
-                      }, 100);
-                    }
+                    handleProgressChange(e.target.value);
                   }}
                 />
               </div>
