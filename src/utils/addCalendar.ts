@@ -10,9 +10,7 @@ export interface IcsEvent {
 
 export function createICSFile({ title, description, location, start, end }: IcsEvent): string {
   const startDate = formatDateICS(start);
-  console.log("createICSFile ~ startDate:", startDate);
   const endDate = formatDateICS(end);
-  console.log("createICSFile ~ endDate:", endDate);
 
   const icsContent = `
 BEGIN:VCALENDAR
