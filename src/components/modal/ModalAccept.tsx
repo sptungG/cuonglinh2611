@@ -168,9 +168,11 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       }
 
       if (userData?.id) {
-        router.replace(`/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}#invitation`);
+        const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
+        router.replace(path, path, { scroll: false });
       } else if (res?.data?.id) {
-        router.replace(`/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}#invitation`);
+        const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
+        router.replace(path, path, { scroll: false });
       }
     } catch (error) {
       console.log("error:", error);
