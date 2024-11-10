@@ -66,12 +66,13 @@ export class SheetsMethods {
       const foundIndex = rows.findIndex((item) => item.id === values?.id);
       if (foundIndex === -1) throw new Error("No item found with ID: " + values?.id);
       const { id, fullName, phoneNumber, invitedTime, partyDay, partyName, accepted } = values;
+      console.log("SheetsMethods ~ updateRow ~ values:", values);
 
       const result = await SheetsService.spreadsheets.values.update({
         ...SheetTarget,
         valueInputOption: "USER_ENTERED",
-        range: `${SheetTarget.range}!F${foundIndex + 2}:G${foundIndex + 2}`,
-        requestBody: { values: [[partyName, accepted]] },
+        range: `${SheetTarget.range}!D${foundIndex + 2}:G${foundIndex + 2}`,
+        requestBody: { values: [[invitedTime, partyDay, partyName, accepted]] },
       });
       return result;
     } catch (err) {

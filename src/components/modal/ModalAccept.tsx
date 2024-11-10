@@ -115,6 +115,8 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
         res = await UpdateUserReq.trigger({
           id: userData.id,
           phoneNumber,
+          invitedTime,
+          partyDay,
           partyName,
           accepted,
         });
@@ -172,7 +174,6 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
       }
     } catch (error) {
       console.log("error:", error);
-      toast.error("Something went wrong!");
     }
   });
 
