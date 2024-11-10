@@ -108,10 +108,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
   const handleSubmitForm = methodForm.handleSubmit(async (formData) => {
     try {
-      const [partyType] = (router.query?.slug || []) as string[];
       const { accepted, fullName, partyName, phoneNumber, invitedTime, partyDay } = formData;
-
-      const defaultData = getUserDataBySlug(partyType);
 
       let res;
       if (userData?.id) {
@@ -140,11 +137,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           description: `Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`,
         });
 
-        const mappedStartDate = dateFns.parse(
-          `${partyDay || defaultData.partyDay} ${invitedTime || defaultData.invitedTime}`,
-          "dd/MM/yyyy H:mm",
-          new Date()
-        );
+        const mappedStartDate = dateFns.parse(`${partyDay} ${invitedTime}`, "dd/MM/yyyy H:mm", new Date());
         const endDate = dateFns.add(mappedStartDate, { hours: 3 });
 
         const location = partyName == "NhaGai" ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7" : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";

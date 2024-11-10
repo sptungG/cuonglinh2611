@@ -62,7 +62,14 @@ const Page = (props: { data: Sheet }) => {
   const [isOpenQR, setIsOpenQR] = useState(false);
   const { data: getUserRes } = useSWR(id ? `/participants?id=${id}` : null, getUser);
 
-  const userData = getUserRes?.data || props.data;
+  const defaultData = props.data;
+  const resData = getUserRes?.data || defaultData;
+  const userData = {
+    ...resData,
+    invitedTime: resData.invitedTime || defaultData.invitedTime,
+    partyDay: resData.partyDay || defaultData.partyDay,
+    partyName: resData.partyName || defaultData.partyName,
+  };
   const mapParty =
     userData?.partyName === "NhaGai"
       ? "https://www.google.com/maps/search/?api=1&query=21.009745980494834,105.86708485767026"
@@ -175,12 +182,14 @@ export const getStaticProps = (async ({ params }) => {
       notFound: true,
     };
 
+  const defaultData = getUserDataBySlug(partyType);
+
   if (!id)
     return {
       props: {
         data: {
           id: "",
-          ...getUserDataBySlug(partyType),
+          ...defaultData,
         },
       },
     };
@@ -191,7 +200,18 @@ export const getStaticProps = (async ({ params }) => {
       notFound: true,
     };
 
-  return { props: { data: sheetRow.data }, revalidate: 1 };
+  const data = sheetRow.data;
+  return {
+    props: {
+      data: {
+        ...data,
+        invitedTime: data.invitedTime || defaultData.invitedTime,
+        partyDay: data.partyDay || defaultData.partyDay,
+        partyName: data.partyName || defaultData.partyName,
+      },
+    },
+    revalidate: 1,
+  };
 }) satisfies GetStaticProps<{ data: Sheet }>;
 
 const PageWrapper = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
