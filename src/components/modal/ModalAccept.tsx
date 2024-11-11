@@ -8,7 +8,7 @@ import { BorderBeam } from "../background/BorderBeam";
 import { FormInputFloating } from "../form/FormInput";
 import FormRadioBtn from "../form/FormRadioBtn";
 import { Modal } from "./AnimatedModal";
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 import { fetchReq, nextAPIUrl } from "@/common/request";
 import useSWRMutation from "swr/mutation";
 import { useRouter } from "next/router";
@@ -135,36 +135,42 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
 
       if (formData.accepted === "YES") {
         handleFire();
-        toast.success(`Your answer is "YES" 🎉`, {
-          description: `Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`,
-        });
 
         const mappedStartDate = dateFns.parse(`${partyDay} ${invitedTime}`, "dd/MM/yyyy H:mm", new Date());
         const endDate = dateFns.add(mappedStartDate, { hours: 3 });
-
         const location = partyName == "NhaGai" ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7" : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";
 
-        await downloadIcsFile({
-          title: "Lễ Cưới Văn Cường & Yến Linh",
-          description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
-          location: location,
-          start: mappedStartDate,
-          end: endDate,
-        });
-      } else if (formData.accepted === "MAYBE") {
-        toast(`Your answer is "MAYBE" 🤔`, {
-          description: "Hope to see you soon!",
-        });
-      } else {
-        toast(`Your answer is "NO" 😐`, {
-          description: ":<<<",
-          action: {
-            label: "Try again",
-            onClick: () => {
-              setOpen?.(true);
+        toast.success(
+          <div className="flex flex-col">
+            <div className="font-[600]">{`Your answer is "YES" 🎉`}</div>
+            <div className="mb-1 whitespace-nowrap text-sm">{`Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`}</div>
+          </div>,
+          {
+            onOpen: () => {
+              downloadIcsFile({
+                title: "Lễ Cưới Văn Cường & Yến Linh",
+                description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
+                location: location,
+                start: mappedStartDate,
+                end: endDate,
+              });
             },
-          },
-        });
+          }
+        );
+      } else if (formData.accepted === "MAYBE") {
+        toast.warn(
+          <div className="flex flex-col">
+            <div className="font-[600]">{`Your answer is "MAYBE" 🤔`}</div>
+            <div className="text-sm">Hope to see you soon!</div>
+          </div>
+        );
+      } else {
+        toast.warn(
+          <div className="flex flex-col">
+            <div className="font-[600]">{`Your answer is "NO" 😐`}</div>
+            <div className="text-sm">{`:<<<`}</div>
+          </div>
+        );
       }
 
       if (userData?.id) {
