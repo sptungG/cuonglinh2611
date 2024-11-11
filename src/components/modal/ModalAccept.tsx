@@ -141,22 +141,27 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
         const location = partyName == "NhaGai" ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7" : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";
 
         toast.success(
-          <div className="flex flex-col">
+          <div className="flex flex-col sm:w-[400px]">
             <div className="font-[600]">{`Your answer is "YES" 🎉`}</div>
-            <div className="mb-1 whitespace-nowrap text-sm">{`Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`}</div>
-          </div>,
-          {
-            onOpen: () => {
-              downloadIcsFile({
-                title: "Lễ Cưới Văn Cường & Yến Linh",
-                description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
-                location: location,
-                start: mappedStartDate,
-                end: endDate,
-              });
-            },
-          }
+            <div className="mb-1 text-sm leading-[1.2]">{`Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`}</div>
+          </div>
         );
+
+        downloadIcsFile({
+          title: "Lễ Cưới Văn Cường & Yến Linh",
+          description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
+          location: location,
+          start: mappedStartDate,
+          end: endDate,
+        }).then(() => {
+          if (userData?.id) {
+            const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
+            router.replace(path, path, { scroll: false });
+          } else if (res?.data?.id) {
+            const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
+            router.replace(path, path, { scroll: false });
+          }
+        });
       } else if (formData.accepted === "MAYBE") {
         toast.warn(
           <div className="flex flex-col">
@@ -164,6 +169,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             <div className="text-sm">Hope to see you soon!</div>
           </div>
         );
+        if (userData?.id) {
+          const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
+          router.replace(path, path, { scroll: false });
+        } else if (res?.data?.id) {
+          const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
+          router.replace(path, path, { scroll: false });
+        }
       } else {
         toast.warn(
           <div className="flex flex-col">
@@ -171,14 +183,13 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             <div className="text-sm">{`:<<<`}</div>
           </div>
         );
-      }
-
-      if (userData?.id) {
-        const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
-        router.replace(path, path, { scroll: false });
-      } else if (res?.data?.id) {
-        const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
-        router.replace(path, path, { scroll: false });
+        if (userData?.id) {
+          const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
+          router.replace(path, path, { scroll: false });
+        } else if (res?.data?.id) {
+          const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
+          router.replace(path, path, { scroll: false });
+        }
       }
     } catch (error) {
       console.log("error:", error);
