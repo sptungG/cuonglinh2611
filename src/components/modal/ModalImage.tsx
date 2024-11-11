@@ -20,7 +20,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
       setOpen={(open) => {
         if (!open) onOpenChange?.(undefined);
       }}
-      className="h-dvh !max-h-dvh w-dvw !max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14"
+      className="h-dvh !max-h-dvh w-dvw !max-w-[100dvw] !items-center !justify-center border-0 bg-transparent sm:px-14 2xl:!max-w-[1200px]"
       classNameCloseBtn="sm:bg-gray-100/10 rounded-full top-1 right-1 sm:top-2 sm:right-2 size-9"
     >
       <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-white/90 pb-[48px] pt-[44px] sm:bg-gray-100/10 sm:py-[60px]">
