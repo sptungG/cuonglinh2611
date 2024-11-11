@@ -147,20 +147,12 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
           </div>
         );
 
-        downloadIcsFile({
+        await downloadIcsFile({
           title: "Lễ Cưới Văn Cường & Yến Linh",
           description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
           location: location,
           start: mappedStartDate,
           end: endDate,
-        }).then(() => {
-          if (userData?.id) {
-            const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
-            router.replace(path, path, { scroll: false });
-          } else if (res?.data?.id) {
-            const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
-            router.replace(path, path, { scroll: false });
-          }
         });
       } else if (formData.accepted === "MAYBE") {
         toast.warn(
@@ -169,13 +161,6 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             <div className="text-sm">Hope to see you soon!</div>
           </div>
         );
-        if (userData?.id) {
-          const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
-          router.replace(path, path, { scroll: false });
-        } else if (res?.data?.id) {
-          const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
-          router.replace(path, path, { scroll: false });
-        }
       } else {
         toast.warn(
           <div className="flex flex-col">
@@ -183,14 +168,25 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
             <div className="text-sm">{`:<<<`}</div>
           </div>
         );
-        if (userData?.id) {
-          const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
-          router.replace(path, path, { scroll: false });
-        } else if (res?.data?.id) {
-          const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
-          router.replace(path, path, { scroll: false });
-        }
       }
+
+      toast.promise(
+        new Promise((resolve) =>
+          setTimeout(() => {
+            if (userData?.id) {
+              const path = `/${userData.partyName === "NhaGai" ? "l" : "c"}/${userData.id}`;
+              router.replace(path, path, { scroll: false });
+            } else if (res?.data?.id) {
+              const path = `/${res.data.partyName === "NhaGai" ? "l" : "c"}/${res.data.id}`;
+              router.replace(path, path, { scroll: false });
+            }
+            resolve(true);
+          }, 0)
+        ),
+        {
+          pending: "Getting your invitation...",
+        }
+      );
     } catch (error) {
       console.log("error:", error);
     }
