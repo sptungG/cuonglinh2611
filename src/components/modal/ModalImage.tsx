@@ -20,7 +20,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
       setOpen={(open) => {
         if (!open) onOpenChange?.(undefined);
       }}
-      className="h-dvh max-h-[auto] min-h-fit max-w-[1000px] !items-center !justify-center border-0 bg-transparent sm:px-14 md:max-w-fit"
+      className="h-dvh !max-h-dvh w-dvw !max-w-[100dvw] !items-center !justify-center border-0 bg-transparent sm:px-14"
       classNameCloseBtn="sm:bg-gray-100/10 rounded-full top-1 right-1 sm:top-2 sm:right-2 size-9"
     >
       <div className="flex h-full flex-col items-center justify-center overflow-hidden bg-white/90 pb-[48px] pt-[44px] sm:bg-gray-100/10 sm:py-[60px]">
@@ -29,7 +29,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
           height={1000}
           width={1000}
           alt=""
-          className="inset-0 !h-auto !max-h-full w-auto !min-w-[100dvw] object-contain sm:!min-w-[300px]"
+          className="inset-0 !h-full !max-h-full w-auto !min-w-[100dvw] object-contain sm:!min-w-[300px]"
           quality={90}
           loading="eager"
           placeholder="blur"
@@ -45,7 +45,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
             </div>
           )}
 
-          <div className="absolute bottom-1 left-1 sm:bottom-1/2 sm:left-0 sm:translate-y-1/2">
+          <div className="absolute bottom-1 left-1 sm:bottom-1/2 sm:left-1 sm:translate-y-1/2">
             <button
               disabled={!canPreviewPrev}
               onClick={onPreviewPrev}
@@ -54,7 +54,7 @@ const ModalImage = ({ src, onOpenChange }: TModalImageProps) => {
               <ArrowLeftIcon className={cn("size-6 transition duration-200", canPreviewPrev && "sm:group-hover:rotate-3 sm:group-hover:scale-125")} />
             </button>
           </div>
-          <div className="absolute bottom-1 right-1 sm:bottom-1/2 sm:right-0 sm:translate-y-1/2">
+          <div className="absolute bottom-1 right-1 sm:bottom-1/2 sm:right-1 sm:translate-y-1/2">
             <button
               disabled={!canPreviewNext}
               onClick={onPreviewNext}
