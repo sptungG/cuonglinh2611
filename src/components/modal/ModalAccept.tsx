@@ -139,21 +139,19 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
         const mappedStartDate = dateFns.parse(`${partyDay} ${invitedTime}`, "dd/MM/yyyy H:mm", new Date());
         const endDate = dateFns.add(mappedStartDate, { hours: 3 });
         const location = partyName == "NhaGai" ? "https://maps.app.goo.gl/gzs9MRd9NqgfZits7" : "https://maps.app.goo.gl/gBg3rjwBqTo81Gkr5";
-
-        toast.success(
-          <div className="flex flex-col sm:w-[400px]">
-            <div className="font-[600]">{`Your answer is "YES" 🎉`}</div>
-            <div className="mb-1 text-sm leading-[1.2]">{`Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`}</div>
-          </div>
-        );
-
-        await downloadIcsFile({
+        downloadIcsFile({
           title: "Lễ Cưới Văn Cường & Yến Linh",
           description: `Trân trọng kính mời bạn đến tham dự Lễ Thành Hôn của Văn Cường và Yến Linh tại ${partyName == "NhaGai" ? "Nhà Gái: Trống Đồng Place, 2 P. Lãng Yên, Hai Bà Trưng, Hà Nội" : "Nhà Trai: Đội 5, Phú Thịnh, Kim Động, Hưng Yên"}. Sự hiện diện của bạn là niềm vui và vinh hạnh cho đôi uyên ương trong ngày trọng đại này.`,
           location: location,
           start: mappedStartDate,
           end: endDate,
         });
+        toast.success(
+          <div className="flex flex-col sm:w-[400px]">
+            <div className="font-[600]">{`Your answer is "YES" 🎉`}</div>
+            <div className="mb-1 text-sm leading-[1.2]">{`Thank youu${formData?.fullName ? ", " + formData?.fullName : ""}! See you soon!`}</div>
+          </div>
+        );
       } else if (formData.accepted === "MAYBE") {
         toast.warn(
           <div className="flex flex-col">
@@ -181,7 +179,7 @@ const ModalAccept = ({ open, setOpen, userData }: TModalAcceptProps) => {
               router.replace(path, path, { scroll: false });
             }
             resolve(true);
-          }, 0)
+          }, 500)
         ),
         {
           pending: "Getting your invitation...",

@@ -33,19 +33,15 @@ function formatDateICS(date: Date): string {
   return date.toISOString().replace(/-|:|\.\d+/g, "");
 }
 
-export function downloadIcsFile(event: IcsEvent): Promise<void> {
-  return new Promise((resolve) => {
-    const icsUrl = createICSFile({
-      title: event.title,
-      description: event.description,
-      location: event.location,
-      start: event.start,
-      end: event.end,
-    });
-
-    setTimeout(() => {
-      openInNewTab(icsUrl, `${event.title}.ics`);
-      resolve();
-    }, 100);
+export function downloadIcsFile(event: IcsEvent) {
+  const icsUrl = createICSFile({
+    title: event.title,
+    description: event.description,
+    location: event.location,
+    start: event.start,
+    end: event.end,
   });
+
+  openInNewTab(icsUrl, `${event.title}.ics`);
+  return icsUrl;
 }
