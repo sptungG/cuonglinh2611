@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: process.env.NODE_ENV !== "production",
-  swcMinify: process.env.NODE_ENV === "production",
-  compress: process.env.NODE_ENV === "production",
+  reactStrictMode: true,
+  swcMinify: true,
+  compress: true,
   experimental: {
-    optimizeCss: process.env.NODE_ENV === "production",
+    optimizeCss: true,
     scrollRestoration: false,
   },
   images: {
