@@ -1,15 +1,13 @@
+import { IMG_BLUR } from "@/common/constant";
 import { cn } from "@/common/utils";
 import Fonts from "@/styles/fonts";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { ArrowUpIcon, HomeIcon, SlashIcon } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useId, useState } from "react";
+import React, { useId } from "react";
 import { useMediaQuery } from "react-responsive";
-import NImage from "../next/NextImage";
 import PreviewImagesProvider from "../context/PreviewImagesContext";
-import { IMG_BLUR } from "@/common/constant";
-// shuffleArray
+import NImage from "../next/NextImage";
 // shuffleArray
 // shuffleArray
 function shuffleArray(array: string[]) {
