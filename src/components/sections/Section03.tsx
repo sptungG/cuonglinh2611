@@ -129,7 +129,7 @@ const Section03 = ({ userData }: TSection03Props) => {
               <>
                 <FadeWrapper className="flex items-baseline text-neutral-500">
                   <span>Tổ chức vào lúc</span>
-                  <span className="ml-1 font-[600]">{"17 giờ 00"}</span>
+                  <span className="ml-1 font-[600]">{"17 giờ 30"}</span>
                 </FadeWrapper>
                 <FadeWrapper className="text-lg">
                   Thứ Bảy, ngày 23 tháng 11 năm 2024
