@@ -78,7 +78,10 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
           >
             {userData?.partyName === "NhaGai"
               ? `23 Tháng 11, 2024`
-              : `26 Tháng 11, 2024`}
+              : userData?.partyDay === "25/11/2024" ||
+                  userData?.partyName === "NhaTraiChieu"
+                ? `25 Tháng 11, 2024`
+                : `26 Tháng 11, 2024`}
           </div>
 
           <div className="mb-2 flex items-center gap-1 text-base leading-[1.2] sm:text-lg">
