@@ -10,13 +10,25 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
   return (
     <section className="relative flex min-h-dvh items-center justify-center max-sm:flex-col max-sm:pb-40 max-sm:pt-20 sm:max-h-[1500px]">
       <div className="flex flex-col items-center justify-center max-sm:mt-20">
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
+        <FadeWrapper
+          direction="left"
+          className={cn(
+            Fonts.DancingScript.className,
+            "text-xl text-amber-400 font-[700] uppercase mb-1"
+          )}
+        >
           Cô dâu
         </FadeWrapper>
-        <FadeWrapper direction="left" className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>
+        <FadeWrapper
+          direction="left"
+          className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}
+        >
           Nguyễn Yến Linh
         </FadeWrapper>
-        <FadeWrapper direction="left" className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]">
+        <FadeWrapper
+          direction="left"
+          className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]"
+        >
           <NImage
             src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487153/cuonglinh2611/albums/dx96rtpoodv1ly7c8xcj.jpg"
             height={0}
@@ -40,7 +52,7 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
       {mediaAbove640 && (
         <FadeWrapper className="relative mx-16 hidden h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 max-sm:-order-1 sm:flex">
           <NImage
-            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487149/cuonglinh2611/albums/pr8omw0riiihnokxibb7.jpg"
+            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1731813522/cuonglinh2611/albums/thyvlfoqcsvx8r2cuot4.png"
             alt="2611"
             height={0}
             width={300}
@@ -70,7 +82,7 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
           className="relative mb-3 flex size-[300px] items-center justify-center max-sm:order-3 max-sm:mt-6 sm:size-[260px]"
         >
           <NImage
-            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/cv5javq9t38zwfzaheuy.jpg"
+            src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1731813678/cuonglinh2611/albums/rpefcobjdrhmegp1amou.png"
             height={0}
             width={172}
             loading="eager"
@@ -87,10 +99,19 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
             />
           </div>
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}>
+        <FadeWrapper
+          direction="right"
+          className={cn(
+            Fonts.DancingScript.className,
+            "text-xl text-amber-400 font-[700] uppercase mb-1"
+          )}
+        >
           Chú rể
         </FadeWrapper>
-        <FadeWrapper direction="right" className={cn(Fonts.DancingScript.className, "text-5xl ")}>
+        <FadeWrapper
+          direction="right"
+          className={cn(Fonts.DancingScript.className, "text-5xl ")}
+        >
           Nguyễn Văn Cường
         </FadeWrapper>
       </div>

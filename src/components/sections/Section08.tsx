@@ -15,13 +15,13 @@ const IMAGES = [
   // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg",
   // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487174/cuonglinh2611/albums/xr89qr0buoarwut8lhog.jpg",
   // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487172/cuonglinh2611/albums/fyhxoiixev8hlkmk1trc.jpg",
-  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244972/cuonglinh2611/albums/luhrk5vaismtlkj8g2ru.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814139/cuonglinh2611/albums/vi2kxytuizq1zvkjbfuc.jpg",
   "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244974/cuonglinh2611/albums/ngd9xdlwk87p2rlz69zq.jpg",
-  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487152/cuonglinh2611/albums/ypw8ls6wyx0jo2ezu141.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814207/cuonglinh2611/albums/skuwyrd4gm1wpfumjvgy.png",
   "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg",
   // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244972/cuonglinh2611/albums/yxq5em5w2bfwojkjn2va.jpg",
-  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244972/cuonglinh2611/albums/yxq5em5w2bfwojkjn2va.jpg",
-  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244973/cuonglinh2611/albums/q6ls006x29zaneslu40d.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814137/cuonglinh2611/albums/kgwim46tax7unxjtdlpg.jpg",
+  "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814142/cuonglinh2611/albums/qc1zl4ycgetvrthf6n6c.jpg",
   // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244974/cuonglinh2611/albums/ngd9xdlwk87p2rlz69zq.jpg",
 ];
 

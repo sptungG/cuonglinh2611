@@ -47,12 +47,12 @@ const Section07 = ({ onClickBtn01, setModalImage }: TSection07Props) => {
             // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/sjb4sqfg9jy3ik0lth9x.jpg",
             // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487151/cuonglinh2611/albums/vgc8bcfwhfqdew2aqm93.jpg",
             // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487156/cuonglinh2611/albums/jqhpuelqjqy7kiylyso2.jpg",
-            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244972/cuonglinh2611/albums/nltbq0bz5kpxxa8t2vkp.jpg",
-            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244972/cuonglinh2611/albums/cqtbfxdfnrxqz05rsxl9.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814136/cuonglinh2611/albums/b1q9cevpesl8c5zvgeiw.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814136/cuonglinh2611/albums/jnuctzfli23qggaycf1c.jpg",
             "https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487170/cuonglinh2611/albums/sjb4sqfg9jy3ik0lth9x.jpg",
             // "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244972/cuonglinh2611/albums/yxq5em5w2bfwojkjn2va.jpg",
-            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244974/cuonglinh2611/albums/s9klhyet6vlrkb1dsxf6.jpg",
-            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731244974/cuonglinh2611/albums/ngd9xdlwk87p2rlz69zq.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814139/cuonglinh2611/albums/k5bviecjmidqzbny8tep.jpg",
+            "https://res.cloudinary.com/dcos6mpjy/image/upload/v1731814139/cuonglinh2611/albums/hcvvubntskbjatx2w2xn.jpg",
           ].map((image, index) => {
             const zIndex = 10;
             return (
