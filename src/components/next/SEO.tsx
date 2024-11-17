@@ -15,7 +15,7 @@ const SEO = ({ title = "Cuong&Linh", description = "Cuong&Linh", keywords = "", 
   const metaDescription = description ? description : process.env.NEXT_PUBLIC_siteDescription;
   const metaKeywords = keywords ? keywords : process.env.NEXT_PUBLIC_siteKeywords;
   const twitterHandle = process.env.NEXT_PUBLIC_twitterHandle;
-  const siteImagePreviewUrl = `${router.basePath}/${process.env.NEXT_PUBLIC_siteImagePreviewUrl}`;
+  const siteImagePreviewUrl = `${router.basePath}/preview.png`;
 
   return (
     <Head>
