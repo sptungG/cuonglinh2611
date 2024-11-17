@@ -5,7 +5,7 @@ import Fonts from "@/styles/fonts";
 import { MapPinIcon } from "lucide-react";
 import { useMediaQuery } from "react-responsive";
 import FadeWrapper from "../animation/Fade";
-import { RainbowButton } from "../button/RainbowButton";
+import { RainbowButtonLink } from "../button/RainbowButton";
 import NImage from "../next/NextImage";
 
 type TSection01Props = { userData: Sheet; onClickBtn01?: () => void };
@@ -52,34 +52,19 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
         )}
 
         <div className="relative flex flex-col items-center justify-center px-0 text-center max-sm:-order-1 sm:px-20">
-          <div
-            className={cn(
-              Fonts.Manrope.className,
-              "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8"
-            )}
-          >
-            CHÚNG MÌNH CƯỚI
-          </div>
+          <div className={cn(Fonts.Manrope.className, "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8")}>CHÚNG MÌNH CƯỚI</div>
           <h2
             className={cn(
               Fonts.GreatVibes.className,
               "text-4xl sm:text-6xl font-[600] text-center whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]"
             )}
           >
-            {userData?.partyName === "NhaGai"
-              ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường`
-              : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
+            {userData?.partyName === "NhaGai" ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường` : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
           </h2>
-          <div
-            className={cn(
-              Fonts.DancingScript.className,
-              "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6"
-            )}
-          >
+          <div className={cn(Fonts.DancingScript.className, "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}>
             {userData?.partyName === "NhaGai"
               ? `23 Tháng 11, 2024`
-              : userData?.partyDay === "25/11/2024" ||
-                  userData?.partyName === "NhaTraiChieu"
+              : userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu"
                 ? `25 Tháng 11, 2024`
                 : `26 Tháng 11, 2024`}
           </div>
@@ -93,14 +78,14 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
             </span>
           </div>
 
-          <RainbowButton
+          <RainbowButtonLink
+            href={mapParty}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-base uppercase tracking-[2px] text-amber-900 ring-1 ring-amber-300"
-            onClick={() => {
-              onClickBtn01?.();
-            }}
           >
-            THAM GIA NGAY
-          </RainbowButton>
+            Xem vị trí
+          </RainbowButtonLink>
         </div>
 
         <FadeWrapper className="relative h-[480px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
