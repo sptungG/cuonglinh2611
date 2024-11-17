@@ -60,6 +60,9 @@ const Section03 = ({ userData }: TSection03Props) => {
                 </div>
                 <div className="">Ông: Nguyễn Văn Linh</div>
                 <div className="">Bà: Nguyễn Thị Hoàn</div>
+                <div className="text-center text-[#ffaa40] font-bold">
+                  Phú Thịnh, Kim Động, Hưng Yên
+                </div>
               </FadeWrapper>
 
               <NImage
@@ -79,6 +82,9 @@ const Section03 = ({ userData }: TSection03Props) => {
                 </div>
                 <div className="">Ông: Nguyễn Phương Dũng</div>
                 <div className="">Bà: Nguyễn Thị Minh</div>
+                <div className="text-center text-[#ffaa40] font-bold">
+                  305 Phúc Tân, Hoàn Kiếm, Hà Nội
+                </div>
               </FadeWrapper>
             </div>
 
