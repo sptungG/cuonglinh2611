@@ -80,8 +80,8 @@ const SectionAlbum = () => {
   const virtualizer = useWindowVirtualizer({
     count: ALBUMS.length,
     estimateSize: (i) => 100,
-    overscan: mediaAbove640 ? 5 : 1000,
-    lanes: mediaAbove640 ? 5 : 2,
+    overscan: mediaAbove640 ? 3 : 1000,
+    lanes: mediaAbove640 ? 3 : 2,
     gap: mediaAbove640 ? 20 : 10,
     scrollMargin: 0,
     paddingEnd: 80,
@@ -101,25 +101,13 @@ const SectionAlbum = () => {
           <HomeIcon className="size-6 text-amber-600 sm:size-8" />
         </button>
         <SlashIcon className="rotate-[-17deg] text-amber-500" />
-        <div
-          className={cn(
-            Fonts.DancingScript.className,
-            "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600"
-          )}
-        >
+        <div className={cn(Fonts.DancingScript.className, "relative text-3xl sm:text-4xl z-10 text-left font-[600] text-amber-600")}>
           Album chúng mình
         </div>
       </div>
 
-      <div
-        className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5"
-        ref={listRef}
-        style={{ overflowAnchor: "none" }}
-      >
-        <div
-          className="relative min-h-dvh w-full"
-          style={{ height: `${virtualizer.getTotalSize()}px` }}
-        >
+      <div className="relative mx-auto w-full max-w-[1900px] px-1 sm:px-5" ref={listRef} style={{ overflowAnchor: "none" }}>
+        <div className="relative min-h-dvh w-full" style={{ height: `${virtualizer.getTotalSize()}px` }}>
           {virtualizer.getVirtualItems().map((item) => {
             const src = ALBUMS[item.index];
             return (
@@ -132,8 +120,8 @@ const SectionAlbum = () => {
                     ? {
                         position: "absolute",
                         top: 0,
-                        left: `calc(${item.lane * 20}% + 10px)`,
-                        width: "calc(20% - 20px)",
+                        left: `calc(${item.lane * 33}% + 20px)`,
+                        width: "calc(33% - 20px)",
                         transform: `translateY(${item.start}px)`,
                       }
                     : {
