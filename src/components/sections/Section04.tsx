@@ -3,6 +3,7 @@ import Fonts from "@/styles/fonts";
 import { useMediaQuery } from "react-responsive";
 import FadeWrapper from "../animation/Fade";
 import NImage from "../next/NextImage";
+import { MotionEffect } from "../animation/MotionEffect";
 
 const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
   const mediaAbove640 = useMediaQuery({ minWidth: 640 });
@@ -10,23 +11,21 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
   return (
     <section className="relative flex min-h-dvh items-center justify-center max-sm:flex-col max-sm:pb-40 max-sm:pt-20 sm:max-h-[1500px]">
       <div className="flex flex-col items-center justify-center max-sm:mt-20">
-        <FadeWrapper
-          direction="left"
-          className={cn(
-            Fonts.DancingScript.className,
-            "text-xl text-amber-400 font-[700] uppercase mb-1"
-          )}
+        <MotionEffect
+          slide={{ direction: "left" }}
+          inView
+          inViewOnce={false}
+          className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}
         >
           Cô dâu
-        </FadeWrapper>
-        <FadeWrapper
-          direction="left"
-          className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}
-        >
+        </MotionEffect>
+        <MotionEffect slide={{ direction: "left" }} inView inViewOnce={false} className={cn(Fonts.DancingScript.className, "text-5xl mb-3")}>
           Nguyễn Yến Linh
-        </FadeWrapper>
-        <FadeWrapper
-          direction="left"
+        </MotionEffect>
+        <MotionEffect
+          slide={{ direction: "left" }}
+          inView
+          inViewOnce={false}
           className="relative flex size-[300px] items-center justify-center max-sm:mt-4 sm:size-[260px]"
         >
           <NImage
@@ -46,11 +45,16 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
               className="size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
             />
           </div>
-        </FadeWrapper>
+        </MotionEffect>
       </div>
 
       {mediaAbove640 && (
-        <FadeWrapper className="relative mx-16 hidden h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 max-sm:-order-1 sm:flex">
+        <MotionEffect
+          slide={{ direction: "left" }}
+          inView
+          inViewOnce={false}
+          className="relative mx-16 hidden h-full max-h-[60%] min-w-[400px] max-w-xs shrink-0 flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 max-sm:-order-1 sm:flex"
+        >
           <NImage
             src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1731813522/cuonglinh2611/albums/thyvlfoqcsvx8r2cuot4.png"
             alt="2611"
@@ -73,12 +77,14 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
             width={120}
             className="absolute bottom-0 right-[-40px] animate-[bounceY_10s_linear_infinite]"
           />
-        </FadeWrapper>
+        </MotionEffect>
       )}
 
       <div className="flex flex-col items-center justify-center max-sm:-order-1">
-        <FadeWrapper
-          direction="right"
+        <MotionEffect
+          slide={{ direction: "right" }}
+          inView
+          inViewOnce={false}
           className="relative mb-3 flex size-[300px] items-center justify-center max-sm:order-3 max-sm:mt-6 sm:size-[260px]"
         >
           <NImage
@@ -98,22 +104,18 @@ const Section04 = (props: { setModalImage?: (src?: string) => void }) => {
               className="size-[300px] max-w-screen-sm animate-[zoomTwo_5s_linear_infinite] object-cover sm:size-[260px]"
             />
           </div>
-        </FadeWrapper>
-        <FadeWrapper
-          direction="right"
-          className={cn(
-            Fonts.DancingScript.className,
-            "text-xl text-amber-400 font-[700] uppercase mb-1"
-          )}
+        </MotionEffect>
+        <MotionEffect
+          slide={{ direction: "right" }}
+          inView
+          inViewOnce={false}
+          className={cn(Fonts.DancingScript.className, "text-xl text-amber-400 font-[700] uppercase mb-1")}
         >
           Chú rể
-        </FadeWrapper>
-        <FadeWrapper
-          direction="right"
-          className={cn(Fonts.DancingScript.className, "text-5xl ")}
-        >
+        </MotionEffect>
+        <MotionEffect slide={{ direction: "right" }} inView inViewOnce={false} className={cn(Fonts.DancingScript.className, "text-5xl ")}>
           Nguyễn Văn Cường
-        </FadeWrapper>
+        </MotionEffect>
       </div>
 
       <NImage

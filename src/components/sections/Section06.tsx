@@ -4,21 +4,29 @@ import Fonts from "@/styles/fonts";
 import { cn } from "@/common/utils";
 import TimelineDating from "../timeline/TimelineDating";
 import NImage from "../next/NextImage";
+import { MotionEffect } from "../animation/MotionEffect";
 
 type TSection06Props = { setModalImage?: (src?: string) => void };
 
 const Section06 = ({ setModalImage }: TSection06Props) => {
   return (
     <section className="relative flex min-h-dvh flex-col items-center justify-center">
-      <FadeWrapper direction="right" className="text-center text-xl uppercase text-amber-500 max-sm:w-[90dvw] max-sm:overflow-hidden">
+      <MotionEffect
+        slide={{ direction: "right" }}
+        inView
+        inViewOnce={false}
+        className="text-center text-xl uppercase text-amber-500 max-sm:w-[90dvw] max-sm:overflow-hidden"
+      >
         Chuyện chúng mình
-      </FadeWrapper>
-      <FadeWrapper
-        direction="right"
+      </MotionEffect>
+      <MotionEffect
+        slide={{ direction: "right" }}
+        inView
+        inViewOnce={false}
         className={cn(Fonts.DancingScript.className, "text-5xl sm:text-6xl text-center font-[600] mb-4 max-sm:w-[90dvw] max-sm:overflow-hidden")}
       >
         Đã bắt đầu như thế nào
-      </FadeWrapper>
+      </MotionEffect>
 
       <TimelineDating setModalImage={setModalImage} />
 

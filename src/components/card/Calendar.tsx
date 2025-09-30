@@ -22,7 +22,8 @@ const Calendar = ({ initialRange }: TCalendarProps) => {
   const [currYear, setCurrYear] = useState<number>(new Date().getFullYear());
 
   const [dateRange, setDateRange] = useState<DateRange>({
-    startDate: new Date(),
+    // startDate: new Date(),
+    startDate: initialRange?.startDate ?? new Date(),
     endDate: initialRange?.endDate ?? dateFns.add(new Date(), { days: 20 }),
   });
 

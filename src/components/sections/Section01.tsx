@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import FadeWrapper from "../animation/Fade";
 import { RainbowButtonLink } from "../button/RainbowButton";
 import NImage from "../next/NextImage";
+import { MotionEffect } from "../animation/MotionEffect";
 
 type TSection01Props = { userData: Sheet; onClickBtn01?: () => void };
 
@@ -22,7 +23,12 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
     <section className="relative flex min-h-dvh max-w-[100dvw] flex-col items-center justify-center overflow-x-hidden max-sm:py-20 sm:max-h-[1500px]">
       <div className="z-10 flex items-center max-sm:flex-col sm:justify-between">
         {mediaAbove640 && (
-          <FadeWrapper className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex">
+          <MotionEffect
+            slide={{ direction: "left" }}
+            inView
+            inViewOnce={false}
+            className="relative hidden h-[476px] max-w-xs flex-col items-center justify-center rounded-full border-2 border-amber-900/50 p-2 sm:flex"
+          >
             <NImage
               src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1730487159/cuonglinh2611/albums/jurh3dhvnzzsdp36rplq.jpg"
               alt="2611"
@@ -48,38 +54,23 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
               width={100}
               className="absolute right-[-20px] top-0 animate-[bounceY_12s_linear_infinite]"
             />
-          </FadeWrapper>
+          </MotionEffect>
         )}
 
         <div className="relative flex flex-col items-center justify-center px-0 text-center max-sm:-order-1 sm:px-20">
-          <div
-            className={cn(
-              Fonts.Manrope.className,
-              "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8"
-            )}
-          >
-            CHÚNG MÌNH CƯỚI
-          </div>
+          <div className={cn(Fonts.Manrope.className, "text-base sm:text-xl font-[600] tracking-[4px] mb-4 sm:mb-8")}>CHÚNG MÌNH CƯỚI</div>
           <h2
             className={cn(
               Fonts.GreatVibes.className,
               "text-4xl sm:text-6xl font-[600] text-center whitespace-pre-line tracking-[4px]  mb-8 leading-[1.2]"
             )}
           >
-            {userData?.partyName === "NhaGai"
-              ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường`
-              : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
+            {userData?.partyName === "NhaGai" ? `Nguyễn Yến Linh \n&\n Nguyễn Văn Cường` : `Nguyễn Văn Cường \n&\n Nguyễn Yến Linh`}
           </h2>
-          <div
-            className={cn(
-              Fonts.DancingScript.className,
-              "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6"
-            )}
-          >
+          <div className={cn(Fonts.DancingScript.className, "text-2xl sm:text-3xl font-[600] tracking-[4px] border-y-2 border-amber-900 py-3 mb-6")}>
             {userData?.partyName === "NhaGai"
               ? `23 Tháng 11, 2024`
-              : userData?.partyDay === "25/11/2024" ||
-                  userData?.partyName === "NhaTraiChieu"
+              : userData?.partyDay === "25/11/2024" || userData?.partyName === "NhaTraiChieu"
                 ? `25 Tháng 11, 2024`
                 : `26 Tháng 11, 2024`}
           </div>
@@ -103,7 +94,12 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
           </RainbowButtonLink>
         </div>
 
-        <FadeWrapper className="relative h-[480px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full">
+        <MotionEffect
+          slide={{ direction: "left" }}
+          inView
+          inViewOnce={false}
+          className="relative h-[480px] max-w-xs flex-col items-center justify-center rounded-xl border-2 border-amber-900/50 p-2 max-sm:mt-10 sm:flex sm:h-[476px] sm:rounded-full"
+        >
           <NImage
             src="https://res.cloudinary.com/dcos6mpjy/image/upload/v1731813679/cuonglinh2611/albums/lefmebncz09yjkd1x1ma.png"
             alt="2611"
@@ -130,7 +126,7 @@ const Section01 = ({ userData, onClickBtn01 }: TSection01Props) => {
             width={120}
             className="absolute bottom-[-40px] right-[-40px] animate-[bounceY_12s_linear_infinite] sm:bottom-[-10px] sm:right-[-50px]"
           />
-        </FadeWrapper>
+        </MotionEffect>
       </div>
 
       <NImage
